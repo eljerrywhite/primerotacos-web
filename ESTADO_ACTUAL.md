@@ -51,3 +51,13 @@
 
 ## Branch actual: ui-refactor
 ## Último commit: "WIP: Frontend funcional - build exitoso, datos cargando, filtros funcionando"
+
+## Última sesión - 14 Junio 2025 (noche)
+- ✅ Build exitoso y deployado en Render
+- ✅ Código correcto verificado en el servidor
+- ❌ La URL muestra versión anterior (investigando caché/CDN)
+- 🔄 Se hizo restart del servicio antes de terminar sesión
+
+## Próximos pasos:
+1. Verificar si el restart resolvió el problema
+2. Si no, considerar crear nuevo servicio o investigar CDN
