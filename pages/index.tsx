@@ -54,20 +54,25 @@ const HomePage = () => {
   }, []);
 
   const filteredTaquerias = taquerias
-    .filter((taqueria) => {
-      const matchesSearch = taqueria.nombre
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      return matchesSearch;
-    })
-    .sort((a, b) => {
-      if (sortOrder === "calificacion") {
-        return b.calificacionFinal - a.calificacionFinal;
-      } else if (sortOrder === "nombre") {
-        return a.nombre.localeCompare(b.nombre);
-      }
-      return 0;
-    });
+  .filter((taqueria) => {
+    const matchesSearch = taqueria.nombre
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    
+    // Agregar filtro por alcaldía
+    const matchesAlcaldia = selectedAlcaldia === "todas" || 
+      taqueria.alcaldia?.toLowerCase() === selectedAlcaldia.toLowerCase();
+    
+    return matchesSearch && matchesAlcaldia;
+  })
+  .sort((a, b) => {
+    if (sortOrder === "calificacion") {
+      return b.calificacionFinal - a.calificacionFinal;
+    } else if (sortOrder === "nombre") {
+      return a.nombre.localeCompare(b.nombre);
+    }
+    return 0;
+  });
 
   return (
     <div className="min-h-screen bg-gray-50 font-mono">
@@ -124,39 +129,69 @@ const HomePage = () => {
             </button>
 
             {/* Filtros desktop */}
-            <div className="hidden md:flex gap-4 mt-4">
-              <div className="flex-1">
-                <label className="text-sm uppercase mb-1 block">Ordenar:</label>
-                <select
-                  className="w-full px-4 py-2 bg-white text-black border border-gray-300"
-                  value={sortOrder}
-                  onChange={(e) => setSortOrder(e.target.value)}
-                >
-                  <option value="calificacion">Mejor Calificación</option>
-                  <option value="nombre">Alfabético</option>
-                </select>
-              </div>
-            </div>
+<div className="hidden md:flex gap-4 mt-4">
+  <div className="flex-1">
+    <label className="text-sm uppercase mb-1 block">Ordenar:</label>
+    <select
+      className="w-full px-4 py-2 bg-white text-black border border-gray-300"
+      value={sortOrder}
+      onChange={(e) => setSortOrder(e.target.value)}
+    >
+      <option value="calificacion">Mejor Calificación</option>
+      <option value="nombre">Alfabético</option>
+    </select>
+  </div>
+  <div className="flex-1">
+    <label className="text-sm uppercase mb-1 block">Alcaldía:</label>
+    <select
+      className="w-full px-4 py-2 bg-white text-black border border-gray-300"
+      value={selectedAlcaldia}
+      onChange={(e) => setSelectedAlcaldia(e.target.value)}
+    >
+      {alcaldias.map((alcaldia) => (
+        <option key={alcaldia} value={alcaldia.toLowerCase()}>
+          {alcaldia}
+        </option>
+      ))}
+    </select>
+  </div>
+</div>
 
             {/* Filtros móvil expandible */}
-            {showFilters && (
-              <div className="md:hidden space-y-4 mt-4">
-                <div>
-                  <label className="text-sm uppercase mb-1 block">
-                    Ordenar:
-                  </label>
-                  <select
-                    className="w-full px-4 py-2 bg-white text-black"
-                    value={sortOrder}
-                    onChange={(e) => setSortOrder(e.target.value)}
-                  >
-                    <option value="calificacion">Mejor Calificación</option>
-                    <option value="nombre">Alfabético</option>
-                  </select>
-                </div>
-              </div>
-            )}
-          </div>
+{showFilters && (
+  <div className="md:hidden space-y-4 mt-4">
+    <div>
+      <label className="text-sm uppercase mb-1 block">
+        Ordenar:
+      </label>
+      <select
+        className="w-full px-4 py-2 bg-white text-black"
+        value={sortOrder}
+        onChange={(e) => setSortOrder(e.target.value)}
+      >
+        <option value="calificacion">Mejor Calificación</option>
+        <option value="nombre">Alfabético</option>
+      </select>
+    </div>
+    <div>
+      <label className="text-sm uppercase mb-1 block">
+        Alcaldía:
+      </label>
+      <select
+        className="w-full px-4 py-2 bg-white text-black"
+        value={selectedAlcaldia}
+        onChange={(e) => setSelectedAlcaldia(e.target.value)}
+      >
+        {alcaldias.map((alcaldia) => (
+          <option key={alcaldia} value={alcaldia.toLowerCase()}>
+            {alcaldia}
+          </option>
+        ))}
+      </select>
+    </div>
+  </div>
+)}
+</div> 
 
           {/* Contador de resultados */}
           <div className="text-center mt-6 text-sm">
