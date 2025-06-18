@@ -1,4 +1,4 @@
-# ESTADO ACTUAL DEL PROYECTO - 14 Junio 2025
+# ESTADO ACTUAL DEL PROYECTO - 16 Junio 2025
 
 ## ✅ Qué está funcionando:
 - Build compila exitosamente
@@ -8,6 +8,7 @@
 - Ordenamiento (calificación/alfabético)
 - Modal con detalles y calificaciones
 - Tipos TypeScript centralizados en `/types/index.ts`
+- **Deployment en Render funcionando correctamente con la versión ui-refactor**
 
 ## ⏳ Qué falta:
 1. **UI/UX**:
@@ -21,20 +22,21 @@
    - Paginación (si hay muchas taquerías)
    - Más información en el modal (horarios, especialidades)
 
-3. **Deployment**:
-   - Decidir si hacer merge a main o deployar desde ui-refactor
-   - Configurar servicio en Render
-   - Verificar variables de entorno
+3. **Próximos pasos del proyecto**:
+   - Decidir si hacer merge a main o continuar desarrollo en ui-refactor
+   - Continuar mejorando UI/UX
+   - Agregar nuevas funcionalidades
 
 ## 🔧 Últimos cambios importantes:
 - Se movieron todas las interfaces Taqueria a `/types/index.ts`
 - Se corrigió el CSS (moved @import to top)
 - Se arreglaron todos los errores de TypeScript
+- Se resolvió el problema de caché/CDN en Render - la versión actual está desplegada correctamente
 
 ## 📝 Para retomar:
 1. El código está en el branch `ui-refactor`
-2. Todo compila y funciona localmente
-3. Próximo paso: mejorar UI o hacer deployment
+2. Todo compila y funciona tanto localmente como en producción
+3. Próximo paso: mejorar UI o agregar nuevas funcionalidades
 
 ## Estructura de datos actual en MongoDB:
 ```json
@@ -50,14 +52,11 @@
 ```
 
 ## Branch actual: ui-refactor
-## Último commit: "WIP: Frontend funcional - build exitoso, datos cargando, filtros funcionando"
+## Último deployment exitoso: 16 Junio 2025
+## Estado: ✅ Funcionando en producción
 
-## Última sesión - 14 Junio 2025 (noche)
-- ✅ Build exitoso y deployado en Render
-- ✅ Código correcto verificado en el servidor
-- ❌ La URL muestra versión anterior (investigando caché/CDN)
-- 🔄 Se hizo restart del servicio antes de terminar sesión
-
-## Próximos pasos:
-1. Verificar si el restart resolvió el problema
-2. Si no, considerar crear nuevo servicio o investigar CDN
+## Próximos pasos sugeridos:
+1. Mejorar la UI con Header y Footer
+2. Implementar diseño más fiel al concepto original
+3. Agregar filtros por alcaldía cuando los datos estén disponibles
+4. Mejorar la experiencia móvil
