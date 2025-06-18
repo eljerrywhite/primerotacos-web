@@ -1,4 +1,4 @@
-# ESTADO ACTUAL DEL PROYECTO - 17 Junio 2025
+# ESTADO ACTUAL DEL PROYECTO - 18 Diciembre 2024
 
 ## ✅ Qué está funcionando:
 - Build compila exitosamente con Next.js 13.5.6
@@ -8,27 +8,37 @@
 - Búsqueda por nombre
 - Ordenamiento (calificación/alfabético)
 - Modal con detalles y calificaciones
+- **Modal con efecto blur en el fondo y borde negro**
 - Tipos TypeScript centralizados en `/types/index.ts`
 - UI v2 implementado completamente
-- Logo SVG personalizado funcionando
+- Logo SVG personalizado funcionando con variantes positive/negative
 - Diseño responsive
+- Padding correcto en las cards de taquerías
 
-## ✅ Últimos cambios importantes (17 Junio):
-- Migración exitosa de Next.js 15 a 13.5.6 para compatibilidad con Tailwind
-- Implementación completa del diseño v2 (minimalista, blanco y negro)
-- Solución de problemas de CORS con proxy API local
-- Logo SVG nuevo integrado con variantes positive/negative
-- Header sticky con logo centrado
-- Footer con CTA para agregar taquerías
-- Modal funcional con información de calificaciones
+## ✅ Últimos cambios importantes (18 Diciembre - Tarde):
+- **Modal mejorado**: Agregado efecto `backdrop-blur-sm` al overlay
+- **Borde al modal**: Border de 2px negro para consistencia visual
+- **Logo corregido**: Variantes positive/negative funcionando correctamente
+  - Header (fondo negro): variant="negative" (logo blanco)
+  - Footer (fondo blanco): variant="positive" (logo gris #1E1E1E)
+- **Padding en cards**: Agregado `px-2 pt-2` a cada taquería en la lista
+
+## ✅ Cambios anteriores (18 Diciembre - Mañana):
+- **Limpieza de código**: Eliminados 7 componentes no utilizados
+- Proyecto simplificado con toda la UI en `pages/index.tsx`
+- Solo se mantiene `PrimeroTacosLogo.tsx` como componente
+- Estructura de archivos más limpia y mantenible
 
 ## ⏳ Qué falta:
-1. **Datos adicionales**:
-   - Agregar campos a MongoDB: alcaldía, colonia, dirección, especialidad
-   - Implementar filtros por alcaldía cuando los datos estén disponibles
+1. **Filtro por alcaldía**:
+   - El código ya está preparado pero necesita activarse
+   - Falta verificar si los datos en MongoDB tienen el campo `alcaldia`
+   
+2. **Datos adicionales**:
+   - Agregar campos a MongoDB: dirección completa, especialidad detallada
    - Paginación (cuando haya más taquerías)
 
-2. **Mejoras futuras**:
+3. **Mejoras futuras**:
    - Sistema de favoritos
    - Compartir en redes sociales
    - Mapa interactivo
@@ -47,6 +57,7 @@
 2. Todo compila y funciona localmente y en producción
 3. API funcionando en: https://primerotacos.onrender.com/taquerias
 4. Proxy local configurado para evitar CORS
+5. Estructura simplificada con componentes mínimos
 
 ## Estructura de datos actual en MongoDB:
 ```json
@@ -57,12 +68,16 @@
   "servicio": 4.0,
   "lugar": 3.5,
   "calificacionFinal": 4.0,
-  "ubicacion": "https://maps.google.com/..."
+  "ubicacion": "https://maps.google.com/...",
+  "alcaldia": "Benito Juárez", // Campo opcional
+  "colonia": "Del Valle",       // Campo opcional
+  "direccion": "...",           // Campo opcional
+  "especialidad": "..."         // Campo opcional
 }
 ```
 
 ## Branch actual: ui-final
-## Último commit: "UI v2 funcionando con Tailwind y MongoDB - configuración completa"
+## Último commit: "feat: Agregar efecto blur y borde al modal, logo con variantes de color"
 
 ## URLs importantes:
 - Frontend (desarrollo): Replit
@@ -71,7 +86,7 @@
 - GPT: https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos
 
 ## Próximos pasos recomendados:
-1. Hacer merge de ui-final a main
-2. Verificar deployment en Render
-3. Agregar campos adicionales a MongoDB
-4. Implementar filtros por alcaldía
+1. Verificar campos de alcaldía en MongoDB
+2. Activar filtro por alcaldía
+3. Hacer merge de ui-final a main
+4. Verificar deployment en Render
