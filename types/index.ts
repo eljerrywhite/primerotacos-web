@@ -1,4 +1,4 @@
-// types/index.ts
+
 export interface Taqueria {
   _id: string;
   nombre: string;
@@ -6,8 +6,9 @@ export interface Taqueria {
   servicio: number;
   lugar: number;
   calificacionFinal: number;
-  ubicacion: string;
-  // Campos opcionales ya que no están en todos los documentos
-  alcaldia?: string;
+  ubicacion?: string;
+  direccion?: string;
+  especialidad?: string;
   colonia?: string;
+  alcaldia?: string;
 }
