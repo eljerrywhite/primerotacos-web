@@ -1,6 +1,6 @@
-import React from 'react';
-import { MapPin } from 'lucide-react';
-import { Taqueria } from '../types';
+import React from "react";
+import { MapPin } from "lucide-react";
+import { Taqueria } from "../types";
 
 interface TaqueriaCardProps {
   taqueria: Taqueria;
@@ -16,10 +16,9 @@ const TaqueriaCard: React.FC<TaqueriaCardProps> = ({ taqueria, onClick }) => {
         {(taqueria.colonia || taqueria.alcaldia) && (
           <div className="flex items-center text-gray-600">
             <MapPin className="w-4 h-4 mr-1" />
-            {taqueria.colonia && taqueria.alcaldia 
+            {taqueria.colonia && taqueria.alcaldia
               ? `${taqueria.colonia}, ${taqueria.alcaldia}`
-              : taqueria.colonia || taqueria.alcaldia
-            }
+              : taqueria.colonia || taqueria.alcaldia}
           </div>
         )}
         <div className="flex justify-between items-center">
@@ -28,7 +27,7 @@ const TaqueriaCard: React.FC<TaqueriaCardProps> = ({ taqueria, onClick }) => {
           </div>
         </div>
         <div className="flex justify-start items-center mt-2">
-          <button 
+          <button
             className="text-black underline hover:text-gray-600 transition-colors text-sm text-left"
             onClick={onClick}
           >
@@ -36,20 +35,19 @@ const TaqueriaCard: React.FC<TaqueriaCardProps> = ({ taqueria, onClick }) => {
           </button>
         </div>
       </div>
-      
+
       {/* Vista escritorio */}
       <div className="hidden md:block col-span-5">
         <div className="font-bold">{taqueria.nombre}</div>
       </div>
       <div className="hidden md:flex col-span-4 items-center">
-        {(taqueria.colonia || taqueria.alcaldia) ? (
+        {taqueria.colonia || taqueria.alcaldia ? (
           <>
             <MapPin className="w-4 h-4 mr-1 text-gray-500" />
             <span>
-              {taqueria.colonia && taqueria.alcaldia 
+              {taqueria.colonia && taqueria.alcaldia
                 ? `${taqueria.colonia}, ${taqueria.alcaldia}`
-                : taqueria.colonia || taqueria.alcaldia
-              }
+                : taqueria.colonia || taqueria.alcaldia}
             </span>
           </>
         ) : (
@@ -62,7 +60,7 @@ const TaqueriaCard: React.FC<TaqueriaCardProps> = ({ taqueria, onClick }) => {
         </div>
       </div>
       <div className="hidden md:flex col-span-1 justify-start">
-        <button 
+        <button
           className="text-black underline hover:text-gray-600 transition-colors text-sm text-left"
           onClick={onClick}
         >
