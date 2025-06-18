@@ -84,7 +84,9 @@ const HomePage = () => {
           </div>
         </div>
       </nav>
-
+      <div className="bg-red-500 text-white p-4">
+        TEST - Si esto no es rojo, Tailwind no funciona
+      </div>
       {/* Sección de título y búsqueda */}
       <section className="bg-black text-white py-6 md:py-8">
         <div className="container mx-auto px-4">
