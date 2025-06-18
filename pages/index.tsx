@@ -78,7 +78,7 @@ const HomePage = () => {
             <div className="h-14 md:h-16 lg:h-20">
               <PrimeroTacosLogo
                 className="h-full w-auto max-w-[220px] md:max-w-[260px] lg:max-w-[300px]"
-                variant="positive"
+                variant="negative"
               />
             </div>
           </div>
@@ -176,7 +176,7 @@ const HomePage = () => {
             {filteredTaquerias.map((taqueria) => (
               <div
                 key={taqueria._id}
-                className="bg-white border-b-2 border-gray-200 pb-4"
+                className="bg-white border-b-2 border-gray-200 pb-2 px-2 pt-2"
               >
                 <h3 className="text-lg font-bold uppercase mb-2">
                   {taqueria.nombre}
@@ -245,7 +245,7 @@ const HomePage = () => {
             <div className="h-12 md:h-16">
               <PrimeroTacosLogo
                 className="h-full w-auto max-w-[180px] md:max-w-[240px]"
-                variant="negative"
+                variant="positive"
               />
             </div>
           </div>
@@ -256,17 +256,24 @@ const HomePage = () => {
         </div>
       </footer>
 
-      {/* Modal */}
-      {modalOpen && selectedTaqueria && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <div className="bg-black text-white p-6 relative">
-              <button
-                onClick={() => setModalOpen(false)}
-                className="absolute top-4 right-4"
-              >
-                <X className="h-6 w-6" />
-              </button>
+{/* Modal */}
+{modalOpen && selectedTaqueria && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    {/* Overlay con blur */}
+    <div 
+      className="absolute inset-0 bg-white bg-opacity-50 backdrop-blur-sm"
+      onClick={() => setModalOpen(false)}
+    />
+    
+    {/* Modal con borde */}
+    <div className="relative bg-white max-w-md w-full max-h-[90vh] overflow-y-auto border-2 border-black">
+      <div className="bg-black text-white p-6 relative">
+        <button
+          onClick={() => setModalOpen(false)}
+          className="absolute top-4 right-4"
+        >
+          <X className="h-6 w-6" />
+        </button>
               <h3 className="text-xl font-bold uppercase">
                 {selectedTaqueria.nombre}
               </h3>
