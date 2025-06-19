@@ -7,7 +7,9 @@ export interface Taqueria {
   lugar: number;
   calificacionFinal: number;
   ubicacion: string;
-  // Campos opcionales ya que no están en todos los documentos
-  alcaldia?: string;
-  colonia?: string;
+  especialidad?: string;    
+  direccion?: string;       
+  colonia?: string;         
+  alcaldia?: string;        
+  fecha?: string | Date;
 }
