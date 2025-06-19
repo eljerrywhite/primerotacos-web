@@ -227,9 +227,9 @@ const HomePage = () => {
                   </div>
                 )}
                 {/* Mostrar especialidad si existe */}
-                {taqueria.especialidad && (
-                  <p className="text-sm mb-3">{taqueria.especialidad}</p>
-                )}
+{taqueria.especialidad && (
+  <p className="text-sm text-gray-600 italic mb-3">"{taqueria.especialidad}"</p>
+)}
                 <div className="flex items-center justify-between">
                   <button
                     onClick={() => {
@@ -312,6 +312,7 @@ const HomePage = () => {
               <h3 className="text-xl font-bold uppercase">
                 {selectedTaqueria.nombre}
               </h3>
+        
               {(selectedTaqueria.colonia || selectedTaqueria.alcaldia) && (
                 <div className="flex items-center gap-2 mt-2 text-sm">
                   <MapPin className="h-4 w-4" />
@@ -369,7 +370,7 @@ const HomePage = () => {
                   {selectedTaqueria.especialidad && (
                     <p className="text-sm">
                       <span className="font-semibold">Especialidad:</span>{" "}
-                      {selectedTaqueria.especialidad}
+                      "{selectedTaqueria.especialidad}"
                     </p>
                   )}
                 </div>
