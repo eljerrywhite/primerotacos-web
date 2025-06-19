@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MapPin, Search, Filter, ChevronDown, X, Gem } from "lucide-react";
 import PrimeroTacosLogo from "../components/PrimeroTacosLogo";
 import { Taqueria } from "../types";
+import RotatingTagline from '../components/RotatingTagline';
 
 const HomePage = () => {
   const [taquerias, setTaquerias] = useState<Taqueria[]>([]);
