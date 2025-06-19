@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MapPin, Search, Filter, ChevronDown, X } from "lucide-react";
+import { MapPin, Search, Filter, ChevronDown, X, Gem } from "lucide-react";
 import PrimeroTacosLogo from "../components/PrimeroTacosLogo";
 import { Taqueria } from "../types";
 
@@ -217,15 +217,17 @@ const HomePage = () => {
                   {taqueria.nombre}
                 </h3>
                 {/* Mostrar ubicación si existe */}
-                {(taqueria.colonia || taqueria.alcaldia) && (
-                  <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
-                    <MapPin className="h-4 w-4" />
-                    <span>
-                      {taqueria.colonia || "Sin colonia"}
-                      {taqueria.alcaldia && `, ${taqueria.alcaldia}`}
-                    </span>
-                  </div>
-                )}
+{/* COMENTADO - Quitar comentarios si se quiere mostrar ubicación en cards
+{(taqueria.colonia || taqueria.alcaldia) && (
+  <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+    <MapPin className="h-4 w-4" />
+    <span>
+      {taqueria.colonia || "Sin colonia"}
+      {taqueria.alcaldia && `, ${taqueria.alcaldia}`}
+    </span>
+  </div>
+)}
+*/}
                 {/* Mostrar especialidad si existe */}
 {taqueria.especialidad && (
   <p className="text-sm text-gray-600 italic mb-3">"{taqueria.especialidad}"</p>
@@ -312,17 +314,7 @@ const HomePage = () => {
               <h3 className="text-xl font-bold uppercase">
                 {selectedTaqueria.nombre}
               </h3>
-        
-              {(selectedTaqueria.colonia || selectedTaqueria.alcaldia) && (
-                <div className="flex items-center gap-2 mt-2 text-sm">
-                  <MapPin className="h-4 w-4" />
-                  <span>
-                    {selectedTaqueria.colonia || "Sin colonia"}
-                    {selectedTaqueria.alcaldia &&
-                      `, ${selectedTaqueria.alcaldia}`}
-                  </span>
-                </div>
-              )}
+  
             </div>
 
             <div className="p-6">
@@ -357,26 +349,38 @@ const HomePage = () => {
               </div>
 
               {/* Información adicional si existe */}
-              {(selectedTaqueria.direccion ||
-                selectedTaqueria.especialidad) && (
-                <div className="mb-6">
-                  <h4 className="font-bold uppercase mb-3">Información</h4>
-                  {selectedTaqueria.direccion && (
-                    <p className="text-sm mb-2">
-                      <span className="font-semibold">Dirección:</span>{" "}
-                      {selectedTaqueria.direccion}
-                    </p>
-                  )}
-                  {selectedTaqueria.especialidad && (
-                    <p className="text-sm">
-                      <span className="font-semibold">Especialidad:</span>{" "}
-                      "{selectedTaqueria.especialidad}"
-                    </p>
-                  )}
+{(selectedTaqueria.especialidad || selectedTaqueria.direccion) && (
+  <div className="mb-6">
+    {/* Separador de tres diamantes */}
+    <div className="flex justify-center items-center gap-2 my-4">
+      <span className="text-lg">✦</span>
+  <span className="text-lg">✦</span>
+  <span className="text-lg">✦</span>
+    </div>
+    
+    
+    {selectedTaqueria.especialidad && (
+      <div className="flex items-start gap-2">
+        <Gem className="h-4 w-4 mt-0.5 flex-shrink-0" />
+        <p className="text-sm italic">
+          "{selectedTaqueria.especialidad}"
+        </p>
+      </div>
+    )}
+  </div>
+)}
+              {selectedTaqueria.direccion && (
+                <div className="flex items-start gap-2 mb-2">
+                  <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                  <p className="text-sm">
+                    {selectedTaqueria.direccion}
+                    {selectedTaqueria.colonia && `, ${selectedTaqueria.colonia}`}
+                    {selectedTaqueria.alcaldia && `, ${selectedTaqueria.alcaldia}`}
+                  </p>
                 </div>
               )}
 
-              <div className="flex gap-4">
+              <div className="flex gap-4 mt-8">
                 {selectedTaqueria.ubicacion && (
                   <a
                     href={selectedTaqueria.ubicacion}
