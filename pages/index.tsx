@@ -360,14 +360,17 @@ const HomePage = () => {
     </div>
     
     
-    {selectedTaqueria.especialidad && (
-      <div className="flex items-start gap-2">
-        <Gem className="h-4 w-4 mt-0.5 flex-shrink-0" />
-        <p className="text-sm italic">
-          "{selectedTaqueria.especialidad}"
-        </p>
-      </div>
-    )}
+    {/* Mostrar taglines rotatorios si existen, si no mostrar especialidad */}
+{(selectedTaqueria.taglines && selectedTaqueria.taglines.length > 0) ? (
+  <RotatingTagline taglines={selectedTaqueria.taglines} />
+) : selectedTaqueria.especialidad ? (
+  <div className="flex items-start gap-2">
+    <Gem className="h-4 w-4 mt-0.5 flex-shrink-0" />
+    <p className="text-sm italic">
+      "{selectedTaqueria.especialidad}"
+    </p>
+  </div>
+) : null}
   </div>
 )}
               {selectedTaqueria.direccion && (
