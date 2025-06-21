@@ -7,7 +7,8 @@ export interface Taqueria {
   lugar: number;
   calificacionFinal: number;
   ubicacion: string;
-  especialidad?: string;    
+  especialidad?: string;
+  taglines?: string[];
   direccion?: string;       
   colonia?: string;         
   alcaldia?: string;        
