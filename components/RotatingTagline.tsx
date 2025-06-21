@@ -9,7 +9,7 @@ interface RotatingTaglineProps {
 
 const RotatingTagline: React.FC<RotatingTaglineProps> = ({ 
   taglines, 
-  interval = 10000 
+  interval = 4000 
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
