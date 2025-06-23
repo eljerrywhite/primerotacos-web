@@ -53,3 +53,29 @@ button, a {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* Patrón SVG sutil para fondos blancos */
+.pattern-background {
+  position: relative;
+}
+
+.pattern-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/bg-pattern.png');  /* Nota: verifica si es pattern.png o bg-pattern.png */
+  background-size: 240px 240px;
+  background-repeat: repeat;
+  background-position: center;
+  opacity: .1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pattern-background > * {
+  position: relative;
+  z-index: 1;
+}

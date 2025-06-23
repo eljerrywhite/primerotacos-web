@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MapPin, Search, Filter, ChevronDown, X, Gem } from "lucide-react";
 import PrimeroTacosLogo from "../components/PrimeroTacosLogo";
 import { Taqueria } from "../types";
-import RotatingTagline from '../components/RotatingTagline';
+import RotatingTagline from "../components/RotatingTagline";
 
 const HomePage = () => {
   const [taquerias, setTaquerias] = useState<Taqueria[]>([]);
@@ -55,28 +55,38 @@ const HomePage = () => {
   }, []);
 
   const filteredTaquerias = taquerias
-  .filter((taqueria) => {
-    const matchesSearch = taqueria.nombre
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    
-    // Agregar filtro por alcaldía
-    const matchesAlcaldia = selectedAlcaldia === "todas" || 
-      taqueria.alcaldia?.toLowerCase() === selectedAlcaldia.toLowerCase();
-    
-    return matchesSearch && matchesAlcaldia;
-  })
-  .sort((a, b) => {
-    if (sortOrder === "calificacion") {
-      return b.calificacionFinal - a.calificacionFinal;
-    } else if (sortOrder === "nombre") {
-      return a.nombre.localeCompare(b.nombre);
-    }
-    return 0;
-  });
+    .filter((taqueria) => {
+      const matchesSearch = taqueria.nombre
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+
+      // Agregar filtro por alcaldía
+      const matchesAlcaldia =
+        selectedAlcaldia === "todas" ||
+        taqueria.alcaldia?.toLowerCase() === selectedAlcaldia.toLowerCase();
+
+      return matchesSearch && matchesAlcaldia;
+    })
+    .sort((a, b) => {
+      if (sortOrder === "calificacion") {
+        return b.calificacionFinal - a.calificacionFinal;
+      } else if (sortOrder === "nombre") {
+        return a.nombre.localeCompare(b.nombre);
+      }
+      return 0;
+    });
 
   return (
-    <div className="min-h-screen bg-gray-50 font-mono">
+    <div
+      className="min-h-screen font-mono"
+      style={{
+        backgroundImage: "url('/bg-pattern.png')",
+        backgroundSize: "240px 240px",
+        backgroundRepeat: "repeat",
+        backgroundPosition: "center",
+        backgroundColor: "#f5f5f5",
+      }}
+    >
       {/* Header con logo */}
       <nav className="bg-black text-white py-4 sticky top-0 z-40">
         <div className="container mx-auto px-4">
@@ -130,69 +140,71 @@ const HomePage = () => {
             </button>
 
             {/* Filtros desktop */}
-<div className="hidden md:flex gap-4 mt-4">
-  <div className="flex-1">
-    <label className="text-sm uppercase mb-1 block">Ordenar:</label>
-    <select
-      className="w-full px-4 py-2 bg-white text-black border border-gray-300"
-      value={sortOrder}
-      onChange={(e) => setSortOrder(e.target.value)}
-    >
-      <option value="calificacion">Mejor Calificación</option>
-      <option value="nombre">Alfabético</option>
-    </select>
-  </div>
-  <div className="flex-1">
-    <label className="text-sm uppercase mb-1 block">Alcaldía:</label>
-    <select
-      className="w-full px-4 py-2 bg-white text-black border border-gray-300"
-      value={selectedAlcaldia}
-      onChange={(e) => setSelectedAlcaldia(e.target.value)}
-    >
-      {alcaldias.map((alcaldia) => (
-        <option key={alcaldia} value={alcaldia.toLowerCase()}>
-          {alcaldia}
-        </option>
-      ))}
-    </select>
-  </div>
-</div>
+            <div className="hidden md:flex gap-4 mt-4">
+              <div className="flex-1">
+                <label className="text-sm uppercase mb-1 block">Ordenar:</label>
+                <select
+                  className="w-full px-4 py-2 bg-white text-black border border-gray-300"
+                  value={sortOrder}
+                  onChange={(e) => setSortOrder(e.target.value)}
+                >
+                  <option value="calificacion">Mejor Calificación</option>
+                  <option value="nombre">Alfabético</option>
+                </select>
+              </div>
+              <div className="flex-1">
+                <label className="text-sm uppercase mb-1 block">
+                  Alcaldía:
+                </label>
+                <select
+                  className="w-full px-4 py-2 bg-white text-black border border-gray-300"
+                  value={selectedAlcaldia}
+                  onChange={(e) => setSelectedAlcaldia(e.target.value)}
+                >
+                  {alcaldias.map((alcaldia) => (
+                    <option key={alcaldia} value={alcaldia.toLowerCase()}>
+                      {alcaldia}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
 
             {/* Filtros móvil expandible */}
-{showFilters && (
-  <div className="md:hidden space-y-4 mt-4">
-    <div>
-      <label className="text-sm uppercase mb-1 block">
-        Ordenar:
-      </label>
-      <select
-        className="w-full px-4 py-2 bg-white text-black"
-        value={sortOrder}
-        onChange={(e) => setSortOrder(e.target.value)}
-      >
-        <option value="calificacion">Mejor Calificación</option>
-        <option value="nombre">Alfabético</option>
-      </select>
-    </div>
-    <div>
-      <label className="text-sm uppercase mb-1 block">
-        Alcaldía:
-      </label>
-      <select
-        className="w-full px-4 py-2 bg-white text-black"
-        value={selectedAlcaldia}
-        onChange={(e) => setSelectedAlcaldia(e.target.value)}
-      >
-        {alcaldias.map((alcaldia) => (
-          <option key={alcaldia} value={alcaldia.toLowerCase()}>
-            {alcaldia}
-          </option>
-        ))}
-      </select>
-    </div>
-  </div>
-)}
-</div> 
+            {showFilters && (
+              <div className="md:hidden space-y-4 mt-4">
+                <div>
+                  <label className="text-sm uppercase mb-1 block">
+                    Ordenar:
+                  </label>
+                  <select
+                    className="w-full px-4 py-2 bg-white text-black"
+                    value={sortOrder}
+                    onChange={(e) => setSortOrder(e.target.value)}
+                  >
+                    <option value="calificacion">Mejor Calificación</option>
+                    <option value="nombre">Alfabético</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-sm uppercase mb-1 block">
+                    Alcaldía:
+                  </label>
+                  <select
+                    className="w-full px-4 py-2 bg-white text-black"
+                    value={selectedAlcaldia}
+                    onChange={(e) => setSelectedAlcaldia(e.target.value)}
+                  >
+                    {alcaldias.map((alcaldia) => (
+                      <option key={alcaldia} value={alcaldia.toLowerCase()}>
+                        {alcaldia}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Contador de resultados */}
           <div className="text-center mt-6 text-sm">
@@ -202,7 +214,7 @@ const HomePage = () => {
       </section>
 
       {/* Lista de taquerías */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="pattern-background bg-white px-4 py-8">
         {loading ? (
           <div className="text-center py-12">
             <p>Cargando taquerías...</p>
@@ -218,21 +230,23 @@ const HomePage = () => {
                   {taqueria.nombre}
                 </h3>
                 {/* Mostrar ubicación si existe */}
-{/* COMENTADO - Quitar comentarios si se quiere mostrar ubicación en cards
-{(taqueria.colonia || taqueria.alcaldia) && (
-  <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
-    <MapPin className="h-4 w-4" />
-    <span>
-      {taqueria.colonia || "Sin colonia"}
-      {taqueria.alcaldia && `, ${taqueria.alcaldia}`}
-    </span>
-  </div>
-)}
-*/}
+                {/* COMENTADO - Quitar comentarios si se quiere mostrar ubicación en cards
+                  {(taqueria.colonia || taqueria.alcaldia) && (
+                    <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                      <MapPin className="h-4 w-4" />
+                      <span>
+                        {taqueria.colonia || "Sin colonia"}
+                        {taqueria.alcaldia && `, ${taqueria.alcaldia}`}
+                      </span>
+                    </div>
+                  )}
+                  */}
                 {/* Mostrar especialidad si existe */}
-{taqueria.especialidad && (
-  <p className="text-sm text-gray-600 italic mb-3">"{taqueria.especialidad}"</p>
-)}
+                {taqueria.especialidad && (
+                  <p className="text-sm text-gray-600 italic mb-3">
+                    "{taqueria.especialidad}"
+                  </p>
+                )}
                 <div className="flex items-center justify-between">
                   <button
                     onClick={() => {
@@ -277,7 +291,7 @@ const HomePage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-white py-8 border-t-2 border-gray-200">
+      <footer className="pattern-background bg-white py-8 border-t-2 border-gray-200">
         <div className="container mx-auto px-4">
           <div className="flex justify-center mb-4">
             <div className="h-12 md:h-16">
@@ -294,28 +308,27 @@ const HomePage = () => {
         </div>
       </footer>
 
-{/* Modal */}
-{modalOpen && selectedTaqueria && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-    {/* Overlay con blur */}
-    <div 
-      className="absolute inset-0 bg-white bg-opacity-50 backdrop-blur-sm"
-      onClick={() => setModalOpen(false)}
-    />
-    
-    {/* Modal con borde */}
-    <div className="relative bg-white max-w-md w-full max-h-[90vh] overflow-y-auto border-2 border-black">
-      <div className="bg-black text-white p-6 relative">
-        <button
-          onClick={() => setModalOpen(false)}
-          className="absolute top-4 right-4"
-        >
-          <X className="h-6 w-6" />
-        </button>
+      {/* Modal */}
+      {modalOpen && selectedTaqueria && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Overlay con blur */}
+          <div
+            className="absolute inset-0 bg-white bg-opacity-50 backdrop-blur-sm"
+            onClick={() => setModalOpen(false)}
+          />
+
+          {/* Modal con borde */}
+          <div className="relative bg-white max-w-md w-full max-h-[90vh] overflow-y-auto border-2 border-black">
+            <div className="bg-black text-white p-6 relative">
+              <button
+                onClick={() => setModalOpen(false)}
+                className="absolute top-4 right-4"
+              >
+                <X className="h-6 w-6" />
+              </button>
               <h3 className="text-xl font-bold uppercase">
                 {selectedTaqueria.nombre}
               </h3>
-  
             </div>
 
             <div className="p-6">
@@ -350,36 +363,39 @@ const HomePage = () => {
               </div>
 
               {/* Información adicional si existe */}
-{(selectedTaqueria.especialidad || selectedTaqueria.direccion) && (
-  <div className="mb-6">
-    {/* Separador de tres diamantes */}
-    <div className="flex justify-center items-center gap-2 my-4">
-      <span className="text-lg">✦</span>
-  <span className="text-lg">✦</span>
-  <span className="text-lg">✦</span>
-    </div>
-    
-    
-    {/* Mostrar taglines rotatorios si existen, si no mostrar especialidad */}
-{(selectedTaqueria.taglines && selectedTaqueria.taglines.length > 0) ? (
-  <RotatingTagline taglines={selectedTaqueria.taglines} />
-) : selectedTaqueria.especialidad ? (
-  <div className="flex items-start gap-2">
-    <Gem className="h-4 w-4 mt-0.5 flex-shrink-0" />
-    <p className="text-sm italic">
-      "{selectedTaqueria.especialidad}"
-    </p>
-  </div>
-) : null}
-  </div>
-)}
+              {(selectedTaqueria.especialidad ||
+                selectedTaqueria.direccion) && (
+                <div className="mb-6">
+                  {/* Separador de tres diamantes */}
+                  <div className="flex justify-center items-center gap-2 my-4">
+                    <span className="text-lg">✦</span>
+                    <span className="text-lg">✦</span>
+                    <span className="text-lg">✦</span>
+                  </div>
+
+                  {/* Mostrar taglines rotatorios si existen, si no mostrar especialidad */}
+                  {selectedTaqueria.taglines &&
+                  selectedTaqueria.taglines.length > 0 ? (
+                    <RotatingTagline taglines={selectedTaqueria.taglines} />
+                  ) : selectedTaqueria.especialidad ? (
+                    <div className="flex items-start gap-2">
+                      <Gem className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                      <p className="text-sm italic">
+                        "{selectedTaqueria.especialidad}"
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
+              )}
               {selectedTaqueria.direccion && (
                 <div className="flex items-start gap-2 mb-2">
                   <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
                   <p className="text-sm">
                     {selectedTaqueria.direccion}
-                    {selectedTaqueria.colonia && `, ${selectedTaqueria.colonia}`}
-                    {selectedTaqueria.alcaldia && `, ${selectedTaqueria.alcaldia}`}
+                    {selectedTaqueria.colonia &&
+                      `, ${selectedTaqueria.colonia}`}
+                    {selectedTaqueria.alcaldia &&
+                      `, ${selectedTaqueria.alcaldia}`}
                   </p>
                 </div>
               )}
