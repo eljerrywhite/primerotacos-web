@@ -15,6 +15,8 @@ const HomePage = () => {
   );
   const [modalOpen, setModalOpen] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
+  const [displayLimit, setDisplayLimit] = useState(10);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const alcaldias = [
     "Todas",
@@ -37,6 +39,7 @@ const HomePage = () => {
   ];
 
   useEffect(() => {
+    
     const fetchTaquerias = async () => {
       try {
         setLoading(true);
@@ -53,6 +56,11 @@ const HomePage = () => {
 
     fetchTaquerias();
   }, []);
+
+  useEffect(() => {
+    // Resetear el límite cuando cambien los filtros
+    setDisplayLimit(10);
+  }, [searchTerm, sortOrder, selectedAlcaldia]);
 
   const filteredTaquerias = taquerias
     .filter((taqueria) => {
@@ -221,7 +229,7 @@ const HomePage = () => {
           </div>
         ) : (
           <div className="max-w-4xl mx-auto space-y-4">
-            {filteredTaquerias.map((taqueria) => (
+            {filteredTaquerias.slice(0, displayLimit).map((taqueria) => (
               <div
                 key={taqueria._id}
                 className="bg-white border-b-2 border-gray-200 pb-2 px-2 pt-2"
@@ -265,6 +273,41 @@ const HomePage = () => {
             ))}
           </div>
         )}
+        {/* Botones de cargar más / volver arriba */}
+<div className="text-center py-8">
+  <p className="text-sm text-gray-600 mb-4">
+    Mostrando {Math.min(displayLimit, filteredTaquerias.length)} de {filteredTaquerias.length} taquerías
+  </p>
+  
+  {/* Botón Cargar Más */}
+  {filteredTaquerias.length > displayLimit && (
+    <button
+      onClick={() => {
+        setIsLoadingMore(true);
+        setTimeout(() => {
+          setDisplayLimit(prev => prev + 10);
+          setIsLoadingMore(false);
+        }, 300);
+      }}
+      disabled={isLoadingMore}
+      className="border-2 border-black text-black px-8 py-3 uppercase font-bold hover:bg-black hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      {isLoadingMore ? 'Cargando...' : 'Cargar más'}
+    </button>
+  )}
+  
+  {/* Link Volver al inicio - debajo del botón */}
+  {displayLimit > 10 && (
+    <div className="mt-4">
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="text-sm underline hover:no-underline"
+      >
+        VOLVER AL INICIO
+      </button>
+    </div>
+  )}
+</div>
       </main>
 
       {/* CTA Section */}
