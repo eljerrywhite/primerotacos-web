@@ -9,11 +9,21 @@
 - Base de datos: MongoDB Atlas ✅
 
 ## 🎯 Últimas Actualizaciones (24 Junio)
-
+### ✨ Nueva Funcionalidad
+- ✅ **Paginación implementada**: Muestra 10 taquerías inicialmente
+- ✅ **Botón "Ver más"**: Carga 10 adicionales con cada clic
+- ✅ **Contador de resultados**: "Mostrando X de Y taquerías"
+- ✅ **Link "Volver al inicio"**: Aparece después de cargar más items
+- ✅ **Reset automático**: Los filtros reinician la paginación
+- ✅ **Feedback visual**: Estado "Cargando..." al hacer clic
 ### 🎨 Mejoras Visuales
 - ✅ **Pattern de fondo mejorado**: Tamaño ajustado a 400px para mejor visual
 - ✅ **Efecto parallax**: Pattern fijo al hacer scroll (background-attachment: fixed)
 - ✅ **GPT mejorado**: Búsqueda inteligente que no muestra toda la lista
+### ✨ Mejoras en Modal
+- ✅ **Nuevo botón "Calificar taquería"**: Link directo al GPT desde el modal
+- ✅ **Reorganización de botones**: "Ver mapa" y "Calificar" lado a lado
+- ✅ **"Cerrar" como link**: Estilo más sutil y centrado debajo
 
 ### 📊 Estado Actual
 - **10 taquerías** en la base de datos
