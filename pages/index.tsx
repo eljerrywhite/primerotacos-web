@@ -291,7 +291,7 @@ const HomePage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="pattern-background bg-white py-8 border-t-2 border-gray-200">
+      <footer className="pattern-background bg-white py-8 ">
         <div className="container mx-auto px-4">
           <div className="flex justify-center mb-4">
             <div className="h-12 md:h-16">

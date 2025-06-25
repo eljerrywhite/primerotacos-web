@@ -62,7 +62,9 @@
 ### UI/UX
 - ✅ Diseño minimalista blanco y negro
 - ✅ Logo con variantes (positive/negative)
-- ✅ Pattern de fondo sutil con imagen de tacos (opacity: 0.05)
+- ✅ Pattern de fondo sutil con imagen de tacos (opacity: 0.1)
+- ✅ Efecto parallax en pattern (background-attachment: fixed)
+- ✅ Tamaño de pattern optimizado (400px x 400px)
 - ✅ Búsqueda en tiempo real
 - ✅ Ordenamiento (calificación/alfabético)
 - ✅ Filtros por alcaldía
@@ -86,9 +88,10 @@
 - ✅ **Separación por comas**: Instrucciones específicas (ej: 4,3,5)
 
 ### GPT Personalizado
+- ✅ Búsqueda inteligente**: Solo muestra coincidencias relevantes (máx 5)
 - ✅ Extrae dirección, colonia, alcaldía de URLs
-- ✅ **Manejo flexible de URLs**: Soporta formatos google.com/maps y maps.app.goo.gl
-- ✅ **Opción de coordenadas**: Puede usar lat/lng si el parsing falla
+- ✅ Manejo flexible de URLs: Soporta formatos google.com/maps y maps.app.goo.gl
+- ✅ Opción de coordenadas: Puede usar lat/lng si el parsing falla
 - ✅ Pregunta "¿Qué es lo más chingón?"
 
 ## 📁 ESTRUCTURA DE ARCHIVOS
