@@ -443,24 +443,37 @@ const HomePage = () => {
                 </div>
               )}
 
-              <div className="flex gap-4 mt-8">
-                {selectedTaqueria.ubicacion && (
-                  <a
-                    href={selectedTaqueria.ubicacion}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 bg-black text-white text-center py-2 hover:bg-gray-800"
-                  >
-                    VER UBICACIÓN
-                  </a>
-                )}
-                <button
-                  onClick={() => setModalOpen(false)}
-                  className="flex-1 border border-black py-2 hover:bg-gray-100"
-                >
-                  CERRAR
-                </button>
-              </div>
+              {/* Botones de acción */}
+<div className="flex gap-4 mt-8">
+  {selectedTaqueria.ubicacion && (
+    <a
+      href={selectedTaqueria.ubicacion}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex-1 bg-black text-white text-center py-2 hover:bg-gray-800 uppercase"
+    >
+      VER MAPA
+    </a>
+  )}
+  <a
+    href="https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex-1 border border-black py-2 hover:bg-gray-100 text-center uppercase"
+  >
+    CALIFICA
+  </a>
+</div>
+
+{/* Link cerrar centrado */}
+<div className="text-center mt-6">
+  <button
+    onClick={() => setModalOpen(false)}
+    className="text-sm underline hover:no-underline"
+  >
+    CERRAR
+  </button>
+</div>
             </div>
           </div>
         </div>
