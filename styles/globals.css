@@ -66,10 +66,11 @@ button, a {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/bg-pattern.png');  /* Nota: verifica si es pattern.png o bg-pattern.png */
-  background-size: 240px 240px;
+  background-image: url('/bg-pattern.png');
+  background-size: 400px 400px;
   background-repeat: repeat;
   background-position: center;
+  background-attachment: fixed;
   opacity: .1;
   pointer-events: none;
   z-index: 0;
