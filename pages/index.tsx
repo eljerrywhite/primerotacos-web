@@ -63,10 +63,13 @@ const HomePage = () => {
   }, [searchTerm, sortOrder, selectedAlcaldia]);
 
   const filteredTaquerias = taquerias
-    .filter((taqueria) => {
-      const matchesSearch = taqueria.nombre
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
+  .filter((taqueria) => {
+    const searchLower = searchTerm.toLowerCase();
+    const matchesSearch = 
+      taqueria.nombre.toLowerCase().includes(searchLower) ||
+      taqueria.especialidad?.toLowerCase().includes(searchLower) ||
+      taqueria.taglines?.some(tag => tag.toLowerCase().includes(searchLower));
+    
 
       // Agregar filtro por alcaldía
       const matchesAlcaldia =
@@ -128,7 +131,7 @@ const HomePage = () => {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
                 type="text"
-                placeholder="Buscar taquería, especialidad o colonia..."
+                placeholder="Buscar taquería, especialidad o tipo."
                 className="w-full pl-12 pr-4 py-4 text-black rounded-none focus:outline-none"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
