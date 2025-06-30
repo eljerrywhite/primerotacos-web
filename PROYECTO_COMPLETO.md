@@ -65,6 +65,7 @@
 - ✅ Pattern de fondo actualizado (24 Junio)
 - ✅ Efecto parallax en pattern (desktop)
 - ✅ Búsqueda en tiempo real
+- ✅ **Botón limpiar búsqueda**: Ícono X cuando hay texto
 - ✅ Ordenamiento (calificación/alfabético)
 - ✅ Filtros por alcaldía
 - ✅ Cards con taglines en cursiva

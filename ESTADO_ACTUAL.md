@@ -18,6 +18,7 @@
 - ✅ **Reset automático**: Los filtros reinician la paginación
 - ✅ **Búsqueda mejorada**: Ahora busca por nombre, especialidad y taglines
 - ✅ **Modal mejorado**: Nuevo botón "Calificar taquería" con link al GPT
+- ✅ **Botón limpiar búsqueda**: X para borrar el texto de búsqueda
 
 ### 🎨 Mejoras Visuales
 - ✅ Pattern de fondo actualizado con nuevo diseño
