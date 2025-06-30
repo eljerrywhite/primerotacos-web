@@ -62,20 +62,24 @@
 ### UI/UX
 - ✅ Diseño minimalista blanco y negro
 - ✅ Logo con variantes (positive/negative)
-- ✅ Pattern de fondo sutil con imagen de tacos (opacity: 0.1)
-- ✅ Efecto parallax en pattern (background-attachment: fixed)
-- ✅ Tamaño de pattern optimizado (400px x 400px)
+- ✅ Pattern de fondo actualizado (24 Junio)
+- ✅ Efecto parallax en pattern (desktop)
 - ✅ Búsqueda en tiempo real
 - ✅ Ordenamiento (calificación/alfabético)
 - ✅ Filtros por alcaldía
 - ✅ Cards con taglines en cursiva
-- ✅ Modal con información completa
+- ✅ **Modal mejorado**: Botón "Calificar taquería"
 - ✅ Separadores con 3 gemas
 - ✅ Iconos contextuales (MapPin, Gem)
 - ✅ 100% responsive
+- ✅ **Paginación responsive**: 10 items iniciales
 
 ### Funcionalidades
 - ✅ Sistema de calificaciones con promedio
+- ✅ **Paginación**: Carga inicial de 10, botón "Ver más"
+- ✅ **Búsqueda avanzada**: Por nombre, especialidad y taglines
+- ✅ **Contador de resultados**: Muestra items visibles vs total
+- ✅ **Link "Volver al inicio"**: Navegación mejorada
 - ✅ Extracción automática de datos desde Google Maps
 - ✅ Validación de alcaldías de CDMX
 - ✅ Actualización inteligente (upsert)
@@ -93,6 +97,7 @@
 - ✅ Manejo flexible de URLs: Soporta formatos google.com/maps y maps.app.goo.gl
 - ✅ Opción de coordenadas: Puede usar lat/lng si el parsing falla
 - ✅ Pregunta "¿Qué es lo más chingón?"
+- ✅ **Tips de uso**: Recomienda nombre completo y compartir links
 
 ## 📁 ESTRUCTURA DE ARCHIVOS
 
