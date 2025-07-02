@@ -3,6 +3,7 @@ import { MapPin, Search, Filter, ChevronDown, X, Gem } from "lucide-react";
 import PrimeroTacosLogo from "../components/PrimeroTacosLogo";
 import { Taqueria } from "../types";
 import RotatingTagline from "../components/RotatingTagline";
+import { tacoEvents } from "../lib/analytics"; // Importación para Google Analytics
 
 const HomePage = () => {
   const [taquerias, setTaquerias] = useState<Taqueria[]>([]);
@@ -128,24 +129,53 @@ const HomePage = () => {
           {/* Barra de búsqueda */}
           <div className="max-w-4xl mx-auto">
             <div className="relative">
-  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-  <input
-    type="text"
-    placeholder="Buscar taquería o especialidad"
-    className="w-full pl-10 pr-12 py-3 bg-gray-100 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-  />
-  {searchTerm && (
-    <button
-      onClick={() => setSearchTerm("")}
-      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
-      aria-label="Limpiar búsqueda"
-    >
-      <X className="h-5 w-5" />
-    </button>
-  )}
-</div>
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Buscar taquería o especialidad"
+                className="w-full pl-10 pr-12 py-3 bg-gray-100 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                value={searchTerm}
+                onChange={(e) => {
+                  const newSearchTerm = e.target.value;
+                  setSearchTerm(newSearchTerm);
+                  
+                  // Calcular y registrar el evento de búsqueda si hay un término
+                  if (newSearchTerm.trim()) {
+                    const results = taquerias.filter((taqueria) => {
+                      const searchLower = newSearchTerm.toLowerCase();
+                      const matchesSearch = 
+                        taqueria.nombre.toLowerCase().includes(searchLower) ||
+                        taqueria.especialidad?.toLowerCase().includes(searchLower) ||
+                        taqueria.taglines?.some(tag => tag.toLowerCase().includes(searchLower));
+                      
+                      const matchesAlcaldia =
+                        selectedAlcaldia === "todas" ||
+                        taqueria.alcaldia?.toLowerCase() === selectedAlcaldia.toLowerCase();
+
+                      return matchesSearch && matchesAlcaldia;
+                    });
+                    
+                    // Registrar el evento
+                    tacoEvents.search(newSearchTerm, results.length);
+                  }
+                }}
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => {
+                    // Registrar el evento de limpiar búsqueda
+                    if (searchTerm.trim()) {
+                      tacoEvents.clearSearch(searchTerm);
+                    }
+                    setSearchTerm("");
+                  }}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  aria-label="Limpiar búsqueda"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              )}
+            </div>
 
             {/* Botón de filtros móvil */}
             <button
@@ -166,7 +196,17 @@ const HomePage = () => {
                 <select
                   className="w-full px-4 py-2 bg-white text-black border border-gray-300"
                   value={sortOrder}
-                  onChange={(e) => setSortOrder(e.target.value)}
+                  onChange={(e) => {
+                    const newSortOrder = e.target.value;
+                    setSortOrder(newSortOrder);
+                    
+                    // Registrar el evento de filtro
+                    tacoEvents.applyFilter({
+                      filterType: 'ordenamiento',
+                      value: newSortOrder,
+                      resultCount: filteredTaquerias.length
+                    });
+                  }}
                 >
                   <option value="calificacion">Mejor Calificación</option>
                   <option value="nombre">Alfabético</option>
@@ -179,7 +219,28 @@ const HomePage = () => {
                 <select
                   className="w-full px-4 py-2 bg-white text-black border border-gray-300"
                   value={selectedAlcaldia}
-                  onChange={(e) => setSelectedAlcaldia(e.target.value)}
+                  onChange={(e) => {
+                    const newAlcaldia = e.target.value;
+                    setSelectedAlcaldia(newAlcaldia);
+                    
+                    // Registrar el evento de filtro
+                    tacoEvents.applyFilter({
+                      filterType: 'alcaldia',
+                      value: newAlcaldia,
+                      resultCount: taquerias.filter(t => {
+                        const matchesSearch = searchTerm ? 
+                          t.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          t.especialidad?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          t.taglines?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) : true;
+                        
+                        const matchesAlcaldia =
+                          newAlcaldia === "todas" ||
+                          t.alcaldia?.toLowerCase() === newAlcaldia.toLowerCase();
+                        
+                        return matchesSearch && matchesAlcaldia;
+                      }).length
+                    });
+                  }}
                 >
                   {alcaldias.map((alcaldia) => (
                     <option key={alcaldia} value={alcaldia.toLowerCase()}>
@@ -200,7 +261,17 @@ const HomePage = () => {
                   <select
                     className="w-full px-4 py-2 bg-white text-black"
                     value={sortOrder}
-                    onChange={(e) => setSortOrder(e.target.value)}
+                    onChange={(e) => {
+                      const newSortOrder = e.target.value;
+                      setSortOrder(newSortOrder);
+                      
+                      // Registrar el evento de filtro
+                      tacoEvents.applyFilter({
+                        filterType: 'ordenamiento',
+                        value: newSortOrder,
+                        resultCount: filteredTaquerias.length
+                      });
+                    }}
                   >
                     <option value="calificacion">Mejor Calificación</option>
                     <option value="nombre">Alfabético</option>
@@ -213,7 +284,28 @@ const HomePage = () => {
                   <select
                     className="w-full px-4 py-2 bg-white text-black"
                     value={selectedAlcaldia}
-                    onChange={(e) => setSelectedAlcaldia(e.target.value)}
+                    onChange={(e) => {
+                      const newAlcaldia = e.target.value;
+                      setSelectedAlcaldia(newAlcaldia);
+                      
+                      // Registrar el evento de filtro
+                      tacoEvents.applyFilter({
+                        filterType: 'alcaldia',
+                        value: newAlcaldia,
+                        resultCount: taquerias.filter(t => {
+                          const matchesSearch = searchTerm ? 
+                            t.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                            t.especialidad?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                            t.taglines?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) : true;
+                          
+                          const matchesAlcaldia =
+                            newAlcaldia === "todas" ||
+                            t.alcaldia?.toLowerCase() === newAlcaldia.toLowerCase();
+                          
+                          return matchesSearch && matchesAlcaldia;
+                        }).length
+                      });
+                    }}
                   >
                     {alcaldias.map((alcaldia) => (
                       <option key={alcaldia} value={alcaldia.toLowerCase()}>
@@ -272,6 +364,16 @@ const HomePage = () => {
                     onClick={() => {
                       setSelectedTaqueria(taqueria);
                       setModalOpen(true);
+                      
+                      // Registrar el evento de ver detalle
+                      if (taqueria._id) {
+                        tacoEvents.viewTaqueriaDetail({
+                          id: taqueria._id,
+                          nombre: taqueria.nombre,
+                          calificacion: taqueria.calificacionFinal,
+                          alcaldia: taqueria.alcaldia || ''
+                        });
+                      }
                     }}
                     className="text-sm underline hover:no-underline"
                   >
@@ -286,40 +388,49 @@ const HomePage = () => {
           </div>
         )}
         {/* Botones de cargar más / volver arriba */}
-<div className="text-center py-8">
-  <p className="text-sm text-gray-600 mb-4">
-    Mostrando {Math.min(displayLimit, filteredTaquerias.length)} de {filteredTaquerias.length} taquerías
-  </p>
-  
-  {/* Botón Cargar Más */}
-  {filteredTaquerias.length > displayLimit && (
-    <button
-      onClick={() => {
-        setIsLoadingMore(true);
-        setTimeout(() => {
-          setDisplayLimit(prev => prev + 10);
-          setIsLoadingMore(false);
-        }, 300);
-      }}
-      disabled={isLoadingMore}
-      className="border-2 border-black text-black px-8 py-3 uppercase font-bold hover:bg-black hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-    >
-      {isLoadingMore ? 'Cargando...' : 'Cargar más'}
-    </button>
-  )}
-  
-  {/* Link Volver al inicio - debajo del botón */}
-  {displayLimit > 10 && (
-    <div className="mt-4">
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="text-sm underline hover:no-underline"
-      >
-        VOLVER AL INICIO
-      </button>
-    </div>
-  )}
-</div>
+        <div className="text-center py-8">
+          <p className="text-sm text-gray-600 mb-4">
+            Mostrando {Math.min(displayLimit, filteredTaquerias.length)} de {filteredTaquerias.length} taquerías
+          </p>
+          
+          {/* Botón Cargar Más */}
+          {filteredTaquerias.length > displayLimit && (
+            <button
+              onClick={() => {
+                setIsLoadingMore(true);
+                setTimeout(() => {
+                  const newDisplayLimit = displayLimit + 10;
+                  setDisplayLimit(newDisplayLimit);
+                  setIsLoadingMore(false);
+                  
+                  // Registrar el evento de cargar más
+                  tacoEvents.loadMoreTaquerias(newDisplayLimit, filteredTaquerias.length);
+                }, 300);
+              }}
+              disabled={isLoadingMore}
+              className="border-2 border-black text-black px-8 py-3 uppercase font-bold hover:bg-black hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoadingMore ? 'Cargando...' : 'Cargar más'}
+            </button>
+          )}
+          
+          {/* Link Volver al inicio - debajo del botón */}
+          {displayLimit > 10 && (
+            <div className="mt-4">
+              <button
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                  
+                  // Registrar el evento de volver al inicio
+                  tacoEvents.returnToTop('pagination');
+                }}
+                className="text-sm underline hover:no-underline"
+              >
+                VOLVER AL INICIO
+              </button>
+            </div>
+          )}
+        </div>
       </main>
 
       {/* CTA Section */}
@@ -338,6 +449,10 @@ const HomePage = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block border-2 border-white px-6 py-3 hover:bg-white hover:text-black transition-colors uppercase"
+              onClick={() => {
+                // Registrar el evento de calificar (sin taquería específica)
+                tacoEvents.clickCalificar();
+              }}
             >
               CALIFICAR CON GPT
             </a>
@@ -456,36 +571,61 @@ const HomePage = () => {
               )}
 
               {/* Botones de acción */}
-<div className="flex gap-4 mt-8">
-  {selectedTaqueria.ubicacion && (
-    <a
-      href={selectedTaqueria.ubicacion}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex-1 bg-black text-white text-center py-2 hover:bg-gray-800 uppercase"
-    >
-      VER MAPA
-    </a>
-  )}
-  <a
-    href="https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex-1 border border-black py-2 hover:bg-gray-100 text-center uppercase"
-  >
-    CALIFICA
-  </a>
-</div>
+              <div className="flex gap-4 mt-8">
+                {selectedTaqueria.ubicacion && (
+                  <a
+                    href={selectedTaqueria.ubicacion}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-black text-white text-center py-2 hover:bg-gray-800 uppercase"
+                    onClick={(e) => {
+                      // Evitar que se cierre el modal
+                      e.stopPropagation();
+                      
+                      // Registrar el evento de ver mapa
+                      if (selectedTaqueria._id) {
+                        tacoEvents.viewMap(
+                          selectedTaqueria._id,
+                          selectedTaqueria.nombre,
+                          true // desde vista detalle
+                        );
+                      }
+                    }}
+                  >
+                    VER MAPA
+                  </a>
+                )}
+                <a
+                  href="https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 border border-black py-2 hover:bg-gray-100 text-center uppercase"
+                  onClick={(e) => {
+                    // Evitar que se cierre el modal
+                    e.stopPropagation();
+                    
+                    // Registrar el evento de calificar
+                    if (selectedTaqueria._id) {
+                      tacoEvents.clickCalificar(
+                        selectedTaqueria._id,
+                        selectedTaqueria.nombre
+                      );
+                    }
+                  }}
+                >
+                  CALIFICA
+                </a>
+              </div>
 
-{/* Link cerrar centrado */}
-<div className="text-center mt-6">
-  <button
-    onClick={() => setModalOpen(false)}
-    className="text-sm underline hover:no-underline"
-  >
-    CERRAR
-  </button>
-</div>
+              {/* Link cerrar centrado */}
+              <div className="text-center mt-6">
+                <button
+                  onClick={() => setModalOpen(false)}
+                  className="text-sm underline hover:no-underline"
+                >
+                  CERRAR
+                </button>
+              </div>
             </div>
           </div>
         </div>
