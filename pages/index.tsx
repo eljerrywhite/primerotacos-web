@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React, { useState, useEffect } from "react";
 import { MapPin, Search, Filter, ChevronDown, X, Gem } from "lucide-react";
 import PrimeroTacosLogo from "../components/PrimeroTacosLogo";
@@ -99,6 +100,10 @@ const HomePage = () => {
         backgroundColor: "#f5f5f5",
       }}
     >
+      <Head>
+        <title>Top Tacos y Taquerias CDMX por PrimeroTacos.mx</title>
+      </Head>
+      
       {/* Header con logo */}
       <nav className="bg-black text-white py-4 sticky top-0 z-40">
         <div className="container mx-auto px-4">
