@@ -30,8 +30,14 @@ export default function Document() {
         <meta name="twitter:description" content="Encuentra las mejores taquerías en CDMX, calificadas por expertos taqueros según calidad, servicio y ubicación." />
         <meta name="twitter:image" content="https://primerotacos.mx/og-image.png" />
         
-        {/* Favicon y otros iconos */}
+        {/* Favicon y otros iconos - Actualizado para incluir todos los tamaños */}
         <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
+        <link rel="manifest" href="/site.webmanifest" />
 
         
         {/* Google Analytics */}
