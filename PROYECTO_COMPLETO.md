@@ -1,5 +1,5 @@
 # PROYECTO PRIMERO TACOS - DOCUMENTACIÓN COMPLETA
-*Fecha: 21 de Junio de 2025*
+*Fecha: 2 de Julio de 2025*
 
 ## 🎯 RESUMEN EJECUTIVO
 
@@ -122,29 +122,25 @@
 ## 🔍 SEO Y OPTIMIZACIÓN
 
 ### Implementación SEO Completa
-
-- ✅ Meta tags SEO: Implementados en `_document.tsx`
+- ✅ **Meta tags SEO**: Implementados en `_document.tsx`
   - Descripción optimizada para búsquedas
   - Palabras clave relevantes (tacos, taquerías, CDMX, calificaciones)
   - Datos estructurados Schema.org para negocios locales
-
-- ✅ Open Graph y Twitter Cards: Configurados para compartir en redes
+- ✅ **Open Graph y Twitter Cards**: Configurados para compartir en redes
   - Título: "Top Tacos y Taquerías CDMX por PrimeroTacos.mx"
   - Imagen OG personalizada
   - Descripción atractiva para redes sociales
-
-- ✅ Archivos de indexación:
+- ✅ **Archivos de indexación**:
   - `sitemap.xml`: Mapa del sitio para motores de búsqueda
   - `robots.txt`: Directivas de rastreo configuradas
   - `site.webmanifest`: Configuración PWA
-
-- ✅ Sistema completo de favicons:
+- ✅ **Sistema completo de favicons**:
   - Favicons para Android Chrome (192x192, 512x512)
   - Favicons para Apple Touch (icono de app)
   - Favicon estándar (16x16, 32x32)
   - og-image para compartir en redes
+- ✅ **Google Search Console**: Sitio registrado y verificado
 
-- ✅ Google Search Console: Sitio registrado y verificado
 
 ## 🌐 Dominios Personalizados
 
@@ -165,44 +161,56 @@
 
 ## 📁 ESTRUCTURA DE ARCHIVOS
 
+### Archivos SEO y Assets
 ```
-primerotacos-web/ (Frontend)
-├── pages/
-│   ├── index.tsx              # UI completa con taglines rotativos integrados
-│   ├── _app.tsx               # Configuración de la aplicación con analytics
-│   ├── _document.tsx          # Implementación de Google Analytics
-│   └── api/
-│       └── taquerias.ts       # Proxy API
-├── components/
-│   ├── PrimeroTacosLogo.tsx   # Logo SVG
-│   └── RotatingTagline.tsx    # Componente de taglines rotativos ✅ IMPLEMENTADO
-├── lib/
-│   ├── mongodb.ts             # Conexión DB
-│   └── analytics.ts           # Eventos personalizados para Google Analytics
-├── types/
-│   └── index.ts               # TypeScript types (actualizado con taglines)
-├── styles/
-│   └── globals.css            # Estilos Tailwind
-└── public/
-    ├── favicon.ico               # Favicon principal
-    ├── favicon-16x16.png        # Favicon 16px
-    ├── favicon-32x32.png        # Favicon 32px
-    ├── android-chrome-192x192.png # Android grande
-    ├── android-chrome-512x512.png # Android extra grande
-    ├── apple-touch-icon.png     # iOS/macOS
-    ├── site.webmanifest         # PWA config
-    ├── bg-pattern.png           # Pattern de fondo (bg-pattern.png)
-    ├── og-image.png            # Imagen para redes sociales
-    ├── sitemap.xml             # Mapa del sitio
-    └── robots.txt              # Directivas de rastreo
-primerotacos/ (API Backend)
-└── index.js                   # API completa con:
-# - Endpoints GET/POST para taquerías
-# - Manejo de arrays de taglines
-# - Endpoint /reset-all (temporal)
-# - Conexión MongoDB
-# - Sistema de promedioss
+public/
+├── android-chrome-192x192.png   # Favicon Android grande
+├── android-chrome-512x512.png   # Favicon Android extra grande
+├── apple-touch-icon.png         # Icono para dispositivos Apple
+├── bg-pattern.png              # Pattern de fondo
+├── favicon-16x16.png           # Favicon pequeño
+├── favicon-32x32.png           # Favicon estándar
+├── favicon.ico                 # Favicon principal
+├── og-image.png               # Imagen Open Graph
+├── site.webmanifest           # Manifest PWA
+├── sitemap.xml                # Mapa del sitio
+└── robots.txt                 # Directivas para bots
 ```
+
+## 🔒 SEGURIDAD Y REPUTACIÓN
+
+### Headers de Seguridad Implementados
+- ✅ **Calificación A** en SecurityHeaders.com
+- ✅ **Headers implementados**:
+  - `Strict-Transport-Security`: HTTPS obligatorio
+  - `X-Content-Type-Options`: Previene MIME sniffing
+  - `X-Frame-Options`: Protección contra clickjacking
+  - `Content-Security-Policy`: Control de recursos
+  - `Referrer-Policy`: Control de información referrer
+  - `Permissions-Policy`: Control de APIs del navegador
+
+### Configuración en next.config.js
+```javascript
+async headers() {
+  return [{
+    source: '/:path*',
+    headers: [
+      // Headers de seguridad configurados
+    ]
+  }]
+}
+```
+
+### security.txt
+- ✅ **Ubicación**: `/.well-known/security.txt`
+- ✅ **Contenido**: Información de contacto para reportes de seguridad
+- ✅ **Estándar**: Cumple con RFC 9116
+
+### Beneficios de Seguridad
+- Menor probabilidad de bloqueo por filtros corporativos
+- Mayor confianza de usuarios y sistemas automatizados
+- Mejor posicionamiento en búsquedas (Google valora HTTPS y seguridad)
+- Protección contra ataques comunes (XSS, clickjacking, etc.)
 
 ### 🔄 **Archivos Modificados en la Última Actualización:**
 
