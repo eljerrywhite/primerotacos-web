@@ -7,7 +7,12 @@
 - Base de datos: MongoDB Atlas ✅
 - Google Analytics: Implementado y rastreando eventos ✅
 
-## 🔄 Últimas Actualizaciones (Julio 2-8, 2025)
+## 🔄 Últimas Actualizaciones (Julio 2-9, 2025)
+- ✅ **Skeleton loaders**: Feedback visual mientras cargan las taquerías
+- ✅ **Búsqueda mejorada**: Ignora acentos para mejor UX
+- ✅ **Taglines estables**: Random pero fijos, no cambian al scrollear
+- ✅ **GPT actualizado**: Moderación de contenido y flujo mejorado
+- ✅ **Componente TaqueriaSkeleton**: Con efecto shimmer elegante
 - ✅ **UI/UX completamente pulida**: Cards clickeables, modal mejorado, animaciones
 - ✅ **Logo animado**: Crece 50% al cargar, se reduce al scrollear
 - ✅ **Buscador optimizado**: Padding corregido, tamaño consistente
@@ -50,6 +55,9 @@
 - UI/UX profesional y pulida
 - 100% responsive y accesible
 - Animaciones sutiles y modernas
+- UI/UX profesional con skeleton loaders
+- Búsqueda inteligente sin acentos
+- GPT con mejor manejo de contenido
 
 ## 🔄 Próximas Features
 - [ ] Página "Acerca de" para contexto del proyecto
@@ -57,3 +65,18 @@
 - [ ] Sistema de favoritos
 - [ ] Compartir en redes sociales
 - [ ] Más contenido en la base de datos
+
+---- Recomendaciones ----
+Documentar los estilos en un archivo como typography.md
+Crear componentes para los más usados:
+jsx<Heading1>Título</Heading1>
+<BodyText>Texto</BodyText>
+
+Considerar crear tokens en Tailwind config
+
+- Logo/Header: text-lg sm:text-2xl font-bold uppercase
+- Título principal: text-3xl sm:text-4xl md:text-5xl font-bold
+- Nombre taquería: text-lg sm:text-xl font-bold uppercase
+- Body: text-base sm:text-lg
+- Taglines: text-sm sm:text-base italic
+- Botones: uppercase font-medium/font-bold

@@ -1,12 +1,19 @@
-import Head from 'next/head';
+import Head from "next/head";
 import React, { useState, useEffect } from "react";
-import { MapPin, Search, Filter, ChevronDown, ChevronUp, X, Gem } from "lucide-react";
+import {
+  MapPin,
+  Search,
+  Filter,
+  ChevronDown,
+  ChevronUp,
+  X,
+  Gem,
+} from "lucide-react";
 import PrimeroTacosLogo from "../components/PrimeroTacosLogo";
 import { Taqueria } from "../types";
 import RotatingTagline from "../components/RotatingTagline";
 import { tacoEvents } from "../lib/analytics";
-
-
+import TaqueriaSkeleton from "../components/TaqueriaSkeleton";
 
 const HomePage = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -16,13 +23,17 @@ const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("calificacion");
   const [selectedAlcaldia, setSelectedAlcaldia] = useState("todas");
-  const [selectedTaqueria, setSelectedTaqueria] = useState<Taqueria | null>(null);
+  const [selectedTaqueria, setSelectedTaqueria] = useState<Taqueria | null>(
+    null,
+  );
   const [modalOpen, setModalOpen] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [displayLimit, setDisplayLimit] = useState(10);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false); 
-  
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [randomIndexes, setRandomIndexes] = useState<{ [key: string]: number }>(
+    {},
+  );
 
   const alcaldias = [
     "Todas",
@@ -62,34 +73,47 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
+    // Generar índices random una sola vez cuando se cargan las taquerías
+    const indexes: { [key: string]: number } = {};
+    taquerias.forEach((taqueria) => {
+      if (taqueria._id && taqueria.taglines && taqueria.taglines.length > 0) {
+        indexes[taqueria._id] = Math.floor(
+          Math.random() * taqueria.taglines.length,
+        );
+      }
+    });
+    setRandomIndexes(indexes);
+  }, [taquerias]); // Solo se ejecuta cuando cambian las taquerías
+
+  useEffect(() => {
     setDisplayLimit(10);
   }, [searchTerm, sortOrder, selectedAlcaldia]);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && modalOpen) {
+      if (e.key === "Escape" && modalOpen) {
         setModalOpen(false);
       }
     };
 
     if (modalOpen) {
-      document.addEventListener('keydown', handleEsc);
-      return () => document.removeEventListener('keydown', handleEsc);
+      document.addEventListener("keydown", handleEsc);
+      return () => document.removeEventListener("keydown", handleEsc);
     }
   }, [modalOpen]);
 
-useEffect(() => {
-  const handleScroll = () => {
-    const scrollPosition = window.scrollY;
-    setIsScrolled(scrollPosition > 20);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 20);
+    };
 
-  window.addEventListener('scroll', handleScroll);
-  
-  return () => {
-    window.removeEventListener('scroll', handleScroll);
-  };
-}, []);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // 2. Agrega este useEffect para controlar cuándo mostrar el botón
   useEffect(() => {
@@ -107,24 +131,35 @@ useEffect(() => {
       setNearFooter(distanceFromBottom < 200);
     };
 
-    window.addEventListener('scroll', handleScrollForButton);
-    return () => window.removeEventListener('scroll', handleScrollForButton);
+    window.addEventListener("scroll", handleScrollForButton);
+    return () => window.removeEventListener("scroll", handleScrollForButton);
   }, []);
+
+  // AQUÍ VA LA FUNCIÓN normalizeText
+  const normalizeText = (text: string): string => {
+    return text
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, ""); // Remueve diacríticos (acentos)
+  };
+
   
-  
-// Filtrar y ordenar taquerías
+
+  // Filtrar y ordenar taquerías
   const filteredTaquerias = taquerias
     .filter((taqueria) => {
-      const searchLower = searchTerm.toLowerCase();
-      const matchesSearch = 
-        taqueria.nombre.toLowerCase().includes(searchLower) ||
-        taqueria.especialidad?.toLowerCase().includes(searchLower) ||
-        taqueria.taglines?.some(tag => tag.toLowerCase().includes(searchLower));
-      
+      const searchNormalized = normalizeText(searchTerm);
+      const matchesSearch =
+        normalizeText(taqueria.nombre).includes(searchNormalized) ||
+        normalizeText(taqueria.especialidad || "").includes(searchNormalized) ||
+        taqueria.taglines?.some((tag) =>
+          normalizeText(tag).includes(searchNormalized),
+        );
+
       const matchesAlcaldia =
         selectedAlcaldia === "todas" ||
         taqueria.alcaldia?.toLowerCase() === selectedAlcaldia.toLowerCase();
-      
+
       return matchesSearch && matchesAlcaldia;
     })
     .sort((a, b) => {
@@ -148,105 +183,115 @@ useEffect(() => {
       }}
     >
       <Head>
-  <title>Top Tacos y Taquerias CDMX por PrimeroTacos.mx</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-</Head>
+        <title>Top Tacos y Taquerias CDMX por PrimeroTacos.mx</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
 
       {/* Skip to main content link for accessibility */}
-      <a 
-        href="#main-content" 
+      <a
+        href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-black text-white px-4 py-2 rounded z-50"
       >
         Saltar al contenido principal
       </a>
 
       {/* Header con logo */}
-<nav className={`bg-black text-white sticky top-0 z-40 transition-all duration-500 ${isScrolled ? 'py-3' : 'py-5 md:py-8'}`}>
-  <div className="container mx-auto px-4">
-    <div className="flex justify-center">
-      <div className={`transition-all duration-500 ease-out ${
-        isScrolled 
-          ? 'h-14 md:h-16 lg:h-20' 
-          : 'h-[84px] md:h-24 lg:h-[120px]'
-      }`}>
-        <PrimeroTacosLogo
-          className={`h-full w-auto transition-all duration-500 ${
-            isScrolled 
-              ? 'max-w-[220px] md:max-w-[260px] lg:max-w-[300px]' 
-              : 'max-w-[330px] md:max-w-[390px] lg:max-w-[450px]'
-          }`}
-          variant="negative"
-        />
-      </div>
-    </div>
-  </div>
-</nav>
+      <nav
+        className={`bg-black text-white sticky top-0 z-40 transition-all duration-500 ${isScrolled ? "py-3" : "py-5 md:py-8"}`}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center">
+            <div
+              className={`transition-all duration-500 ease-out ${
+                isScrolled
+                  ? "h-14 md:h-16 lg:h-20"
+                  : "h-[84px] md:h-24 lg:h-[120px]"
+              }`}
+            >
+              <PrimeroTacosLogo
+                className={`h-full w-auto transition-all duration-500 ${
+                  isScrolled
+                    ? "max-w-[220px] md:max-w-[260px] lg:max-w-[300px]"
+                    : "max-w-[330px] md:max-w-[390px] lg:max-w-[450px]"
+                }`}
+                variant="negative"
+              />
+            </div>
+          </div>
+        </div>
+      </nav>
 
       {/* Sección de título y búsqueda */}
       <section className="bg-black text-white py-2 md:py-3">
-  <div className="container mx-auto px-4">
-    <div className="text-center mb-6">
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
-        PRIMERO TACOS × LOS KNIJOS
-      </h1>
-      <p className="text-base sm:text-lg max-w-2xl mx-auto leading-normal">
-  Base de datos comunitaria de taquerías en la Ciudad de México,
-  calificadas por expertos taqueros.
-</p>
-    </div>
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+              PRIMERO TACOS × LOS KNIJOS
+            </h1>
+            <p className="text-base sm:text-lg max-w-2xl mx-auto leading-normal">
+              Base de datos comunitaria de taquerías en la Ciudad de México,
+              calificadas por expertos taqueros.
+            </p>
+          </div>
 
           {/* Barra de búsqueda */}
-<div className="max-w-4xl mx-auto">
-  <div className="relative">
-    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none z-10" />
-    <label htmlFor="search-input" className="sr-only">
-      Buscar taquerías
-    </label>
-    <input
-      id="search-input"
-      type="text"
-      placeholder="Buscar taquería o especialidad"
-      className="w-full pl-10 pr-12 py-3 sm:py-4 bg-gray-100 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 rounded-none text-base"
-      value={searchTerm}
-      onChange={(e) => {
-        const newSearchTerm = e.target.value;
-        setSearchTerm(newSearchTerm);
-        
-        if (newSearchTerm.trim()) {
-          const results = taquerias.filter((taqueria) => {
-            const searchLower = newSearchTerm.toLowerCase();
-            const matchesSearch = 
-              taqueria.nombre.toLowerCase().includes(searchLower) ||
-              taqueria.especialidad?.toLowerCase().includes(searchLower) ||
-              taqueria.taglines?.some(tag => tag.toLowerCase().includes(searchLower));
-            
-            const matchesAlcaldia =
-              selectedAlcaldia === "todas" ||
-              taqueria.alcaldia?.toLowerCase() === selectedAlcaldia.toLowerCase();
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none z-10" />
+              <label htmlFor="search-input" className="sr-only">
+                Buscar taquerías
+              </label>
+              <input
+                id="search-input"
+                type="text"
+                placeholder="Buscar taquería o especialidad"
+                className="w-full pl-10 pr-12 py-3 sm:py-4 bg-gray-100 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 rounded-none text-base"
+                value={searchTerm}
+                onChange={(e) => {
+                  const newSearchTerm = e.target.value;
+                  setSearchTerm(newSearchTerm);
 
-            return matchesSearch && matchesAlcaldia;
-          });
-          
-          tacoEvents.search(newSearchTerm, results.length);
-        }
-      }}
-    />
-    {searchTerm && (
-      <button
-        onClick={() => {
-          if (searchTerm.trim()) {
-            tacoEvents.clearSearch(searchTerm);
-          }
-          setSearchTerm("");
-        }}
-        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 p-2 focus:outline-none focus:ring-2 focus:ring-gray-400 rounded transition-colors"
-        aria-label="Limpiar búsqueda"
-      >
-        <X className="h-5 w-5" />
-      </button>
-    )}
-  </div>
+                  if (newSearchTerm.trim()) {
+                    const results = taquerias.filter((taqueria) => {
+                      const searchNormalized = normalizeText(newSearchTerm);
+                      const matchesSearch =
+                        normalizeText(taqueria.nombre).includes(
+                          searchNormalized,
+                        ) ||
+                        normalizeText(taqueria.especialidad || "").includes(
+                          searchNormalized,
+                        ) ||
+                        taqueria.taglines?.some((tag) =>
+                          normalizeText(tag).includes(searchNormalized),
+                        );
 
+                      const matchesAlcaldia =
+                        selectedAlcaldia === "todas" ||
+                        taqueria.alcaldia?.toLowerCase() ===
+                          selectedAlcaldia.toLowerCase();
+
+                      return matchesSearch && matchesAlcaldia;
+                    });
+
+                    tacoEvents.search(newSearchTerm, results.length);
+                  }
+                }}
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => {
+                    if (searchTerm.trim()) {
+                      tacoEvents.clearSearch(searchTerm);
+                    }
+                    setSearchTerm("");
+                  }}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 p-2 focus:outline-none focus:ring-2 focus:ring-gray-400 rounded transition-colors"
+                  aria-label="Limpiar búsqueda"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              )}
+            </div>
 
             {/* Botón de filtros móvil */}
             <button
@@ -261,145 +306,179 @@ useEffect(() => {
             </button>
 
             {/* Filtros desktop */}
-<div className="hidden md:flex gap-4 mt-4">
-  <div className="flex-1">
-    <label htmlFor="sort-order-desktop" className="text-sm uppercase mb-1 block">Ordenar:</label>
-    <div className="relative">
-      <select
-        id="sort-order-desktop"
-        className="w-full px-4 py-3 pr-10 text-base bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
-        value={sortOrder}
-        onChange={(e) => {
-          const newSortOrder = e.target.value;
-          setSortOrder(newSortOrder);
+            <div className="hidden md:flex gap-4 mt-4">
+              <div className="flex-1">
+                <label
+                  htmlFor="sort-order-desktop"
+                  className="text-sm uppercase mb-1 block"
+                >
+                  Ordenar:
+                </label>
+                <div className="relative">
+                  <select
+                    id="sort-order-desktop"
+                    className="w-full px-4 py-3 pr-10 text-base bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
+                    value={sortOrder}
+                    onChange={(e) => {
+                      const newSortOrder = e.target.value;
+                      setSortOrder(newSortOrder);
 
-          tacoEvents.applyFilter({
-            filterType: 'ordenamiento',
-            value: newSortOrder,
-            resultCount: filteredTaquerias.length
-          });
-        }}
-      >
-        <option value="calificacion">Mejor Calificación</option>
-        <option value="nombre">Alfabético</option>
-      </select>
-      <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
-    </div>
-  </div>
-  <div className="flex-1">
-    <label htmlFor="alcaldia-filter-desktop" className="text-sm uppercase mb-1 block">
-      Alcaldía:
-    </label>
-    <div className="relative">
-      <select
-        id="alcaldia-filter-desktop"
-        className="w-full px-4 py-3 pr-10 text-base bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
-        value={selectedAlcaldia}
-        onChange={(e) => {
-          const newAlcaldia = e.target.value;
-          setSelectedAlcaldia(newAlcaldia);
+                      tacoEvents.applyFilter({
+                        filterType: "ordenamiento",
+                        value: newSortOrder,
+                        resultCount: filteredTaquerias.length,
+                      });
+                    }}
+                  >
+                    <option value="calificacion">Mejor Calificación</option>
+                    <option value="nombre">Alfabético</option>
+                  </select>
+                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
+                </div>
+              </div>
+              <div className="flex-1">
+                <label
+                  htmlFor="alcaldia-filter-desktop"
+                  className="text-sm uppercase mb-1 block"
+                >
+                  Alcaldía:
+                </label>
+                <div className="relative">
+                  <select
+                    id="alcaldia-filter-desktop"
+                    className="w-full px-4 py-3 pr-10 text-base bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
+                    value={selectedAlcaldia}
+                    onChange={(e) => {
+                      const newAlcaldia = e.target.value;
+                      setSelectedAlcaldia(newAlcaldia);
 
-          tacoEvents.applyFilter({
-            filterType: 'alcaldia',
-            value: newAlcaldia,
-            resultCount: taquerias.filter(t => {
-              const matchesSearch = searchTerm ? 
-                t.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                t.especialidad?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                t.taglines?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) : true;
+                      tacoEvents.applyFilter({
+                        filterType: "alcaldia",
+                        value: newAlcaldia,
+                        resultCount: taquerias.filter((t) => {
+                          const matchesSearch = searchTerm
+                            ? t.nombre
+                                .toLowerCase()
+                                .includes(searchTerm.toLowerCase()) ||
+                              t.especialidad
+                                ?.toLowerCase()
+                                .includes(searchTerm.toLowerCase()) ||
+                              t.taglines?.some((tag) =>
+                                tag
+                                  .toLowerCase()
+                                  .includes(searchTerm.toLowerCase()),
+                              )
+                            : true;
 
-              const matchesAlcaldia =
-                newAlcaldia === "todas" ||
-                t.alcaldia?.toLowerCase() === newAlcaldia.toLowerCase();
+                          const matchesAlcaldia =
+                            newAlcaldia === "todas" ||
+                            t.alcaldia?.toLowerCase() ===
+                              newAlcaldia.toLowerCase();
 
-              return matchesSearch && matchesAlcaldia;
-            }).length
-          });
-        }}
-      >
-        {alcaldias.map((alcaldia) => (
-          <option key={alcaldia} value={alcaldia.toLowerCase()}>
-            {alcaldia}
-          </option>
-        ))}
-      </select>
-      <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
-    </div>
-  </div>
-</div>
+                          return matchesSearch && matchesAlcaldia;
+                        }).length,
+                      });
+                    }}
+                  >
+                    {alcaldias.map((alcaldia) => (
+                      <option key={alcaldia} value={alcaldia.toLowerCase()}>
+                        {alcaldia}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
+                </div>
+              </div>
+            </div>
 
-{/* Filtros móvil expandible */}
-{showFilters && (
-  <div className="md:hidden space-y-4 mt-4">
-    <div>
-      <label htmlFor="sort-order-mobile" className="text-sm uppercase mb-1 block">
-        Ordenar:
-      </label>
-      <div className="relative">
-        <select
-          id="sort-order-mobile"
-          className="w-full px-4 py-3 pr-10 text-base bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none"
-          value={sortOrder}
-          onChange={(e) => {
-            const newSortOrder = e.target.value;
-            setSortOrder(newSortOrder);
+            {/* Filtros móvil expandible */}
+            {showFilters && (
+              <div className="md:hidden space-y-4 mt-4">
+                <div>
+                  <label
+                    htmlFor="sort-order-mobile"
+                    className="text-sm uppercase mb-1 block"
+                  >
+                    Ordenar:
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="sort-order-mobile"
+                      className="w-full px-4 py-3 pr-10 text-base bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none"
+                      value={sortOrder}
+                      onChange={(e) => {
+                        const newSortOrder = e.target.value;
+                        setSortOrder(newSortOrder);
 
-            tacoEvents.applyFilter({
-              filterType: 'ordenamiento',
-              value: newSortOrder,
-              resultCount: filteredTaquerias.length
-            });
-          }}
-        >
-          <option value="calificacion">Mejor Calificación</option>
-          <option value="nombre">Alfabético</option>
-        </select>
-        <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
-      </div>
-    </div>
-    <div>
-      <label htmlFor="alcaldia-filter-mobile" className="text-sm uppercase mb-1 block">
-        Alcaldía:
-      </label>
-      <div className="relative">
-        <select
-          id="alcaldia-filter-mobile"
-          className="w-full px-4 py-3 pr-10 text-base bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none"
-          value={selectedAlcaldia}
-          onChange={(e) => {
-            const newAlcaldia = e.target.value;
-            setSelectedAlcaldia(newAlcaldia);
+                        tacoEvents.applyFilter({
+                          filterType: "ordenamiento",
+                          value: newSortOrder,
+                          resultCount: filteredTaquerias.length,
+                        });
+                      }}
+                    >
+                      <option value="calificacion">Mejor Calificación</option>
+                      <option value="nombre">Alfabético</option>
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="alcaldia-filter-mobile"
+                    className="text-sm uppercase mb-1 block"
+                  >
+                    Alcaldía:
+                  </label>
+                  <div className="relative">
+                    <select
+                      id="alcaldia-filter-mobile"
+                      className="w-full px-4 py-3 pr-10 text-base bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none"
+                      value={selectedAlcaldia}
+                      onChange={(e) => {
+                        const newAlcaldia = e.target.value;
+                        setSelectedAlcaldia(newAlcaldia);
 
-            tacoEvents.applyFilter({
-              filterType: 'alcaldia',
-              value: newAlcaldia,
-              resultCount: taquerias.filter(t => {
-                const matchesSearch = searchTerm ? 
-                  t.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                  t.especialidad?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                  t.taglines?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())) : true;
+                        tacoEvents.applyFilter({
+                          filterType: "alcaldia",
+                          value: newAlcaldia,
+                          resultCount: taquerias.filter((t) => {
+                            const matchesSearch = searchTerm
+                              ? t.nombre
+                                  .toLowerCase()
+                                  .includes(searchTerm.toLowerCase()) ||
+                                t.especialidad
+                                  ?.toLowerCase()
+                                  .includes(searchTerm.toLowerCase()) ||
+                                t.taglines?.some((tag) =>
+                                  tag
+                                    .toLowerCase()
+                                    .includes(searchTerm.toLowerCase()),
+                                )
+                              : true;
 
-                const matchesAlcaldia =
-                  newAlcaldia === "todas" ||
-                  t.alcaldia?.toLowerCase() === newAlcaldia.toLowerCase();
+                            const matchesAlcaldia =
+                              newAlcaldia === "todas" ||
+                              t.alcaldia?.toLowerCase() ===
+                                newAlcaldia.toLowerCase();
 
-                return matchesSearch && matchesAlcaldia;
-              }).length
-            });
-          }}
-        >
-          {alcaldias.map((alcaldia) => (
-            <option key={alcaldia} value={alcaldia.toLowerCase()}>
-              {alcaldia}
-            </option>
-          ))}
-        </select>
-        <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
-      </div>
-    </div>
-  </div>
-)}
-</div>
+                            return matchesSearch && matchesAlcaldia;
+                          }).length,
+                        });
+                      }}
+                    >
+                      {alcaldias.map((alcaldia) => (
+                        <option key={alcaldia} value={alcaldia.toLowerCase()}>
+                          {alcaldia}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Contador de resultados */}
           <div className="text-center mt-6 text-base sm:text-lg">
@@ -408,113 +487,122 @@ useEffect(() => {
         </div>
       </section>
 
-     {/* Lista de taquerías */}
-<main id="main-content" className="pattern-background bg-white px-4 py-8">
-  {loading ? (
-  <div className="text-center py-12">
-    <p className="text-base sm:text-lg">
-      <span>Cargando taquerías</span>
-      <span className="loading-dots"></span>
-    </p>
+      {/* Lista de taquerías */}
+      <main id="main-content" className="pattern-background bg-white px-4 py-8">
+       {loading ? (
+  <div className="max-w-4xl mx-auto space-y-4">
+    {[...Array(5)].map((_, i) => (
+      <TaqueriaSkeleton key={i} />
+    ))}
   </div>
 ) : (
-    <div className="max-w-4xl mx-auto space-y-4">
-  {filteredTaquerias.slice(0, displayLimit).map((taqueria) => (
-    <div
-      key={taqueria._id}
-      className="bg-white border-b-2 border-gray-200 pb-5 px-4 sm:px-5 pt-5 hover:bg-gray-50 transition-colors duration-200 cursor-pointer animate-fadeIn"
-          onClick={() => {
-            setSelectedTaqueria(taqueria);
-            setModalOpen(true);
-            if (taqueria._id) {
-              tacoEvents.viewTaqueriaDetail({
-                id: taqueria._id,
-                nombre: taqueria.nombre,
-                calificacion: taqueria.calificacionFinal,
-                alcaldia: taqueria.alcaldia || ''
-              });
-            }
-          }}
-        >
-          <h2 className="text-lg sm:text-xl font-bold uppercase mb-1">
-            {taqueria.nombre}
-          </h2>
-          {/* Alcaldía debajo del nombre */}
-          {taqueria.alcaldia && (
-            <p className="text-xs sm:text-sm text-gray-500 mb-3">
-              {taqueria.alcaldia}
-            </p>
-          )}
-          {/* Tagline random o especialidad */}
-          {taqueria.taglines && taqueria.taglines.length > 0 ? (
-            <p className="text-sm sm:text-base text-gray-600 italic mb-4 leading-normal">
-              "{taqueria.taglines[Math.floor(Math.random() * taqueria.taglines.length)]}"
-            </p>
-          ) : taqueria.especialidad ? (
-            <p className="text-sm sm:text-base text-gray-600 italic mb-4 leading-normal">
-              "{taqueria.especialidad}"
-            </p>
-          ) : null}
-          
-          <div className="flex items-center justify-between">
-            <span className="text-sm sm:text-base underline">
-              VER DETALLES
-            </span>
-            <span className="bg-black text-white px-3 py-1 text-base sm:text-lg font-bold">
-              {taqueria.calificacionFinal.toFixed(1)}
-            </span>
+  <div className="max-w-4xl mx-auto space-y-4">
+    {filteredTaquerias.slice(0, displayLimit).map((taqueria) => (
+              <div
+                key={taqueria._id}
+                className="bg-white border-b-2 border-gray-200 pb-5 px-4 sm:px-5 pt-5 hover:bg-gray-50 transition-colors duration-200 cursor-pointer animate-fadeIn"
+                onClick={() => {
+                  setSelectedTaqueria(taqueria);
+                  setModalOpen(true);
+                  if (taqueria._id) {
+                    tacoEvents.viewTaqueriaDetail({
+                      id: taqueria._id,
+                      nombre: taqueria.nombre,
+                      calificacion: taqueria.calificacionFinal,
+                      alcaldia: taqueria.alcaldia || "",
+                    });
+                  }
+                }}
+              >
+                <h2 className="text-lg sm:text-xl font-bold uppercase mb-1">
+                  {taqueria.nombre}
+                </h2>
+                {/* Alcaldía debajo del nombre */}
+                {taqueria.alcaldia && (
+                  <p className="text-xs sm:text-sm text-gray-500 mb-3">
+                    {taqueria.alcaldia}
+                  </p>
+                )}
+                {/* Tagline random o especialidad */}
+                {taqueria.taglines && taqueria.taglines.length > 0 ? (
+                  <p className="text-sm sm:text-base text-gray-600 italic mb-4 leading-snug">
+                    "
+                    {taqueria._id && randomIndexes[taqueria._id] !== undefined
+                      ? taqueria.taglines[randomIndexes[taqueria._id]]
+                      : taqueria.taglines[0]}
+                    "
+                  </p>
+                ) : taqueria.especialidad ? (
+                  <p className="text-sm sm:text-base text-gray-600 italic mb-4 leading-snug">
+                    "{taqueria.especialidad}"
+                  </p>
+                ) : null}
+
+                <div className="flex items-center justify-between">
+                  <span className="text-sm sm:text-base underline">
+                    VER DETALLES
+                  </span>
+                  <span className="bg-black text-white px-3 py-1 text-base sm:text-lg font-bold">
+                    {taqueria.calificacionFinal.toFixed(1)}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
+        )}
+
+        {/* Botones de cargar más / volver arriba */}
+        <div className="text-center py-8">
+          <p className="text-sm sm:text-base text-gray-600 mb-4">
+            Mostrando {Math.min(displayLimit, filteredTaquerias.length)} de{" "}
+            {filteredTaquerias.length} taquerías
+          </p>
+
+          {/* Botón Cargar Más */}
+          {filteredTaquerias.length > displayLimit && (
+            <button
+              onClick={() => {
+                setIsLoadingMore(true);
+                setTimeout(() => {
+                  const newDisplayLimit = displayLimit + 10;
+                  setDisplayLimit(newDisplayLimit);
+                  setIsLoadingMore(false);
+
+                  tacoEvents.loadMoreTaquerias(
+                    newDisplayLimit,
+                    filteredTaquerias.length,
+                  );
+                }, 300);
+              }}
+              disabled={isLoadingMore}
+              className="border-2 border-black bg-white text-black px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg uppercase font-bold hover:bg-black hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+            >
+              {isLoadingMore ? (
+                <span>
+                  Cargando<span className="loading-dots"></span>
+                </span>
+              ) : (
+                "Cargar más"
+              )}
+            </button>
+          )}
+
+          {/* Link Volver al inicio */}
+          {displayLimit > 10 && (
+            <div className="mt-4">
+              <button
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                  tacoEvents.returnToTop("pagination");
+                }}
+                className="text-sm sm:text-base underline hover:no-underline p-2 focus:outline-none focus:ring-2 focus:ring-gray-400 rounded"
+              >
+                VOLVER AL INICIO
+              </button>
+            </div>
+          )}
         </div>
-      ))}
-    </div>
-  )}
-
-  {/* Botones de cargar más / volver arriba */}
-  <div className="text-center py-8">
-    <p className="text-sm sm:text-base text-gray-600 mb-4">
-      Mostrando {Math.min(displayLimit, filteredTaquerias.length)} de {filteredTaquerias.length} taquerías
-    </p>
-
-    {/* Botón Cargar Más */}
-    {filteredTaquerias.length > displayLimit && (
-     <button
-  onClick={() => {
-    setIsLoadingMore(true);
-    setTimeout(() => {
-      const newDisplayLimit = displayLimit + 10;
-      setDisplayLimit(newDisplayLimit);
-      setIsLoadingMore(false);
-
-      tacoEvents.loadMoreTaquerias(newDisplayLimit, filteredTaquerias.length);
-    }, 300);
-  }}
-  disabled={isLoadingMore}
-  className="border-2 border-black bg-white text-black px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg uppercase font-bold hover:bg-black hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
->
-  {isLoadingMore ? (
-    <span>Cargando<span className="loading-dots"></span></span>
-  ) : (
-    'Cargar más'
-  )}
-</button>
-    )}
-
-    {/* Link Volver al inicio */}
-    {displayLimit > 10 && (
-      <div className="mt-4">
-        <button
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            tacoEvents.returnToTop('pagination');
-          }}
-          className="text-sm sm:text-base underline hover:no-underline p-2 focus:outline-none focus:ring-2 focus:ring-gray-400 rounded"
-        >
-          VOLVER AL INICIO
-        </button>
-      </div>
-    )}
-  </div>
-</main>
+      </main>
 
       {/* CTA Section */}
       <section className="bg-black text-white py-12">
@@ -562,156 +650,165 @@ useEffect(() => {
 
       {/* Botón flotante Volver arriba */}
       {showScrollTop && (
-  <button
-    onClick={() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      tacoEvents.returnToTop('floating-button');
-    }}
-    className={`scroll-to-top animate-slideIn ${nearFooter ? 'near-footer' : ''}`}
-    aria-label="Volver arriba"
-  >
-    <ChevronUp className="h-5 w-5 sm:h-6 sm:w-6" />
-  </button>
-)}
-      
+        <button
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            tacoEvents.returnToTop("floating-button");
+          }}
+          className={`scroll-to-top animate-slideIn ${nearFooter ? "near-footer" : ""}`}
+          aria-label="Volver arriba"
+        >
+          <ChevronUp className="h-5 w-5 sm:h-6 sm:w-6" />
+        </button>
+      )}
+
       {/* Modal */}
-{modalOpen && selectedTaqueria && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-    {/* Overlay con blur */}
-    <div
-      className="absolute inset-0 bg-white bg-opacity-50 backdrop-blur-sm"
-      onClick={() => setModalOpen(false)}
-    />
-
-    {/* Modal con borde */}
-    <div className="relative bg-white max-w-md w-full max-h-[88vh] sm:max-h-[90vh] overflow-hidden border-2 border-black flex flex-col animate-modalSlideUp">
-      {/* Header compacto */}
-      <div className="bg-black text-white px-4 py-2 sm:py-3 relative flex-shrink-0">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg sm:text-2xl font-bold uppercase pr-2 m-0">
-            {selectedTaqueria.nombre}
-          </h3>
-          <button
+      {modalOpen && selectedTaqueria && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Overlay con blur */}
+          <div
+            className="absolute inset-0 bg-white bg-opacity-50 backdrop-blur-sm"
             onClick={() => setModalOpen(false)}
-            className="p-1 -m-1 focus:outline-none focus:ring-2 focus:ring-white rounded hover:bg-white/10 transition-colors"
-            aria-label="Cerrar modal (ESC)"
-          >
-            <X className="h-5 w-5 sm:h-6 sm:w-6" />
-          </button>
-        </div>
-      </div>
+          />
 
-      {/* Contenido scrolleable */}
-      <div className="flex-1 overflow-y-auto px-4 py-6 sm:p-8">
-        {/* NUEVA SECCIÓN: Calificación gigante centrada */}
-        <div className="text-center mb-4 sm:mb-6">
-          <div className="text-5xl sm:text-6xl font-bold">
-            {selectedTaqueria.calificacionFinal.toFixed(1)}
-          </div>
-          <p className="text-sm text-gray-600">
-            Promedio ponderado de 5.0
-          </p>
-        </div>
-
-        {/* NUEVA SECCIÓN: Desglose horizontal */}
-        <div className="flex justify-around mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-gray-200">
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold">
-              {selectedTaqueria.calidad.toFixed(1)}
-            </div>
-            <div className="text-xs sm:text-sm text-gray-600">Calidad</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold">
-              {selectedTaqueria.servicio.toFixed(1)}
-            </div>
-            <div className="text-xs sm:text-sm text-gray-600">Servicio</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold">
-              {selectedTaqueria.lugar.toFixed(1)}
-            </div>
-            <div className="text-xs sm:text-sm text-gray-600">Lugar</div>
-          </div>
-        </div>
-
-        {/* Información adicional si existe - MANTENEMOS ESTRUCTURA */}
-        {(selectedTaqueria.especialidad || selectedTaqueria.taglines?.length > 0 || selectedTaqueria.direccion) && (
-          <div className="space-y-4">
-            {/* Mostrar taglines random si existen, si no mostrar especialidad */}
-            {selectedTaqueria.taglines && selectedTaqueria.taglines.length > 0 ? (
-              <div className="text-sm sm:text-base italic leading-snug text-gray-700">
-                <RotatingTagline taglines={selectedTaqueria.taglines} />
+          {/* Modal con borde */}
+          <div className="relative bg-white max-w-md w-full max-h-[88vh] sm:max-h-[90vh] overflow-hidden border-2 border-black flex flex-col animate-modalSlideUp">
+            {/* Header compacto */}
+            <div className="bg-black text-white px-4 py-2 sm:py-3 relative flex-shrink-0">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg sm:text-2xl font-bold uppercase pr-2 m-0">
+                  {selectedTaqueria.nombre}
+                </h3>
+                <button
+                  onClick={() => setModalOpen(false)}
+                  className="p-1 -m-1 focus:outline-none focus:ring-2 focus:ring-white rounded hover:bg-white/10 transition-colors"
+                  aria-label="Cerrar modal (ESC)"
+                >
+                  <X className="h-5 w-5 sm:h-6 sm:w-6" />
+                </button>
               </div>
-            ) : selectedTaqueria.especialidad ? (
-              <div className="flex items-start gap-3">
-                <Gem className="h-4 w-4 mt-0.5 flex-shrink-0 text-gray-600" />
-                <p className="text-sm sm:text-base italic leading-snug text-gray-700">
-                  "{selectedTaqueria.especialidad}"
+            </div>
+
+            {/* Contenido scrolleable */}
+            <div className="flex-1 overflow-y-auto px-4 py-6 sm:p-8">
+              {/* NUEVA SECCIÓN: Calificación gigante centrada */}
+              <div className="text-center mb-4 sm:mb-6">
+                <div className="text-5xl sm:text-6xl font-bold">
+                  {selectedTaqueria.calificacionFinal.toFixed(1)}
+                </div>
+                <p className="text-sm text-gray-600">
+                  Promedio ponderado de 5.0
                 </p>
               </div>
-            ) : null}
 
-            {/* Dirección - MANTENEMOS IGUAL */}
-            {selectedTaqueria.direccion && (
-              <div className="flex items-start gap-3">
-                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-gray-600" />
-                <p className="text-sm sm:text-base leading-relaxed">
-                  {selectedTaqueria.direccion}
-                  {selectedTaqueria.colonia && `, ${selectedTaqueria.colonia}`}
-                  {selectedTaqueria.alcaldia && `, ${selectedTaqueria.alcaldia}`}
-                </p>
+              {/* NUEVA SECCIÓN: Desglose horizontal */}
+              <div className="flex justify-around mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-gray-200">
+                <div className="text-center">
+                  <div className="text-2xl sm:text-3xl font-bold">
+                    {selectedTaqueria.calidad.toFixed(1)}
+                  </div>
+                  <div className="text-xs sm:text-sm text-gray-600">
+                    Calidad
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl sm:text-3xl font-bold">
+                    {selectedTaqueria.servicio.toFixed(1)}
+                  </div>
+                  <div className="text-xs sm:text-sm text-gray-600">
+                    Servicio
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl sm:text-3xl font-bold">
+                    {selectedTaqueria.lugar.toFixed(1)}
+                  </div>
+                  <div className="text-xs sm:text-sm text-gray-600">Lugar</div>
+                </div>
               </div>
-            )}
-          </div>
-        )}
-      </div>
 
-      {/* Botones fijos en el footer - MANTENEMOS EXACTAMENTE IGUAL */}
-      <div className="border-t p-3 sm:p-6 bg-white flex-shrink-0">
-        <div className="flex gap-3 sm:gap-4">
-          {selectedTaqueria.ubicacion && (
-            <a
-              href={selectedTaqueria.ubicacion}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 bg-black text-white text-center py-2.5 sm:py-3 text-sm sm:text-lg hover:bg-gray-800 uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors font-medium"
-              onClick={(e) => {
-                e.stopPropagation();
-                if (selectedTaqueria._id) {
-                  tacoEvents.viewMap(
-                    selectedTaqueria._id,
-                    selectedTaqueria.nombre,
-                    true
-                  );
-                }
-              }}
-            >
-              VER MAPA
-            </a>
-          )}
-          <a
-            href="https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 border border-black text-black py-2.5 sm:py-3 text-sm sm:text-lg hover:bg-gray-100 text-center uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors font-medium"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (selectedTaqueria._id) {
-                tacoEvents.clickCalificar(
-                  selectedTaqueria._id,
-                  selectedTaqueria.nombre
-                );
-              }
-            }}
-          >
-            CALIFICAR
-          </a>
+              {/* Información adicional si existe - MANTENEMOS ESTRUCTURA */}
+              {(selectedTaqueria.especialidad ||
+                selectedTaqueria.taglines?.length > 0 ||
+                selectedTaqueria.direccion) && (
+                <div className="space-y-4">
+                  {/* Mostrar taglines random si existen, si no mostrar especialidad */}
+                  {selectedTaqueria.taglines &&
+                  selectedTaqueria.taglines.length > 0 ? (
+                    <div className="text-sm sm:text-base italic leading-snug text-gray-700">
+                      <RotatingTagline taglines={selectedTaqueria.taglines} />
+                    </div>
+                  ) : selectedTaqueria.especialidad ? (
+                    <div className="flex items-start gap-3">
+                      <Gem className="h-4 w-4 mt-0.5 flex-shrink-0 text-gray-600" />
+                      <p className="text-sm sm:text-base italic leading-snug text-gray-700">
+                        "{selectedTaqueria.especialidad}"
+                      </p>
+                    </div>
+                  ) : null}
+
+                  {/* Dirección - MANTENEMOS IGUAL */}
+                  {selectedTaqueria.direccion && (
+                    <div className="flex items-start gap-3">
+                      <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-gray-600" />
+                      <p className="text-sm sm:text-base leading-relaxed">
+                        {selectedTaqueria.direccion}
+                        {selectedTaqueria.colonia &&
+                          `, ${selectedTaqueria.colonia}`}
+                        {selectedTaqueria.alcaldia &&
+                          `, ${selectedTaqueria.alcaldia}`}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Botones fijos en el footer - MANTENEMOS EXACTAMENTE IGUAL */}
+            <div className="border-t p-3 sm:p-6 bg-white flex-shrink-0">
+              <div className="flex gap-3 sm:gap-4">
+                {selectedTaqueria.ubicacion && (
+                  <a
+                    href={selectedTaqueria.ubicacion}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-black text-white text-center py-2.5 sm:py-3 text-sm sm:text-lg hover:bg-gray-800 uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors font-medium"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (selectedTaqueria._id) {
+                        tacoEvents.viewMap(
+                          selectedTaqueria._id,
+                          selectedTaqueria.nombre,
+                          true,
+                        );
+                      }
+                    }}
+                  >
+                    VER MAPA
+                  </a>
+                )}
+                <a
+                  href="https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 border border-black text-black py-2.5 sm:py-3 text-sm sm:text-lg hover:bg-gray-100 text-center uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors font-medium"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (selectedTaqueria._id) {
+                      tacoEvents.clickCalificar(
+                        selectedTaqueria._id,
+                        selectedTaqueria.nombre,
+                      );
+                    }
+                  }}
+                >
+                  CALIFICAR
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-)}
+      )}
     </div>
   );
 };

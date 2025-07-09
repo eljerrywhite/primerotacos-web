@@ -258,8 +258,19 @@ async headers() {
   - Taglines random en cards (rotatorios en modal)
   - Botón flotante "Subir" implementado
   - Micro-animaciones agregadas
+  - Función `normalizeText` para búsqueda sin acentos
+  - Estado `randomIndexes` para taglines estables
+  - Implementación de skeleton loaders
+  - Import del componente TaqueriaSkeleton
 
-- ✅ **`styles/globals.css`** - MODIFICADO  
+- ✅ **`components/TaqueriaSkeleton.tsx`** - CREADO
+ - Componente de skeleton loader con efecto shimmer
+ - Estructura idéntica a las cards reales
+ - Optimizado para performance
+
+- ✅ **`styles/globals.css`** - MODIFICADO
+  - CSS para efecto shimmer del skeleton
+  - Animación optimizada con GPU 
   - Animaciones CSS para modal, cards y botones
   - Estilos del botón flotante circular
   - CSP headers actualizados para Google Fonts
@@ -288,6 +299,11 @@ async headers() {
   - primerotacos.mx configurado como dominio principal
   - Redirecciones desde primerotacos.com implementadas
   - Certificados SSL para conexiones seguras
+
+#### **GPT Prompt:**
+- ✅ **Moderación de contenido** - Manejo inteligente de groserías
+- ✅ **Skip ubicación** - No pide dirección en actualizaciones
+- ✅ **Instrucciones mejoradas** - Proceso más claro para usuarios
 
 ## ♿ ACCESIBILIDAD
 
@@ -410,6 +426,11 @@ npm start # localhost:3000
 
 ## 🎉 LOGROS DEL PROYECTO
 
+- **Loading states profesionales**: Skeletons con shimmer effect
+- **Búsqueda inteligente**: Funciona sin importar acentos
+- **UX refinada**: Taglines que no cambian inesperadamente
+- **GPT robusto**: Mejor manejo de casos edge
+- **Código optimizado**: Componentes reutilizables y performantes
 - Sistema completo y funcional en producción
 - GPT que automatiza la entrada de datos
 - UI profesional y minimalista
