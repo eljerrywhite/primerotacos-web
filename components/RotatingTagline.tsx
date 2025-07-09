@@ -4,7 +4,7 @@ import { Gem } from 'lucide-react';
 
 interface RotatingTaglineProps {
   taglines: string[];
-  interval?: number; // milliseconds, default 10000 (10s)
+  interval?: number; // milliseconds, default 4000 (4s)
 }
 
 const RotatingTagline: React.FC<RotatingTaglineProps> = ({ 
@@ -35,7 +35,7 @@ const RotatingTagline: React.FC<RotatingTaglineProps> = ({
 
   return (
     <div className="flex items-start gap-2">
-      <Gem className="h-4 w-4 mt-0.5 flex-shrink-0" />
+      <Gem className="h-4 w-4 mt-0.5 flex-shrink-0 text-gray-600" />
       <p 
         className={`text-sm italic transition-opacity duration-300 ${
           isVisible ? 'opacity-100' : 'opacity-0'

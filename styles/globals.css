@@ -11,7 +11,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-family: 'Courier Prime', 'Courier New', monospace ;
 }
 
 a {
@@ -24,7 +24,7 @@ a {
 }
 
 .font-mono {
-  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-family: 'Courier Prime', 'Courier New', monospace !important;
 }
 
 /* Estilos personalizados para la aplicación */
@@ -79,4 +79,485 @@ button, a {
 .pattern-background > * {
   position: relative;
   z-index: 1;
+}
+
+/* ===== SISTEMA DE TIPOGRAFÍA MEJORADO ===== */
+
+/* Base font size más grande para mejor legibilidad */
+html {
+  font-size: 16px; /* Base para desktop */
+}
+
+/* Escala tipográfica mejorada */
+:root {
+  /* Tamaños de fuente usando escala modular (1.250) */
+  --text-xs: 0.8rem;    /* 12.8px */
+  --text-sm: 0.875rem;  /* 14px */
+  --text-base: 1rem;    /* 16px */
+  --text-lg: 1.25rem;   /* 20px */
+  --text-xl: 1.563rem;  /* 25px */
+  --text-2xl: 1.953rem; /* 31.25px */
+  --text-3xl: 2.441rem; /* 39px */
+  --text-4xl: 3.052rem; /* 48.8px */
+
+  /* Espaciados mejorados */
+  --spacing-xs: 0.5rem;   /* 8px */
+  --spacing-sm: 0.75rem;  /* 12px */
+  --spacing-md: 1rem;     /* 16px */
+  --spacing-lg: 1.5rem;   /* 24px */
+  --spacing-xl: 2rem;     /* 32px */
+  --spacing-2xl: 3rem;    /* 48px */
+}
+
+/* ===== RESPONSIVE TYPOGRAPHY ===== */
+
+/* Mobile First: Tamaños optimizados para móvil */
+@media (max-width: 640px) {
+  html {
+    font-size: 18px; /* Base más grande en móvil para mejor legibilidad */
+  }
+
+  /* Ajustes específicos para elementos */
+  h1 {
+    font-size: var(--text-2xl); /* 31.25px en móvil */
+    line-height: 1.2;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  h2 {
+    font-size: var(--text-xl); /* 25px en móvil */
+    line-height: 1.3;
+    margin-bottom: var(--spacing-md);
+  }
+
+  h3 {
+    font-size: var(--text-lg); /* 20px en móvil */
+    line-height: 1.4;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  /* Texto del cuerpo */
+  p, li, td {
+    font-size: var(--text-base); /* 16px (18px real) */
+    line-height: 1.6;
+  }
+
+  /* Botones y elementos interactivos más grandes */
+  button, 
+  input, 
+  select, 
+  textarea {
+    min-height: 48px; /* Mínimo recomendado por Google */
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--text-base);
+  }
+
+  /* Cards de taquerías */
+  .taqueria-card {
+    padding: var(--spacing-lg); /* Más espacio interno */
+  }
+
+  .taqueria-nombre {
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .taqueria-especialidad {
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+
+  /* Calificación más visible */
+  .calificacion {
+    font-size: var(--text-xl);
+    font-weight: bold;
+  }
+
+  /* Espaciado entre elementos */
+  .filtros-container {
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  /* Input de búsqueda más grande */
+  input[type="text"] {
+    font-size: var(--text-lg);
+    padding: var(--spacing-md);
+  }
+}
+
+/* ===== ANIMACIONES PARA CARDS DE TAQUERÍAS ===== */
+
+/* Animación de entrada fade in + slide up */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para las cards */
+.taqueria-card {
+  will-change: transform, box-shadow;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover suave para desktop */
+@media (hover: hover) {
+  .taqueria-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* ===== MICRO-ANIMACIONES ===== */
+
+/* Fade in para cards después de filtrar */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Bounce para botón cargar más */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.hover\:animate-bounce:hover {
+  animation: bounce 0.5s ease-in-out;
+}
+
+/* Puntos animados para loading */
+@keyframes dots {
+  0%, 20% {
+    content: '.';
+  }
+  40% {
+    content: '..';
+  }
+  60%, 100% {
+    content: '...';
+  }
+}
+
+.loading-dots::after {
+  content: '';
+  animation: dots 1.5s infinite;
+}
+
+/* Animación para el botón de subir */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideIn {
+  animation: slideInRight 0.3s ease-out;
+}
+
+/* Botón flotante de subir */
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  background: black;
+  color: white;
+  border: 2px solid black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 40;
+  padding: 0;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px white; /* Outline blanco */
+}
+
+.scroll-to-top:hover {
+  background: white;
+  color: black;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.scroll-to-top:active {
+  transform: translateY(-2px);
+}
+
+/* Móvil: botón más pequeño pero manteniendo proporción circular */
+@media (max-width: 640px) {
+  .scroll-to-top {
+    bottom: 1.5rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    box-shadow: 0 0 0 2px white; /* Outline más delgado en móvil */
+  }
+}
+
+/* Fade out cuando llega al final */
+.scroll-to-top.near-footer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Animación de contador */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-count {
+  animation: countUp 0.3s ease-out;
+}
+
+/* Optimización para móvil - menos elevación */
+@media (max-width: 640px) {
+  .taqueria-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s;
+  }
+
+  /* Ajuste de altura para taglines rotativos en móvil */
+  .taqueria-card .rotating-tagline {
+    max-height: 3rem;
+    overflow: hidden;
+  }
+}
+
+/* Efecto de ripple en el botón (opcional) */
+.taqueria-card button {
+  position: relative;
+  overflow: hidden;
+}
+
+.taqueria-card button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.taqueria-card button:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Loading skeleton (para futuro) */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Mejora de performance */
+@media (prefers-reduced-motion: reduce) {
+  .taqueria-card,
+  .taqueria-card button::after {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* ===== MEJORAS DE ACCESIBILIDAD ===== */
+
+/* Focus visible mejorado */
+:focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Mejor contraste para placeholders */
+::placeholder {
+  opacity: 0.7;
+  color: #666;
+}
+
+/* Links con mejor área de toque */
+a {
+  position: relative;
+  padding: 2px 0;
+}
+
+/* Área de toque extendida para links en móvil */
+@media (max-width: 640px) {
+  a::after {
+    content: '';
+    position: absolute;
+    left: -8px;
+    right: -8px;
+    top: -8px;
+    bottom: -8px;
+  }
+}
+
+/* ===== ANIMACIÓN DEL MODAL ===== */
+
+/* Animación slide up desde abajo */
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-modalSlideUp {
+  animation: modalSlideUp 0.3s ease-out;
+}
+
+/* En móvil, el modal viene desde más abajo */
+@media (max-width: 640px) {
+  @keyframes modalSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(100vh);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ===== ESTILOS ESPECÍFICOS DEL BUSCADOR ===== */
+
+/* Estilos para el input de búsqueda */
+#search-input {
+  /* Prevenir que el texto se salga del contenedor */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  /* Tamaño de fuente consistente con los filtros */
+  font-size: 16px !important;
+}
+
+/* Ajuste del placeholder */
+#search-input::placeholder {
+  font-size: 16px !important;
+  opacity: 0.7;
+}
+
+/* Desktop: mantener tamaño consistente */
+@media (min-width: 768px) {
+  #search-input {
+    font-size: 16px !important;
+  }
+  
+  #search-input::placeholder {
+    font-size: 16px !important;
+  }
+}
+
+/* Mobile: tamaño más grande para mejor legibilidad */
+@media (max-width: 640px) {
+  #search-input {
+    padding-left: 2.5rem;
+    font-size: 16px !important;
+  }
+  
+  #search-input::placeholder {
+    font-size: 16px !important;
+  }
+}
+
+/* En pantallas muy pequeñas */
+@media (max-width: 380px) {
+  #search-input {
+    padding-left: 2.5rem !important;
+  }
+}
+
+/* Fix para el botón X - evitar movimiento en hover */
+#search-input + button {
+  transition: color 0.2s ease-in-out;
+  /* Mantener posición fija sin transform en hover */
+}
+
+#search-input + button:hover {
+  /* No usar transform para evitar movimiento */
+  color: #374151; /* gray-700 */
+}
+
+#search-input + button:active {
+  /* Evitar movimiento en press/click */
+  transform: translateY(-50%) !important;
+}
+
+/* ===== UTILIDADES PARA DEBUGGING ===== */
+
+/* Clase para visualizar el tamaño real de touch targets durante desarrollo */
+.debug-touch-target {
+  position: relative;
+}
+
+.debug-touch-target::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border: 2px dashed rgba(255, 0, 0, 0.3);
+  pointer-events: none;
 }

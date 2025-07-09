@@ -161,7 +161,32 @@
 
 ## 📁 ESTRUCTURA DE ARCHIVOS
 
-### Archivos SEO y Assets
+### Estructura General del Proyecto
+```
+primerotacos-web/
+├── components/
+│   ├── PrimeroTacosLogo.tsx      # Componente del logo
+│   └── RotatingTagline.tsx       # Componente de taglines rotatorios
+├── lib/
+│   └── analytics.ts              # Funciones de Google Analytics
+├── pages/
+│   ├── _app.tsx                  # App wrapper de Next.js
+│   ├── _document.tsx             # Documento HTML personalizado
+│   ├── index.tsx                 # Página principal
+│   └── api/
+│       └── taquerias.js          # API route para datos
+├── public/                       # Assets estáticos (ver abajo)
+├── styles/
+│   └── globals.css               # Estilos globales y animaciones
+├── types/
+│   └── index.ts                  # TypeScript types (Taqueria, etc)
+├── .env.local                    # Variables de entorno
+├── next.config.js                # Configuración de Next.js
+├── package.json                  # Dependencias
+├── README.md                     # Documentación
+└── tsconfig.json                 # Configuración TypeScript
+```
+### Archivos SEO y Assets en public/
 ```
 public/
 ├── android-chrome-192x192.png   # Favicon Android grande
@@ -174,9 +199,21 @@ public/
 ├── og-image.png               # Imagen Open Graph
 ├── site.webmanifest           # Manifest PWA
 ├── sitemap.xml                # Mapa del sitio
-└── robots.txt                 # Directivas para bots
+├── robots.txt                 # Directivas para bots
+└── .well-known/
+└── security.txt           # Información de seguridad
 ```
-
+### Backend API (repositorio separado)
+```
+primerotacos/
+├── index.js                    # Servidor Express principal
+├── models/
+│   └── Taqueria.js            # Modelo MongoDB
+├── routes/
+│   └── taquerias.js           # Rutas API
+├── .env                       # Variables de entorno
+└── package.json               # Dependencias
+```
 ## 🔒 SEGURIDAD Y REPUTACIÓN
 
 ### Headers de Seguridad Implementados
@@ -215,6 +252,24 @@ async headers() {
 ### 🔄 **Archivos Modificados en la Última Actualización:**
 
 #### **Frontend (primerotacos-web):**
+- ✅ **`pages/index.tsx`** - MODIFICADO
+  - Cards completamente clickeables con hover effects
+  - Logo con animación de escala al scroll
+  - Taglines random en cards (rotatorios en modal)
+  - Botón flotante "Subir" implementado
+  - Micro-animaciones agregadas
+
+- ✅ **`styles/globals.css`** - MODIFICADO  
+  - Animaciones CSS para modal, cards y botones
+  - Estilos del botón flotante circular
+  - CSP headers actualizados para Google Fonts
+  - Optimizaciones de interlineado
+
+- ✅ **`components/RotatingTagline.tsx`** - MODIFICADO
+  - Color del ícono Gem consistente (text-gray-600)
+
+- ✅ **`next.config.js`** - MODIFICADO
+  - Content Security Policy actualizado para permitir fonts.googleapis.com
 - ✅ **`pages/_document.tsx`** - CREADO
   - Implementación de Google Analytics 4
   - Script de rastreo para monitorizar interacciones de usuarios
@@ -233,6 +288,26 @@ async headers() {
   - primerotacos.mx configurado como dominio principal
   - Redirecciones desde primerotacos.com implementadas
   - Certificados SSL para conexiones seguras
+
+## ♿ ACCESIBILIDAD
+
+### Implementación WCAG 2.1
+- ✅ **Skip Navigation**: Link oculto para saltar al contenido principal
+- ✅ **Formularios accesibles**: Todos los inputs con labels y aria-labels
+- ✅ **Focus Management**: Estados de focus claros y consistentes
+- ✅ **Touch Targets**: Mínimo 44x44px en elementos interactivos
+- ✅ **Navegación por teclado**: 
+  - Tab order lógico
+  - ESC cierra modales
+  - Enter activa botones
+- ✅ **Tipografía escalable**: Sistema responsivo con unidades rem
+- ✅ **Contraste**: Diseño B&W garantiza contraste AAA
+
+### Mejoras de UX Móvil
+- ✅ Modal optimizado con scroll solo en contenido
+- ✅ Header compacto para maximizar espacio
+- ✅ Botones con padding extra para facilitar toque
+- ✅ Textos con tamaños apropiados para lectura sin zoom
 
 ## 🚀 DEPLOYMENT
 
@@ -309,14 +384,10 @@ npm start # localhost:3000
 - [x] Rotación de taglines (COMPLETADO ✅)
 - [ ] Eliminar endpoint /reset-all por seguridad
 - [ ] Llenar base con datos consistentes
-- [ ] Paginación o scroll infinito
 - [ ] PWA para móvil
 
 ### Mediano Plazo
 - [ ] Sistema de favoritos
-- [ ] Compartir en redes
-- [ ] Google Analytics
-- [ ] Dominio propio (primerotacos.mx)
 
 ### Largo Plazo
 - [ ] Fotos de taquerías
@@ -348,6 +419,12 @@ npm start # localhost:3000
 - **Feature revolucionaria**: Taglines rotativos únicos en apps de taquerías
 - **UX avanzada**: Transiciones suaves y timing perfecto
 - **Arquitectura robusta**: Componentes reutilizables y TypeScript
+- **UI/UX de nivel profesional**: Animaciones, transiciones y micro-interacciones
+- **Logo dinámico**: Responde al scroll del usuario
+- **Cards inteligentes**: Clickeables con taglines random
+- **Modal optimizado**: Jerarquía visual clara con calificación protagonista
+- **Navegación mejorada**: Botón flotante contextual
+- **100% pulido**: Cada detalle cuidado desde padding hasta animaciones
 
 ## 👥 CRÉDITOS
 

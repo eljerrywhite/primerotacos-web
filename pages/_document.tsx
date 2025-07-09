@@ -10,7 +10,6 @@ export default function Document() {
       <Head>
         {/* Meta tags básicos */}
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         
         {/* Meta tags para SEO */}
         <meta name="description" content="Base de datos comunitaria de taquerías en CDMX, calificadas por expertos taqueros. Encuentra las mejores taquerías por calidad, servicio y ubicación." />
