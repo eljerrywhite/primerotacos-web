@@ -229,8 +229,7 @@ const HomePage = () => {
               PRIMERO TACOS × LOS KNIJOS
             </h1>
             <p className="text-base sm:text-lg max-w-2xl mx-auto leading-normal">
-              Base de datos comunitaria de taquerías en la Ciudad de México,
-              calificadas por expertos taqueros.
+              Directorio taquero creado por la banda chilanga. Calificaciones reales, sin pretensiones, directo al taco.
             </p>
           </div>
 
@@ -609,11 +608,11 @@ const HomePage = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center border-2 border-white p-6 sm:p-8">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-4 leading-tight">
-              ¿CONOCES UNA TAQUERÍA QUE NO ESTÁ EN NUESTRO DIRECTORIO?
+              ¿CONOCES UNA TAQUERÍA QUE NO ESTÁ EN ESTÁ EN EL RADAR?
             </h2>
             <p className="mb-6 text-base sm:text-lg leading-normal">
-              Ayúdanos a completar este directorio comunitario calificando
-              nuevas taquerías con nuestro GPT especializado.
+              Ayúdanos a descubrir joyitas del barrio.
+              Comparte tus tacos favoritos con nuestro GPT taquero especializado.
             </p>
             <a
               href="https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos"
@@ -643,7 +642,7 @@ const HomePage = () => {
           </div>
           <div className="text-center text-sm sm:text-base text-gray-600">
             <p>© 2025 PRIMERO TACOS × LOS KNIJOS</p>
-            <p className="mt-1">Hecho con 🌮 en CDMX</p>
+            <p className="mt-1">Hecho con 🌮, barrio y amor por la CDMX.</p>
           </div>
         </div>
       </footer>
