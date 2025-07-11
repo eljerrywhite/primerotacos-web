@@ -14,6 +14,7 @@ import { Taqueria } from "../types";
 import RotatingTagline from "../components/RotatingTagline";
 import { tacoEvents } from "../lib/analytics";
 import TaqueriaSkeleton from "../components/TaqueriaSkeleton";
+import EmptyState from "../components/EmptyState";
 
 const HomePage = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -21,6 +22,7 @@ const HomePage = () => {
   const [taquerias, setTaquerias] = useState<Taqueria[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [error, setError] = useState(false);
   const [sortOrder, setSortOrder] = useState("calificacion");
   const [selectedAlcaldia, setSelectedAlcaldia] = useState("todas");
   const [selectedTaqueria, setSelectedTaqueria] = useState<Taqueria | null>(
@@ -59,11 +61,14 @@ const HomePage = () => {
     const fetchTaquerias = async () => {
       try {
         setLoading(true);
+        setError(false);
         const response = await fetch("/api/taquerias");
+        if (!response.ok) throw new Error('Error al cargar');
         const data = await response.json();
         setTaquerias(data);
       } catch (error) {
         console.error("Error:", error);
+        setError(true); // Establecer error en true si falla la carga
       } finally {
         setLoading(false);
       }
@@ -487,121 +492,162 @@ const HomePage = () => {
       </section>
 
       {/* Lista de taquerías */}
-      <main id="main-content" className="pattern-background bg-white px-4 py-8">
-       {loading ? (
-  <div className="max-w-4xl mx-auto space-y-4">
-    {[...Array(5)].map((_, i) => (
-      <TaqueriaSkeleton key={i} />
-    ))}
-  </div>
-) : (
-  <div className="max-w-4xl mx-auto space-y-4">
-    {filteredTaquerias.slice(0, displayLimit).map((taqueria) => (
-              <div
-                key={taqueria._id}
-                className="bg-white border-b-2 border-gray-200 pb-5 px-4 sm:px-5 pt-5 hover:bg-gray-50 transition-colors duration-200 cursor-pointer animate-fadeIn"
-                onClick={() => {
-                  setSelectedTaqueria(taqueria);
-                  setModalOpen(true);
-                  if (taqueria._id) {
-                    tacoEvents.viewTaqueriaDetail({
-                      id: taqueria._id,
-                      nombre: taqueria.nombre,
-                      calificacion: taqueria.calificacionFinal,
-                      alcaldia: taqueria.alcaldia || "",
-                    });
-                  }
-                }}
-              >
-                <h2 className="text-lg sm:text-xl font-bold uppercase mb-1">
-                  {taqueria.nombre}
-                </h2>
-                {/* Alcaldía debajo del nombre */}
-                {taqueria.alcaldia && (
-                  <p className="text-xs sm:text-sm text-gray-500 mb-3">
-                    {taqueria.alcaldia}
-                  </p>
-                )}
-                {/* Tagline random o especialidad */}
-                {taqueria.taglines && taqueria.taglines.length > 0 ? (
-                  <p className="text-sm sm:text-base text-gray-600 italic mb-4 leading-snug">
-                    "
-                    {taqueria._id && randomIndexes[taqueria._id] !== undefined
-                      ? taqueria.taglines[randomIndexes[taqueria._id]]
-                      : taqueria.taglines[0]}
-                    "
-                  </p>
-                ) : taqueria.especialidad ? (
-                  <p className="text-sm sm:text-base text-gray-600 italic mb-4 leading-snug">
-                    "{taqueria.especialidad}"
-                  </p>
-                ) : null}
+      {/* Lista de taquerías */}
+<main id="main-content" className="pattern-background bg-white px-4 py-8">
+  {loading ? (
+    <div className="max-w-4xl mx-auto space-y-4">
+      {[...Array(5)].map((_, i) => (
+        <TaqueriaSkeleton key={i} />
+      ))}
+    </div>
+  ) : error ? (
+    // Empty state para error
+    <div className="max-w-4xl mx-auto">
+      <EmptyState 
+        type="error" 
+        onReload={() => window.location.reload()}
+      />
+    </div>
+  ) : filteredTaquerias.length === 0 ? (
+    // Empty states para búsqueda/filtros
+    <div className="max-w-4xl mx-auto">
+      {searchTerm && selectedAlcaldia !== "todas" ? (
+        // Caso combinado: búsqueda + filtro
+        <EmptyState 
+          type="combined"
+          searchTerm={searchTerm}
+          alcaldia={selectedAlcaldia === "todas" ? undefined : 
+            alcaldias.find(a => a.toLowerCase() === selectedAlcaldia) || selectedAlcaldia}
+          onReset={() => {
+            setSearchTerm("");
+            setSelectedAlcaldia("todas");
+          }}
+        />
+      ) : searchTerm ? (
+        // Solo búsqueda
+        <EmptyState type="search" />
+      ) : selectedAlcaldia !== "todas" ? (
+        // Solo filtro por alcaldía
+        <EmptyState 
+          type="filter"
+          alcaldia={alcaldias.find(a => a.toLowerCase() === selectedAlcaldia) || selectedAlcaldia}
+        />
+      ) : (
+        // No debería pasar, pero por si acaso
+        <EmptyState type="search" />
+      )}
+    </div>
+  ) : (
+    // Lista normal de taquerías
+    <div className="max-w-4xl mx-auto space-y-4">
+      {filteredTaquerias.slice(0, displayLimit).map((taqueria) => (
+        <div
+          key={taqueria._id}
+          className="bg-white border-b-2 border-gray-200 pb-5 px-4 sm:px-5 pt-5 hover:bg-gray-50 transition-colors duration-200 cursor-pointer animate-fadeIn"
+          onClick={() => {
+            setSelectedTaqueria(taqueria);
+            setModalOpen(true);
+            if (taqueria._id) {
+              tacoEvents.viewTaqueriaDetail({
+                id: taqueria._id,
+                nombre: taqueria.nombre,
+                calificacion: taqueria.calificacionFinal,
+                alcaldia: taqueria.alcaldia || "",
+              });
+            }
+          }}
+        >
+          <h2 className="text-lg sm:text-xl font-bold uppercase mb-1">
+            {taqueria.nombre}
+          </h2>
+          {/* Alcaldía debajo del nombre */}
+          {taqueria.alcaldia && (
+            <p className="text-xs sm:text-sm text-gray-500 mb-3">
+              {taqueria.alcaldia}
+            </p>
+          )}
+          {/* Tagline random o especialidad */}
+          {taqueria.taglines && taqueria.taglines.length > 0 ? (
+            <p className="text-sm sm:text-base text-gray-600 italic mb-4 leading-snug">
+              "
+              {taqueria._id && randomIndexes[taqueria._id] !== undefined
+                ? taqueria.taglines[randomIndexes[taqueria._id]]
+                : taqueria.taglines[0]}
+              "
+            </p>
+          ) : taqueria.especialidad ? (
+            <p className="text-sm sm:text-base text-gray-600 italic mb-4 leading-snug">
+              "{taqueria.especialidad}"
+            </p>
+          ) : null}
 
-                <div className="flex items-center justify-between">
-                  <span className="text-sm sm:text-base underline">
-                    VER DETALLES
-                  </span>
-                  <span className="bg-black text-white px-3 py-1 text-base sm:text-lg font-bold">
-                    {taqueria.calificacionFinal.toFixed(1)}
-                  </span>
-                </div>
-              </div>
-            ))}
+          <div className="flex items-center justify-between">
+            <span className="text-sm sm:text-base underline">
+              VER DETALLES
+            </span>
+            <span className="bg-black text-white px-3 py-1 text-base sm:text-lg font-bold">
+              {taqueria.calificacionFinal.toFixed(1)}
+            </span>
           </div>
-        )}
-
-        {/* Botones de cargar más / volver arriba */}
-        <div className="text-center py-8">
-          <p className="text-sm sm:text-base text-gray-600 mb-4">
-            Mostrando {Math.min(displayLimit, filteredTaquerias.length)} de{" "}
-            {filteredTaquerias.length} taquerías
-          </p>
-
-          {/* Botón Cargar Más */}
-          {filteredTaquerias.length > displayLimit && (
-            <button
-              onClick={() => {
-                setIsLoadingMore(true);
-                setTimeout(() => {
-                  const newDisplayLimit = displayLimit + 10;
-                  setDisplayLimit(newDisplayLimit);
-                  setIsLoadingMore(false);
-
-                  tacoEvents.loadMoreTaquerias(
-                    newDisplayLimit,
-                    filteredTaquerias.length,
-                  );
-                }, 300);
-              }}
-              disabled={isLoadingMore}
-              className="border-2 border-black bg-white text-black px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg uppercase font-bold hover:bg-black hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
-            >
-              {isLoadingMore ? (
-                <span>
-                  Cargando<span className="loading-dots"></span>
-                </span>
-              ) : (
-                "Cargar más"
-              )}
-            </button>
-          )}
-
-          {/* Link Volver al inicio */}
-          {displayLimit > 10 && (
-            <div className="mt-4">
-              <button
-                onClick={() => {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                  tacoEvents.returnToTop("pagination");
-                }}
-                className="text-sm sm:text-base underline hover:no-underline p-2 focus:outline-none focus:ring-2 focus:ring-gray-400 rounded"
-              >
-                VOLVER AL INICIO
-              </button>
-            </div>
-          )}
         </div>
-      </main>
+      ))}
+    </div>
+  )}
+
+  {/* Botones de cargar más / volver arriba - SOLO SE MUESTRAN SI HAY RESULTADOS */}
+  {!loading && !error && filteredTaquerias.length > 0 && (
+    <div className="text-center py-8">
+      <p className="text-sm sm:text-base text-gray-600 mb-4">
+        Mostrando {Math.min(displayLimit, filteredTaquerias.length)} de{" "}
+        {filteredTaquerias.length} taquerías
+      </p>
+
+      {/* Botón Cargar Más */}
+      {filteredTaquerias.length > displayLimit && (
+        <button
+          onClick={() => {
+            setIsLoadingMore(true);
+            setTimeout(() => {
+              const newDisplayLimit = displayLimit + 10;
+              setDisplayLimit(newDisplayLimit);
+              setIsLoadingMore(false);
+
+              tacoEvents.loadMoreTaquerias(
+                newDisplayLimit,
+                filteredTaquerias.length,
+              );
+            }, 300);
+          }}
+          disabled={isLoadingMore}
+          className="border-2 border-black bg-white text-black px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg uppercase font-bold hover:bg-black hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+        >
+          {isLoadingMore ? (
+            <span>
+              Cargando<span className="loading-dots"></span>
+            </span>
+          ) : (
+            "Cargar más"
+          )}
+        </button>
+      )}
+
+      {/* Link Volver al inicio */}
+      {displayLimit > 10 && (
+        <div className="mt-4">
+          <button
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              tacoEvents.returnToTop("pagination");
+            }}
+            className="text-sm sm:text-base underline hover:no-underline p-2 focus:outline-none focus:ring-2 focus:ring-gray-400 rounded"
+          >
+            VOLVER AL INICIO
+          </button>
+        </div>
+      )}
+    </div>
+  )}
+</main>
 
       {/* CTA Section */}
       <section className="bg-black text-white py-12">
