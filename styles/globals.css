@@ -450,6 +450,14 @@ html {
   }
 }
 
+/* Estados focus para el botón FILTROS en light mode */
+button[aria-expanded]:focus,
+button[aria-expanded]:focus-visible {
+  outline: 2px solid #000 !important;
+  outline-offset: 2px !important;
+  border-radius: 4px !important;
+}
+
 /* Mejora de performance */
 @media (prefers-reduced-motion: reduce) {
   .taqueria-card,
@@ -653,10 +661,10 @@ input::placeholder {
     box-shadow: 0 0 0 2px white !important; /* Outline blanco como los otros filtros */
   }
 
-  /* Estados focus y hover para el botón FILTROS */
+  /* Estados focus y hover para el botón FILTROS - misma lógica que los selects */
   button[aria-expanded]:focus,
   button[aria-expanded]:focus-visible {
-    outline: 2px solid var(--btn-border) !important;
+    outline: 2px solid var(--search-border, #000) !important;
     outline-offset: 2px !important;
     border-radius: 4px !important;
   }
