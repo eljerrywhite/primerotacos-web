@@ -685,4 +685,28 @@ input::placeholder {
   .filter-chevron {
     color: #9ca3af !important;
   }
+
+  /* Estilos específicos para el botón X cerrar del modal en dark mode */
+  button[aria-label*="Cerrar"] {
+    background-color: transparent !important;
+    color: var(--text-primary) !important;
+    border: none !important;
+  }
+
+  button[aria-label*="Cerrar"]:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-primary) !important;
+  }
+
+  button[aria-label*="Cerrar"]:focus,
+  button[aria-label*="Cerrar"]:focus-visible {
+    outline: 2px solid var(--text-primary) !important;
+    outline-offset: 2px !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  button[aria-label*="Cerrar"]:active {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    transform: scale(0.95) !important;
+  }
 }
