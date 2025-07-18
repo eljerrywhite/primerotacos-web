@@ -40,9 +40,10 @@ const RotatingTagline: React.FC<RotatingTaglineProps> = ({
         style={{ color: "var(--text-secondary)" }}
       />
       <p 
-        className={`text-sm italic transition-opacity duration-300 ${
+        className={`text-base italic transition-opacity duration-300 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
+        style={{ color: "var(--text-secondary)" }}
       >
         "{taglines[currentIndex]}"
       </p>
