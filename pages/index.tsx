@@ -730,14 +730,14 @@ const HomePage = () => {
               style={{
                 borderColor: "var(--header-text)",
                 color: "var(--header-text)",
-                backgroundColor: "transparent", // <-- Agregar esta línea
+                backgroundColor: "var(--header-bg)",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = "var(--header-text)";
                 e.currentTarget.style.color = "var(--header-bg)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.backgroundColor = "var(--header-bg)";
                 e.currentTarget.style.color = "var(--header-text)";
                 
               }}
