@@ -739,7 +739,7 @@ const HomePage = () => {
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = "transparent";
                 e.currentTarget.style.color = "var(--header-text)";
-
+                
               }}
               onClick={() => {
                 tacoEvents.clickCalificar();
@@ -843,17 +843,6 @@ const HomePage = () => {
                 className="flex justify-around mb-4 sm:mb-6 pb-4 sm:pb-6 border-b"
                 style={{ borderBottomColor: "var(--card-border)" }}
               >
-                <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold">
-                    {selectedTaqueria.calidad.toFixed(1)}
-                  </div>
-                  <div
-                    className="text-xs sm:text-sm"
-                    style={{ color: "var(--text-secondary)" }}
-                  >
-                    Calidad
-                  </div>
-                </div>
                 <div className="text-center">
                   <div className="text-2xl sm:text-3xl font-bold">
                     {selectedTaqueria.calidad.toFixed(1)}
@@ -974,12 +963,15 @@ const HomePage = () => {
                     VER MAPA
                   </a>
                 )}
-                <button
-                  className="flex-1 text-center py-2.5 sm:py-3 text-sm sm:text-lg uppercase border font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors"
+                <a
+                  href="https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 border py-2.5 sm:py-3 text-sm sm:text-lg text-center uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors font-medium"
                   style={{
-                    color: "var(--btn-text)",
-                    backgroundColor: "var(--btn-bg)",
                     borderColor: "var(--btn-border)",
+                    backgroundColor: "var(--btn-bg)",
+                    color: "var(--btn-text)",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor =
@@ -1001,7 +993,7 @@ const HomePage = () => {
                   }}
                 >
                   CALIFICAR
-                </button>
+                </a>
               </div>
             </div>
           </div>
