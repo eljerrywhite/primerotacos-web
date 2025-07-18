@@ -645,6 +645,28 @@ input::placeholder {
     border-color: var(--btn-border) !important;
   }
 
+  /* Estilos específicos para el botón FILTROS (móvil) */
+  button[aria-expanded] {
+    background-color: var(--btn-bg) !important;
+    color: var(--btn-text) !important;
+    border-color: var(--btn-border) !important;
+    box-shadow: 0 0 0 2px white !important; /* Outline blanco como los otros filtros */
+  }
+
+  /* Estados focus y hover para el botón FILTROS */
+  button[aria-expanded]:focus,
+  button[aria-expanded]:focus-visible {
+    outline: 2px solid var(--btn-border) !important;
+    outline-offset: 2px !important;
+    border-radius: 4px !important;
+  }
+
+  button[aria-expanded]:hover {
+    background-color: var(--btn-hover-bg) !important;
+    color: var(--btn-hover-text) !important;
+    transform: none !important; /* Evitar movimiento indeseado */
+  }
+
   /* Hacer que el chevron tenga el mismo color que la lupa */
   .text-gray-400 {
     color: #9ca3af !important;
