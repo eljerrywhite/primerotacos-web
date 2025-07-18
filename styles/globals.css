@@ -658,7 +658,8 @@ input::placeholder {
     background-color: var(--btn-bg) !important;
     color: var(--btn-text) !important;
     border-color: var(--btn-border) !important;
-    box-shadow: 0 0 0 2px white !important; /* Outline blanco como los otros filtros */
+    /* Outline blanco básico como buscador y filtros */
+    box-shadow: 0 0 0 1px white !important;
   }
 
   /* Estados focus y hover para el botón FILTROS - usar color fijo para mejor visibilidad */
