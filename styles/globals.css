@@ -643,20 +643,6 @@ input::placeholder {
     background-color: var(--btn-bg) !important;
     color: var(--btn-text) !important;
     border-color: var(--btn-border) !important;
-    box-shadow: 0 0 0 3px white !important; /* Outline blanco como el scroll-to-top */
-  }
-
-  /* Estados focus y hover para el botón FILTROS */
-  button:focus,
-  button:focus-visible {
-    outline: 3px solid #000 !important;
-    outline-offset: 3px !important;
-    border-radius: 2px !important;
-  }
-
-  button:hover {
-    background-color: var(--btn-hover-bg) !important;
-    color: var(--btn-hover-text) !important;
   }
 
   /* Hacer que el chevron tenga el mismo color que la lupa */
