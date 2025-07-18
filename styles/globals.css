@@ -638,6 +638,13 @@ input::placeholder {
     border-color: var(--btn-border) !important;
   }
 
+  /* Aplicar tema dark al botón FILTROS */
+  button {
+    background-color: var(--btn-bg) !important;
+    color: var(--btn-text) !important;
+    border-color: var(--btn-border) !important;
+  }
+
   /* Hacer que el chevron tenga el mismo color que la lupa */
   .text-gray-400 {
     color: #9ca3af !important;
