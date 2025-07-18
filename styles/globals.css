@@ -539,7 +539,7 @@ a {
 /* Ajuste del placeholder */
 #search-input::placeholder {
   font-size: 16px !important;
-  opacity: 0.7;
+  color: var(--search-placeholder);
 }
 
 /* Desktop: mantener tamaño consistente */
