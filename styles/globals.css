@@ -687,25 +687,40 @@ input::placeholder {
   }
 
   /* Estilos específicos para el botón X cerrar del modal en dark mode */
-  button[aria-label*="Cerrar"] {
+  .modal button,
+  button[aria-label^="Cerrar"],
+  button[aria-label*="cerrar"],
+  .close-button {
     background-color: transparent !important;
-    color: var(--text-primary) !important;
+    color: #e8e8e8 !important; /* Color fijo para mejor visibilidad */
     border: none !important;
   }
 
-  button[aria-label*="Cerrar"]:hover {
+  .modal button:hover,
+  button[aria-label^="Cerrar"]:hover,
+  button[aria-label*="cerrar"]:hover,
+  .close-button:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;
-    color: var(--text-primary) !important;
+    color: #e8e8e8 !important;
   }
 
-  button[aria-label*="Cerrar"]:focus,
-  button[aria-label*="Cerrar"]:focus-visible {
-    outline: 2px solid var(--text-primary) !important;
+  .modal button:focus,
+  .modal button:focus-visible,
+  button[aria-label^="Cerrar"]:focus,
+  button[aria-label^="Cerrar"]:focus-visible,
+  button[aria-label*="cerrar"]:focus,
+  button[aria-label*="cerrar"]:focus-visible,
+  .close-button:focus,
+  .close-button:focus-visible {
+    outline: 2px solid #e8e8e8 !important;
     outline-offset: 2px !important;
     background-color: rgba(255, 255, 255, 0.1) !important;
   }
 
-  button[aria-label*="Cerrar"]:active {
+  .modal button:active,
+  button[aria-label^="Cerrar"]:active,
+  button[aria-label*="cerrar"]:active,
+  .close-button:active {
     background-color: rgba(255, 255, 255, 0.2) !important;
     transform: scale(0.95) !important;
   }
