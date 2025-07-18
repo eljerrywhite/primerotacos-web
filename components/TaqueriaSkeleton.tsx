@@ -3,7 +3,10 @@ import React from 'react';
 
 const TaqueriaSkeleton = () => {
   return (
-    <div className="bg-white border-b-2 border-gray-200 pb-5 px-4 sm:px-5 pt-5">
+    <div className="border-b-2 pb-5 px-4 sm:px-5 pt-5" style={{
+  backgroundColor: "var(--card-bg)",
+  borderBottomColor: "var(--card-border)"
+}}>
       {/* Nombre */}
       <div className="h-6 skeleton rounded w-3/4 mb-2"></div>
       

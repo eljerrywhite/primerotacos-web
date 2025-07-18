@@ -63,7 +63,7 @@ const HomePage = () => {
         setLoading(true);
         setError(false);
         const response = await fetch("/api/taquerias");
-        if (!response.ok) throw new Error('Error al cargar');
+        if (!response.ok) throw new Error("Error al cargar");
         const data = await response.json();
         setTaquerias(data);
       } catch (error) {
@@ -148,8 +148,6 @@ const HomePage = () => {
       .replace(/[\u0300-\u036f]/g, ""); // Remueve diacríticos (acentos)
   };
 
-  
-
   // Filtrar y ordenar taquerías
   const filteredTaquerias = taquerias
     .filter((taqueria) => {
@@ -180,11 +178,7 @@ const HomePage = () => {
     <div
       className="min-h-screen font-mono"
       style={{
-        backgroundImage: "url('/bg-pattern.png')",
-        backgroundSize: "240px 240px",
-        backgroundRepeat: "repeat",
-        backgroundPosition: "center",
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "var(--bg-primary)",
       }}
     >
       <Head>
@@ -234,7 +228,8 @@ const HomePage = () => {
               PRIMERO TACOS × LOS KNIJOS
             </h1>
             <p className="text-base sm:text-lg max-w-2xl mx-auto leading-normal">
-              Directorio taquero creado por la banda chilanga. Calificaciones reales, sin pretensiones, directo al taco.
+              Directorio taquero creado por la banda chilanga. Calificaciones
+              reales, sin pretensiones, directo al taco.
             </p>
           </div>
 
@@ -249,7 +244,11 @@ const HomePage = () => {
                 id="search-input"
                 type="text"
                 placeholder="Buscar taquería o especialidad"
-                className="w-full pl-10 pr-12 py-3 sm:py-4 bg-gray-100 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 rounded-none text-base"
+                className="w-full pl-10 pr-12 py-3 sm:py-4 rounded-none text-base focus:outline-none focus:ring-2 focus:ring-gray-400"
+                style={{
+                  backgroundColor: "var(--search-bg)",
+                  color: "var(--search-text)",
+                }}
                 value={searchTerm}
                 onChange={(e) => {
                   const newSearchTerm = e.target.value;
@@ -321,7 +320,12 @@ const HomePage = () => {
                 <div className="relative">
                   <select
                     id="sort-order-desktop"
-                    className="w-full px-4 py-3 pr-10 text-base bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
+                    className="w-full px-4 py-3 pr-10 text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
+                    style={{
+                      backgroundColor: "var(--btn-bg)",
+                      color: "var(--btn-text)",
+                      borderColor: "var(--btn-border)",
+                    }}
                     value={sortOrder}
                     onChange={(e) => {
                       const newSortOrder = e.target.value;
@@ -350,7 +354,12 @@ const HomePage = () => {
                 <div className="relative">
                   <select
                     id="alcaldia-filter-desktop"
-                    className="w-full px-4 py-3 pr-10 text-base bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
+                    className="w-full px-4 py-3 pr-10 text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
+                    style={{
+                      backgroundColor: "var(--btn-bg)",
+                      color: "var(--btn-text)",
+                      borderColor: "var(--btn-border)",
+                    }}
                     value={selectedAlcaldia}
                     onChange={(e) => {
                       const newAlcaldia = e.target.value;
@@ -492,179 +501,246 @@ const HomePage = () => {
       </section>
 
       {/* Lista de taquerías */}
-      {/* Lista de taquerías */}
-<main id="main-content" className="pattern-background bg-white px-4 py-8">
-  {loading ? (
-    <div className="max-w-4xl mx-auto space-y-4">
-      {[...Array(5)].map((_, i) => (
-        <TaqueriaSkeleton key={i} />
-      ))}
-    </div>
-  ) : error ? (
-    // Empty state para error
-    <div className="max-w-4xl mx-auto">
-      <EmptyState 
-        type="error" 
-        onReload={() => window.location.reload()}
-      />
-    </div>
-  ) : filteredTaquerias.length === 0 ? (
-    // Empty states para búsqueda/filtros
-    <div className="max-w-4xl mx-auto">
-      {searchTerm && selectedAlcaldia !== "todas" ? (
-        // Caso combinado: búsqueda + filtro
-        <EmptyState 
-          type="combined"
-          searchTerm={searchTerm}
-          alcaldia={selectedAlcaldia === "todas" ? undefined : 
-            alcaldias.find(a => a.toLowerCase() === selectedAlcaldia) || selectedAlcaldia}
-          onReset={() => {
-            setSearchTerm("");
-            setSelectedAlcaldia("todas");
-          }}
-        />
-      ) : searchTerm ? (
-        // Solo búsqueda
-        <EmptyState type="search" />
-      ) : selectedAlcaldia !== "todas" ? (
-        // Solo filtro por alcaldía
-        <EmptyState 
-          type="filter"
-          alcaldia={alcaldias.find(a => a.toLowerCase() === selectedAlcaldia) || selectedAlcaldia}
-        />
-      ) : (
-        // No debería pasar, pero por si acaso
-        <EmptyState type="search" />
-      )}
-    </div>
-  ) : (
-    // Lista normal de taquerías
-    <div className="max-w-4xl mx-auto space-y-4">
-      {filteredTaquerias.slice(0, displayLimit).map((taqueria) => (
-        <div
-          key={taqueria._id}
-          className="bg-white border-b-2 border-gray-200 pb-5 px-4 sm:px-5 pt-5 hover:bg-gray-50 transition-colors duration-200 cursor-pointer animate-fadeIn"
-          onClick={() => {
-            setSelectedTaqueria(taqueria);
-            setModalOpen(true);
-            if (taqueria._id) {
-              tacoEvents.viewTaqueriaDetail({
-                id: taqueria._id,
-                nombre: taqueria.nombre,
-                calificacion: taqueria.calificacionFinal,
-                alcaldia: taqueria.alcaldia || "",
-              });
-            }
-          }}
-        >
-          <h2 className="text-lg sm:text-xl font-bold uppercase mb-1">
-            {taqueria.nombre}
-          </h2>
-          {/* Alcaldía debajo del nombre */}
-          {taqueria.alcaldia && (
-            <p className="text-xs sm:text-sm text-gray-500 mb-3">
-              {taqueria.alcaldia}
-            </p>
-          )}
-          {/* Tagline random o especialidad */}
-          {taqueria.taglines && taqueria.taglines.length > 0 ? (
-            <p className="text-sm sm:text-base text-gray-600 italic mb-4 leading-snug">
-              "
-              {taqueria._id && randomIndexes[taqueria._id] !== undefined
-                ? taqueria.taglines[randomIndexes[taqueria._id]]
-                : taqueria.taglines[0]}
-              "
-            </p>
-          ) : taqueria.especialidad ? (
-            <p className="text-sm sm:text-base text-gray-600 italic mb-4 leading-snug">
-              "{taqueria.especialidad}"
-            </p>
-          ) : null}
-
-          <div className="flex items-center justify-between">
-            <span className="text-sm sm:text-base underline">
-              VER DETALLES
-            </span>
-            <span className="bg-black text-white px-3 py-1 text-base sm:text-lg font-bold">
-              {taqueria.calificacionFinal.toFixed(1)}
-            </span>
+      <main id="main-content" className="px-4 py-8">
+        {loading ? (
+          <div className="max-w-4xl mx-auto space-y-4">
+            {[...Array(5)].map((_, i) => (
+              <TaqueriaSkeleton key={i} />
+            ))}
           </div>
-        </div>
-      ))}
-    </div>
-  )}
+        ) : error ? (
+          // Empty state para error
+          <div className="max-w-4xl mx-auto">
+            <EmptyState
+              type="error"
+              onReload={() => window.location.reload()}
+            />
+          </div>
+        ) : filteredTaquerias.length === 0 ? (
+          // Empty states para búsqueda/filtros
+          <div className="max-w-4xl mx-auto">
+            {searchTerm && selectedAlcaldia !== "todas" ? (
+              // Caso combinado: búsqueda + filtro
+              <EmptyState
+                type="combined"
+                searchTerm={searchTerm}
+                alcaldia={
+                  selectedAlcaldia === "todas"
+                    ? undefined
+                    : alcaldias.find(
+                        (a) => a.toLowerCase() === selectedAlcaldia,
+                      ) || selectedAlcaldia
+                }
+                onReset={() => {
+                  setSearchTerm("");
+                  setSelectedAlcaldia("todas");
+                }}
+              />
+            ) : searchTerm ? (
+              // Solo búsqueda
+              <EmptyState type="search" />
+            ) : selectedAlcaldia !== "todas" ? (
+              // Solo filtro por alcaldía
+              <EmptyState
+                type="filter"
+                alcaldia={
+                  alcaldias.find((a) => a.toLowerCase() === selectedAlcaldia) ||
+                  selectedAlcaldia
+                }
+              />
+            ) : (
+              // No debería pasar, pero por si acaso
+              <EmptyState type="search" />
+            )}
+          </div>
+        ) : (
+          // Lista normal de taquerías
+          <div className="max-w-4xl mx-auto space-y-4">
+            {filteredTaquerias.slice(0, displayLimit).map((taqueria) => (
+              <div
+                key={taqueria._id}
+                className="border-b-2 pb-5 px-4 sm:px-5 pt-5 transition-colors duration-200 cursor-pointer animate-fadeIn"
+                style={{
+                  backgroundColor: "var(--card-bg)",
+                  borderBottomColor: "var(--card-border)",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = "var(--card-hover)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor = "var(--card-bg)")
+                }
+                onClick={() => {
+                  setSelectedTaqueria(taqueria);
+                  setModalOpen(true);
+                  if (taqueria._id) {
+                    tacoEvents.viewTaqueriaDetail({
+                      id: taqueria._id,
+                      nombre: taqueria.nombre,
+                      calificacion: taqueria.calificacionFinal,
+                      alcaldia: taqueria.alcaldia || "",
+                    });
+                  }
+                }}
+              >
+                <h2 className="text-lg sm:text-xl font-bold uppercase mb-1">
+                  {taqueria.nombre}
+                </h2>
+                {/* Alcaldía debajo del nombre */}
+                {taqueria.alcaldia && (
+                  <p
+                    className="text-xs sm:text-sm mb-3"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    {taqueria.alcaldia}
+                  </p>
+                )}
+                {/* Tagline random o especialidad */}
+                {taqueria.taglines && taqueria.taglines.length > 0 ? (
+                  <p
+                    className="text-sm sm:text-base italic mb-4 leading-snug"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    "
+                    {taqueria._id && randomIndexes[taqueria._id] !== undefined
+                      ? taqueria.taglines[randomIndexes[taqueria._id]]
+                      : taqueria.taglines[0]}
+                    "
+                  </p>
+                ) : taqueria.especialidad ? (
+                  <p
+                    className="text-sm sm:text-base italic mb-4 leading-snug"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    "{taqueria.especialidad}"
+                  </p>
+                ) : null}
 
-  {/* Botones de cargar más / volver arriba - SOLO SE MUESTRAN SI HAY RESULTADOS */}
-  {!loading && !error && filteredTaquerias.length > 0 && (
-    <div className="text-center py-8">
-      <p className="text-sm sm:text-base text-gray-600 mb-4">
-        Mostrando {Math.min(displayLimit, filteredTaquerias.length)} de{" "}
-        {filteredTaquerias.length} taquerías
-      </p>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm sm:text-base underline">
+                    VER DETALLES
+                  </span>
+                  <span
+                    className="px-3 py-1 text-base sm:text-lg font-bold"
+                    style={{
+                      backgroundColor: "var(--header-bg)",
+                      color: "var(--header-text)",
+                    }}
+                  >
+                    {taqueria.calificacionFinal.toFixed(1)}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
-      {/* Botón Cargar Más */}
-      {filteredTaquerias.length > displayLimit && (
-        <button
-          onClick={() => {
-            setIsLoadingMore(true);
-            setTimeout(() => {
-              const newDisplayLimit = displayLimit + 10;
-              setDisplayLimit(newDisplayLimit);
-              setIsLoadingMore(false);
+        {/* Botones de cargar más / volver arriba - SOLO SE MUESTRAN SI HAY RESULTADOS */}
+        {!loading && !error && filteredTaquerias.length > 0 && (
+          <div className="text-center py-8">
+            <p
+              className="text-sm sm:text-base mb-4"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              Mostrando {Math.min(displayLimit, filteredTaquerias.length)} de{" "}
+              {filteredTaquerias.length} taquerías
+            </p>
 
-              tacoEvents.loadMoreTaquerias(
-                newDisplayLimit,
-                filteredTaquerias.length,
-              );
-            }, 300);
-          }}
-          disabled={isLoadingMore}
-          className="border-2 border-black bg-white text-black px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg uppercase font-bold hover:bg-black hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
-        >
-          {isLoadingMore ? (
-            <span>
-              Cargando<span className="loading-dots"></span>
-            </span>
-          ) : (
-            "Cargar más"
-          )}
-        </button>
-      )}
+            {/* Botón Cargar Más */}
+            {filteredTaquerias.length > displayLimit && (
+              <button
+                onClick={() => {
+                  setIsLoadingMore(true);
+                  setTimeout(() => {
+                    const newDisplayLimit = displayLimit + 10;
+                    setDisplayLimit(newDisplayLimit);
+                    setIsLoadingMore(false);
 
-      {/* Link Volver al inicio */}
-      {displayLimit > 10 && (
-        <div className="mt-4">
-          <button
-            onClick={() => {
-              window.scrollTo({ top: 0, behavior: "smooth" });
-              tacoEvents.returnToTop("pagination");
-            }}
-            className="text-sm sm:text-base underline hover:no-underline p-2 focus:outline-none focus:ring-2 focus:ring-gray-400 rounded"
-          >
-            VOLVER AL INICIO
-          </button>
-        </div>
-      )}
-    </div>
-  )}
-</main>
+                    tacoEvents.loadMoreTaquerias(
+                      newDisplayLimit,
+                      filteredTaquerias.length,
+                    );
+                  }, 300);
+                }}
+                disabled={isLoadingMore}
+                className="border-2 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg uppercase font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2"
+                style={{
+                  borderColor: "var(--btn-border)",
+                  backgroundColor: "var(--btn-bg)",
+                  color: "var(--btn-text)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--btn-hover-bg)";
+                  e.currentTarget.style.color = "var(--btn-hover-text)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--btn-bg)";
+                  e.currentTarget.style.color = "var(--btn-text)";
+                }}
+              >
+                {isLoadingMore ? (
+                  <span>
+                    Cargando<span className="loading-dots"></span>
+                  </span>
+                ) : (
+                  "Cargar más"
+                )}
+              </button>
+            )}
+
+            {/* Link Volver al inicio */}
+            {displayLimit > 10 && (
+              <div className="mt-4">
+                <button
+                  onClick={() => {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    tacoEvents.returnToTop("pagination");
+                  }}
+                  className="text-sm sm:text-base underline hover:no-underline p-2 focus:outline-none focus:ring-2 focus:ring-gray-400 rounded"
+                >
+                  VOLVER AL INICIO
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </main>
 
       {/* CTA Section */}
       <section className="bg-black text-white py-12">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center border-2 border-white p-6 sm:p-8">
+          <div
+            className="max-w-2xl mx-auto text-center border-2 p-6 sm:p-8"
+            style={{
+              borderColor: "var(--header-text)",
+            }}
+          >
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-4 leading-tight">
               ¿CONOCES UNA TAQUERÍA QUE NO ESTÁ EN ESTÁ EN EL RADAR?
             </h2>
             <p className="mb-6 text-base sm:text-lg leading-normal">
-              Ayúdanos a descubrir joyitas del barrio.
-              Comparte tus tacos favoritos con nuestro GPT taquero especializado.
+              Ayúdanos a descubrir joyitas del barrio. Comparte tus tacos
+              favoritos con nuestro GPT taquero especializado.
             </p>
             <a
               href="https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block border-2 border-white px-6 py-3 sm:py-4 text-base sm:text-lg hover:bg-white hover:text-black transition-colors uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-white"
+              className="inline-block border-2 px-6 py-3 sm:py-4 text-base sm:text-lg transition-colors uppercase focus:outline-none focus:ring-2 focus:ring-offset-2"
+              style={{
+                borderColor: "var(--header-text)",
+                color: "var(--header-text)",
+                backgroundColor: "transparent", // <-- Agregar esta línea
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "var(--header-text)";
+                e.currentTarget.style.color = "var(--header-bg)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.color = "var(--header-text)";
+                
+              }}
               onClick={() => {
                 tacoEvents.clickCalificar();
               }}
@@ -686,7 +762,7 @@ const HomePage = () => {
               />
             </div>
           </div>
-          <div className="text-center text-sm sm:text-base text-gray-600">
+          <div className="text-center text-sm sm:text-base" style={{ color: "var(--header-text)" }}>
             <p>© 2025 PRIMERO TACOS × LOS KNIJOS</p>
             <p className="mt-1">Hecho con 🌮, barrio y amor por la CDMX.</p>
           </div>
@@ -712,14 +788,27 @@ const HomePage = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           {/* Overlay con blur */}
           <div
-            className="absolute inset-0 bg-white bg-opacity-50 backdrop-blur-sm"
+            className="absolute inset-0 backdrop-blur-sm"
+            style={{ backgroundColor: "var(--modal-overlay)" }}
             onClick={() => setModalOpen(false)}
           />
 
           {/* Modal con borde */}
-          <div className="relative bg-white max-w-md w-full max-h-[88vh] sm:max-h-[90vh] overflow-hidden border-2 border-black flex flex-col animate-modalSlideUp">
+          <div
+            className="relative max-w-md w-full max-h-[88vh] sm:max-h-[90vh] overflow-hidden border-2 flex flex-col animate-modalSlideUp"
+            style={{
+              backgroundColor: "var(--modal-bg)",
+              borderColor: "var(--modal-border)",
+            }}
+          >
             {/* Header compacto */}
-            <div className="bg-black text-white px-4 py-2 sm:py-3 relative flex-shrink-0">
+            <div
+              className="px-4 py-2 sm:py-3 relative flex-shrink-0"
+              style={{
+                backgroundColor: "var(--header-bg)",
+                color: "var(--header-text)",
+              }}
+            >
               <div className="flex items-center justify-between">
                 <h3 className="text-lg sm:text-2xl font-bold uppercase pr-2 m-0">
                   {selectedTaqueria.nombre}
@@ -741,18 +830,27 @@ const HomePage = () => {
                 <div className="text-5xl sm:text-6xl font-bold">
                   {selectedTaqueria.calificacionFinal.toFixed(1)}
                 </div>
-                <p className="text-sm text-gray-600">
+                <p
+                  className="text-sm"
+                  style={{ color: "var(--text-secondary)" }}
+                >
                   Promedio ponderado de 5.0
                 </p>
               </div>
 
               {/* NUEVA SECCIÓN: Desglose horizontal */}
-              <div className="flex justify-around mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-gray-200">
+              <div
+                className="flex justify-around mb-4 sm:mb-6 pb-4 sm:pb-6 border-b"
+                style={{ borderBottomColor: "var(--card-border)" }}
+              >
                 <div className="text-center">
                   <div className="text-2xl sm:text-3xl font-bold">
                     {selectedTaqueria.calidad.toFixed(1)}
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-600">
+                  <div
+                    className="text-xs sm:text-sm"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
                     Calidad
                   </div>
                 </div>
@@ -760,7 +858,10 @@ const HomePage = () => {
                   <div className="text-2xl sm:text-3xl font-bold">
                     {selectedTaqueria.servicio.toFixed(1)}
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-600">
+                  <div
+                    className="text-xs sm:text-sm"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
                     Servicio
                   </div>
                 </div>
@@ -768,7 +869,12 @@ const HomePage = () => {
                   <div className="text-2xl sm:text-3xl font-bold">
                     {selectedTaqueria.lugar.toFixed(1)}
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-600">Lugar</div>
+                  <div
+                    className="text-xs sm:text-sm"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    Lugar
+                  </div>
                 </div>
               </div>
 
@@ -785,8 +891,14 @@ const HomePage = () => {
                     </div>
                   ) : selectedTaqueria.especialidad ? (
                     <div className="flex items-start gap-3">
-                      <Gem className="h-4 w-4 mt-0.5 flex-shrink-0 text-gray-600" />
-                      <p className="text-sm sm:text-base italic leading-snug text-gray-700">
+                      <Gem
+                        className="h-4 w-4 mt-0.5 flex-shrink-0"
+                        style={{ color: "var(--text-secondary)" }}
+                      />
+                      <p
+                        className="text-sm sm:text-base italic leading-snug"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
                         "{selectedTaqueria.especialidad}"
                       </p>
                     </div>
@@ -795,7 +907,10 @@ const HomePage = () => {
                   {/* Dirección - MANTENEMOS IGUAL */}
                   {selectedTaqueria.direccion && (
                     <div className="flex items-start gap-3">
-                      <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-gray-600" />
+                      <MapPin
+                        className="h-4 w-4 mt-0.5 flex-shrink-0"
+                        style={{ color: "var(--text-secondary)" }}
+                      />
                       <p className="text-sm sm:text-base leading-relaxed">
                         {selectedTaqueria.direccion}
                         {selectedTaqueria.colonia &&
@@ -810,14 +925,30 @@ const HomePage = () => {
             </div>
 
             {/* Botones fijos en el footer - MANTENEMOS EXACTAMENTE IGUAL */}
-            <div className="border-t p-3 sm:p-6 bg-white flex-shrink-0">
+            <div
+              className="border-t p-3 sm:p-6 flex-shrink-0"
+              style={{
+                borderTopColor: "var(--card-border)",
+                backgroundColor: "var(--modal-bg)",
+              }}
+            >
               <div className="flex gap-3 sm:gap-4">
                 {selectedTaqueria.ubicacion && (
                   <a
                     href={selectedTaqueria.ubicacion}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 bg-black text-white text-center py-2.5 sm:py-3 text-sm sm:text-lg hover:bg-gray-800 uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors font-medium"
+                    className="flex-1 text-center py-2.5 sm:py-3 text-sm sm:text-lg uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors font-medium"
+                    style={{
+                      backgroundColor: "var(--header-bg)",
+                      color: "var(--header-text)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.opacity = "0.8";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.opacity = "1";
+                    }}
                     onClick={(e) => {
                       e.stopPropagation();
                       if (selectedTaqueria._id) {
@@ -836,7 +967,21 @@ const HomePage = () => {
                   href="https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 border border-black text-black py-2.5 sm:py-3 text-sm sm:text-lg hover:bg-gray-100 text-center uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-colors font-medium"
+                  className="flex-1 border py-2.5 sm:py-3 text-sm sm:text-lg text-center uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors font-medium"
+                  style={{
+                    borderColor: "var(--btn-border)",
+                    backgroundColor: "var(--btn-bg)",
+                    color: "var(--btn-text)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      "var(--btn-hover-bg)";
+                    e.currentTarget.style.color = "var(--btn-hover-text)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--btn-bg)";
+                    e.currentTarget.style.color = "var(--btn-text)";
+                  }}
                   onClick={(e) => {
                     e.stopPropagation();
                     if (selectedTaqueria._id) {

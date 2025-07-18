@@ -1,0 +1,100 @@
+/* Variables de tema para Light y Dark mode */
+:root {
+  /* Colores principales - Light mode */
+  --bg-primary: #f5f5f5;
+  --bg-secondary: #ffffff;
+  --bg-pattern: url('/bg-pattern.png');
+  --pattern-opacity: 1;
+  
+  /* Textos - Light mode */
+  --text-primary: #000000;
+  --text-secondary: #4b5563; /* gray-600 */
+  --text-muted: #6b7280; /* gray-500 */
+  
+  /* Componentes - Light mode */
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb; /* gray-200 */
+  --card-hover: #f9fafb; /* gray-50 */
+  
+  /* Header/Search - Light mode */
+  --header-bg: #000000;
+  --header-text: #ffffff;
+  --search-bg: #f3f4f6; /* gray-100 */
+  --search-text: #000000;
+  --search-placeholder: #6b7280; /* gray-500 */
+  
+  /* Botones - Light mode */
+  --btn-bg: #ffffff;
+  --btn-text: #000000;
+  --btn-border: #000000;
+  --btn-hover-bg: #000000;
+  --btn-hover-text: #ffffff;
+  
+  /* Modal - Light mode */
+  --modal-bg: #ffffff;
+  --modal-overlay: rgba(255, 255, 255, 0.5);
+  --modal-border: #000000;
+  
+  /* Empty states - Light mode */
+  --empty-icon: #9ca3af; /* gray-400 */
+  --empty-text: #374151; /* gray-700 */
+  
+  /* Skeleton - Light mode */
+  --skeleton-base: #e5e7eb; /* gray-200 */
+  --skeleton-highlight: #f3f4f6; /* gray-100 */
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Colores principales - Dark mode */
+    --bg-primary: #0f0f0f;
+    --bg-secondary: #1a1a1a;
+    --bg-pattern: url("data:image/svg+xml,%3Csvg width='240' height='240' viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h240v240H0z' fill='%230f0f0f'/%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M0 0h60v60H0zm60 60h60v60H60zm60-60h60v60h-60zm60 60h60v60h-60zM0 120h60v60H0zm60 60h60v60H60zm60-60h60v60h-60zm60 60h60v60h-60z'/%3E%3C/g%3E%3C/svg%3E");
+    --pattern-opacity: 1;
+    
+    /* Textos - Dark mode */
+    --text-primary: #e8e8e8;
+    --text-secondary: #a0a0a0;
+    --text-muted: #808080;
+    
+    /* Componentes - Dark mode */
+    --card-bg: #1a1a1a;
+    --card-border: #2a2a2a;
+    --card-hover: #222222;
+    
+    /* Header/Search - Dark mode */
+    --header-bg: #ffffff;
+    --header-text: #000000;
+    --search-bg: #2a2a2a;
+    --search-text: #e8e8e8;
+    --search-placeholder: #808080;
+    
+    /* Botones - Dark mode */
+    --btn-bg: #1a1a1a;
+    --btn-text: #e8e8e8;
+    --btn-border: #e8e8e8;
+    --btn-hover-bg: #e8e8e8;
+    --btn-hover-text: #1a1a1a;
+    
+    /* Modal - Dark mode */
+    --modal-bg: #1a1a1a;
+    --modal-overlay: rgba(0, 0, 0, 0.7);
+    --modal-border: #e8e8e8;
+    
+    /* Empty states - Dark mode */
+    --empty-icon: #606060;
+    --empty-text: #a0a0a0;
+    
+    /* Skeleton - Dark mode */
+    --skeleton-base: #2a2a2a;
+    --skeleton-highlight: #333333;
+  }
+}
+
+/* Clase helper para aplicar las variables */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}

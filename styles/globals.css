@@ -6,6 +6,47 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Dark mode - Aplicar variables a clases existentes */
+.pattern-background {
+  background-image: var(--bg-pattern);
+  background-color: var(--bg-secondary);
+  opacity: var(--pattern-opacity);
+}
+
+/* Actualizar colores de componentes específicos */
+@media (prefers-color-scheme: dark) {
+  /* Skeleton loader en dark mode */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+  
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--skeleton-base) 0%,
+      var(--skeleton-highlight) 50%,
+      var(--skeleton-base) 100%
+    );
+  }
+  
+  /* Ajustes para el botón flotante */
+  .scroll-to-top {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    border: 2px solid var(--header-text);
+  }
+  
+  .scroll-to-top:hover {
+    background-color: var(--header-text);
+    color: var(--header-bg);
+  }
+}
+
 /* Estilos globales */
 html,
 body {
@@ -560,4 +601,20 @@ a {
   inset: -12px;
   border: 2px dashed rgba(255, 0, 0, 0.3);
   pointer-events: none;
+}
+
+/* Estilos para inputs y placeholders */
+input::placeholder {
+  color: var(--search-placeholder);
+}
+
+/* Específico para el search input en dark mode */
+@media (prefers-color-scheme: dark) {
+  input {
+    color: var(--search-text);
+  }
+
+  input::placeholder {
+    color: var(--search-placeholder);
+  }
 }
