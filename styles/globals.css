@@ -612,6 +612,12 @@ input::placeholder {
 @media (prefers-color-scheme: dark) {
   input {
     color: var(--search-text);
+    border: 1px solid var(--search-border, #e8e8e8);
+  }
+  
+  #search-input {
+    background-color: var(--search-bg);
+    border: 1px solid var(--search-border, #e8e8e8);
   }
 
   input::placeholder {
