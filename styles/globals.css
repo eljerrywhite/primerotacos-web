@@ -563,6 +563,13 @@ a {
   #search-input::placeholder {
     font-size: 16px !important;
   }
+
+  /* Aplicar variables de tema a selects móviles */
+  select {
+    background-color: var(--btn-bg) !important;
+    color: var(--btn-text) !important;
+    border-color: var(--btn-border) !important;
+  }
 }
 
 /* En pantallas muy pequeñas */
@@ -622,6 +629,13 @@ input::placeholder {
 
   input::placeholder {
     color: var(--search-placeholder);
+  }
+
+  /* Aplicar tema dark a todos los selects */
+  select {
+    background-color: var(--btn-bg) !important;
+    color: var(--btn-text) !important;
+    border-color: var(--btn-border) !important;
   }
 
   /* Hacer que el chevron tenga el mismo color que la lupa */
