@@ -728,17 +728,17 @@ const HomePage = () => {
               rel="noopener noreferrer"
               className="inline-block border-2 px-6 py-3 sm:py-4 text-base sm:text-lg transition-colors uppercase focus:outline-none focus:ring-2 focus:ring-offset-2"
               style={{
-                borderColor: "var(--header-text)",
-                color: "var(--header-text)",
-                backgroundColor: "var(--header-bg)",
+                borderColor: "#ffffff",
+                color: "#ffffff",
+                backgroundColor: "#000000",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--header-text)";
-                e.currentTarget.style.color = "var(--header-bg)";
+                e.currentTarget.style.backgroundColor = "#ffffff";
+                e.currentTarget.style.color = "#000000";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--header-bg)";
-                e.currentTarget.style.color = "var(--header-text)";
+                e.currentTarget.style.backgroundColor = "#000000";
+                e.currentTarget.style.color = "#ffffff";
                 
               }}
               onClick={() => {
