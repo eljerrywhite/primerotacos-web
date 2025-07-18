@@ -886,7 +886,7 @@ const HomePage = () => {
                   {/* Mostrar taglines random si existen, si no mostrar especialidad */}
                   {selectedTaqueria.taglines &&
                   selectedTaqueria.taglines.length > 0 ? (
-                    <div className="text-sm sm:text-base italic leading-snug text-gray-700">
+                    <div className="text-sm sm:text-base italic leading-snug" style={{ color: "var(--text-secondary)" }}>
                       <RotatingTagline taglines={selectedTaqueria.taglines} />
                     </div>
                   ) : selectedTaqueria.especialidad ? (

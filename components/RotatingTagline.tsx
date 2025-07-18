@@ -35,7 +35,10 @@ const RotatingTagline: React.FC<RotatingTaglineProps> = ({
 
   return (
     <div className="flex items-start gap-2">
-      <Gem className="h-4 w-4 mt-0.5 flex-shrink-0 text-gray-600" />
+      <Gem 
+        className="h-4 w-4 mt-0.5 flex-shrink-0" 
+        style={{ color: "var(--text-secondary)" }}
+      />
       <p 
         className={`text-sm italic transition-opacity duration-300 ${
           isVisible ? 'opacity-100' : 'opacity-0'
