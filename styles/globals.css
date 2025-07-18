@@ -623,4 +623,9 @@ input::placeholder {
   input::placeholder {
     color: var(--search-placeholder);
   }
+
+  /* Hacer que el chevron tenga el mismo color que la lupa */
+  .text-gray-400 {
+    color: #9ca3af !important;
+  }
 }
