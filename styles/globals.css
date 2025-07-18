@@ -628,4 +628,9 @@ input::placeholder {
   .text-gray-400 {
     color: #9ca3af !important;
   }
+  
+  /* Asegurar que los chevrons de filtros tengan el mismo color que la lupa */
+  .filter-chevron {
+    color: #9ca3af !important;
+  }
 }
