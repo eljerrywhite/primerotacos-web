@@ -758,11 +758,11 @@ const HomePage = () => {
             <div className="h-12 md:h-16">
               <PrimeroTacosLogo
                 className="h-full w-auto max-w-[180px] md:max-w-[240px]"
-                variant="positive"
+                variant="negative"
               />
             </div>
           </div>
-          <div className="text-center text-sm sm:text-base" style={{ color: "var(--header-text)" }}>
+          <div className="text-center text-sm sm:text-base text-white">
             <p>© 2025 PRIMERO TACOS × LOS KNIJOS</p>
             <p className="mt-1">Hecho con 🌮, barrio y amor por la CDMX.</p>
           </div>
