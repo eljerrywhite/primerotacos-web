@@ -34,16 +34,25 @@
     );
   }
   
-  /* Ajustes para el botón flotante */
+  /* Ajustes para el botón flotante en dark mode */
   .scroll-to-top {
     background-color: var(--header-bg);
     color: var(--header-text);
     border: 2px solid var(--header-text);
+    /* Outline más delgado en dark mode para igualar light mode */
+    box-shadow: 0 0 0 2px var(--header-bg) !important;
   }
   
   .scroll-to-top:hover {
     background-color: var(--header-text);
     color: var(--header-bg);
+  }
+
+  /* En móvil mantener el outline delgado */
+  @media (max-width: 640px) {
+    .scroll-to-top {
+      box-shadow: 0 0 0 1px var(--header-bg) !important;
+    }
   }
 }
 
