@@ -34,16 +34,18 @@
     );
   }
   
-  /* Ajustes para el botón flotante */
+  /* Ajustes para el botón flotante en dark mode */
   .scroll-to-top {
-    background-color: var(--header-bg);
-    color: var(--header-text);
-    border: 2px solid var(--header-text);
+    background-color: var(--header-bg); /* Blanco en dark mode */
+    color: var(--header-text); /* Negro en dark mode */
+    border: 2px solid var(--header-text); /* Border negro en dark mode */
   }
   
   .scroll-to-top:hover {
-    background-color: var(--header-text);
-    color: var(--header-bg);
+    background-color: var(--header-text); /* Negro en dark mode */
+    color: var(--header-bg); /* Blanco en dark mode */
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15); /* Sombra blanca en dark mode */
   }
 }
 
