@@ -233,9 +233,7 @@ const HomePage = () => {
               PRIMERO TACOS × LOS KNIJOS
             </h1>
             <p className="text-base sm:text-lg max-w-2xl mx-auto leading-normal">
-              Directorio taquero hecho por chilangos, pa' chilangos.
-              <br />
-              Aquí se califica todo: taco, trato y rincón.
+              Directorio taquero hecho por chilangos, pa’ chilangos. Aquí se califica todo: taco, trato y rincón.
             </p>
           </div>
 
@@ -827,7 +825,7 @@ const HomePage = () => {
                   {selectedTaqueria.nombre}
                 </h3>
                 <button
-                  onClick={()={() => setModalOpen(false)}
+                  onClick={() => setModalOpen(false)}
                   className="p-1 -m-1 focus:outline-none focus:ring-2 focus:ring-white rounded hover:bg-white/10 transition-colors"
                   aria-label="Cerrar modal (ESC)"
                 >
