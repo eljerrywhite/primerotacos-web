@@ -347,6 +347,7 @@ html {
   box-shadow: 0 0 0 3px white; /* Outline blanco */
 }
 
+/* Hover para light mode */
 .scroll-to-top:hover {
   background: white;
   color: black;
