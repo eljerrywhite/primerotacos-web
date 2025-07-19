@@ -778,7 +778,7 @@ const HomePage = () => {
           className={`scroll-to-top animate-slideIn ${nearFooter ? "near-footer" : ""}`}
           aria-label="Volver arriba"
         >
-          <ChevronUp style={{ width: "36px", height: "36px" }} />
+          <ChevronUp className="h-8 w-8 md:h-7 md:w-7" />
         </button>
       )}
 
