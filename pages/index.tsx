@@ -656,7 +656,7 @@ const HomePage = () => {
             {/* Botón Cargar Más */}
             {filteredTaquerias.length > displayLimit && (
               <button
-                onClick={() => {
+                onClick={()={() => {
                   setIsLoadingMore(true);
                   setTimeout(() => {
                     const newDisplayLimit = displayLimit + 10;
@@ -723,7 +723,7 @@ const HomePage = () => {
             }}
           >
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-4 leading-tight">
-              ¿CONOCES UNA TAQUERÍA QUE NO ESTÁ EN ESTÁ EN EL RADAR?
+              ¿CONOCES UNA TAQUERÍA QUE NO ESTÁ EN NUESTRO RADAR?
             </h2>
             <p className="mb-6 text-base sm:text-lg leading-normal">
               Ayúdanos a descubrir joyitas del barrio. Comparte tus tacos
