@@ -170,6 +170,11 @@ const HomePage = () => {
         return b.calificacionFinal - a.calificacionFinal;
       } else if (sortOrder === "nombre") {
         return a.nombre.localeCompare(b.nombre);
+      } else if (sortOrder === "fecha") {
+        // Ordenar por fecha más reciente primero
+        const fechaA = a.fecha ? new Date(a.fecha).getTime() : 0;
+        const fechaB = b.fecha ? new Date(b.fecha).getTime() : 0;
+        return fechaB - fechaA;
       }
       return 0;
     });
@@ -340,6 +345,7 @@ const HomePage = () => {
                   >
                     <option value="calificacion">Mejor Calificación</option>
                     <option value="nombre">Alfabético</option>
+                    <option value="fecha">Últimos agregados</option>
                   </select>
                   <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
                 </div>
@@ -432,6 +438,7 @@ const HomePage = () => {
                     >
                       <option value="calificacion">Mejor Calificación</option>
                       <option value="nombre">Alfabético</option>
+                      <option value="fecha">Últimos agregados</option>
                     </select>
                     <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
                   </div>
