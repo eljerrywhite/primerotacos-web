@@ -334,6 +334,20 @@ html {
   z-index: 40;
 }
 
+/* Tamaño específico del ícono SVG */
+.scroll-to-top svg {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+/* En desktop, ícono más pequeño */
+@media (min-width: 768px) {
+  .scroll-to-top svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
 .scroll-to-top:hover {
   background: black;
   color: white;
