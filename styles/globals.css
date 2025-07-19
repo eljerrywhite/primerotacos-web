@@ -6,13 +6,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark mode - Aplicar variables a clases existentes */
-.pattern-background {
-  background-image: var(--bg-pattern);
-  background-color: var(--bg-secondary);
-  opacity: var(--pattern-opacity);
-}
-
 /* Actualizar colores de componentes específicos */
 @media (prefers-color-scheme: dark) {
   /* Skeleton loader en dark mode */
@@ -32,20 +25,6 @@
       var(--skeleton-highlight) 50%,
       var(--skeleton-base) 100%
     );
-  }
-  
-  /* Ajustes para el botón flotante en dark mode - lógica inversa */
-  .scroll-to-top {
-    background-color: white; /* Fondo blanco por defecto en dark mode */
-    color: black; /* Texto negro por defecto en dark mode */
-    border: 2px solid white; /* Border blanco en dark mode */
-  }
-  
-  .scroll-to-top:hover {
-    background-color: black; /* Fondo negro en hover en dark mode */
-    color: white; /* Texto blanco en hover en dark mode */
-    transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15); /* Sombra blanca en dark mode */
   }
 }
 
@@ -97,7 +76,7 @@ button, a {
   background: #555;
 }
 
-/* Patrón SVG sutil para fondos blancos */
+/* Patrón de fondo con parallax - ÚNICA DEFINICIÓN */
 .pattern-background {
   position: relative;
 }
@@ -110,13 +89,26 @@ button, a {
   right: 0;
   bottom: 0;
   background-image: url('/bg-pattern.png');
-  background-size: 400px 400px;
+  background-size: 480px 480px;
   background-repeat: repeat;
   background-position: center;
   background-attachment: fixed;
-  opacity: .1;
+  opacity: 0.2;
   pointer-events: none;
   z-index: 0;
+}
+
+/* En dark mode, mantener el pattern pero muy sutil */
+@media (prefers-color-scheme: dark) {
+  .pattern-background::before {
+    mix-blend-mode: multiply;
+    opacity: 8;
+  }
+
+  /* Logo del footer en dark mode */
+  .dark-mode-invert {
+    filter: invert(1);
+  }
 }
 
 .pattern-background > * {
@@ -328,12 +320,10 @@ html {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  min-height: 48px;
-  background: black;
-  color: white;
+  width: 56px;  /* Más grande */
+  height: 56px;
+  background: white;
+  color: black;
   border: 2px solid black;
   border-radius: 50%;
   display: flex;
@@ -342,33 +332,39 @@ html {
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 40;
-  padding: 0;
-  flex-shrink: 0;
-  box-shadow: 0 0 0 3px white; /* Outline blanco */
 }
 
-/* Hover para light mode */
 .scroll-to-top:hover {
-  background: white;
-  color: black;
+  background: black;
+  color: white;
   transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .scroll-to-top:active {
   transform: translateY(-2px);
 }
 
-/* Móvil: botón más pequeño pero manteniendo proporción circular */
+/* Dark mode para el botón */
+    @media (prefers-color-scheme: dark) {
+      .scroll-to-top {
+        background: white; 
+    color: black;
+    border-color: #1a1a1a;
+  }
+  
+  .scroll-to-top:hover {
+    background: black;
+    color: white;
+  }
+}
+
+/* Móvil: mantener tamaño grande */
 @media (max-width: 640px) {
   .scroll-to-top {
     bottom: 1.5rem;
-    right: 1rem;
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
-    box-shadow: 0 0 0 2px white; /* Outline más delgado en móvil */
+    right: 1.5rem;
+    width: 52px;
+    height: 52px;
   }
 }
 
@@ -574,13 +570,6 @@ a {
   #search-input::placeholder {
     font-size: 16px !important;
   }
-
-  /* Aplicar variables de tema a selects móviles */
-  select {
-    background-color: var(--btn-bg) !important;
-    color: var(--btn-text) !important;
-    border-color: var(--btn-border) !important;
-  }
 }
 
 /* En pantallas muy pequeñas */
@@ -630,101 +619,9 @@ input::placeholder {
 @media (prefers-color-scheme: dark) {
   input {
     color: var(--search-text);
-    border: 1px solid var(--search-border, #e8e8e8);
   }
   
-  #search-input {
-    background-color: var(--search-bg);
-    border: 1px solid var(--search-border, #e8e8e8);
-  }
-
   input::placeholder {
     color: var(--search-placeholder);
-  }
-
-  /* Aplicar tema dark a todos los selects */
-  select {
-    background-color: var(--btn-bg) !important;
-    color: var(--btn-text) !important;
-    border-color: var(--btn-border) !important;
-  }
-
-  /* Aplicar tema dark al botón FILTROS */
-  button {
-    background-color: var(--btn-bg) !important;
-    color: var(--btn-text) !important;
-    border-color: var(--btn-border) !important;
-  }
-
-  /* Estilos específicos para el botón FILTROS (móvil) */
-  button[aria-expanded] {
-    background-color: var(--btn-bg) !important;
-    color: var(--btn-text) !important;
-    border-color: var(--btn-border) !important;
-    /* Outline blanco básico como buscador y filtros */
-    box-shadow: 0 0 0 1px white !important;
-  }
-
-  /* Estados focus y hover para el botón FILTROS - usar color fijo para mejor visibilidad */
-  button[aria-expanded]:focus,
-  button[aria-expanded]:focus-visible {
-    outline: 2px solid #ffffff !important;
-    outline-offset: 2px !important;
-    border-radius: 4px !important;
-  }
-
-  button[aria-expanded]:hover {
-    background-color: var(--btn-hover-bg) !important;
-    color: var(--btn-hover-text) !important;
-    transform: none !important; /* Evitar movimiento indeseado */
-  }
-
-  /* Hacer que el chevron tenga el mismo color que la lupa */
-  .text-gray-400 {
-    color: #9ca3af !important;
-  }
-  
-  /* Asegurar que los chevrons de filtros tengan el mismo color que la lupa */
-  .filter-chevron {
-    color: #9ca3af !important;
-  }
-
-  /* Estilos específicos para el botón X cerrar del modal en dark mode */
-  .modal button,
-  button[aria-label^="Cerrar"],
-  button[aria-label*="cerrar"],
-  .close-button {
-    background-color: transparent !important;
-    color: #000000 !important; /* Negro para mejor contraste */
-    border: none !important;
-  }
-
-  .modal button:hover,
-  button[aria-label^="Cerrar"]:hover,
-  button[aria-label*="cerrar"]:hover,
-  .close-button:hover {
-    background-color: rgba(0, 0, 0, 0.1) !important;
-    color: #000000 !important;
-  }
-
-  .modal button:focus,
-  .modal button:focus-visible,
-  button[aria-label^="Cerrar"]:focus,
-  button[aria-label^="Cerrar"]:focus-visible,
-  button[aria-label*="cerrar"]:focus,
-  button[aria-label*="cerrar"]:focus-visible,
-  .close-button:focus,
-  .close-button:focus-visible {
-    outline: 2px solid #000000 !important;
-    outline-offset: 2px !important;
-    background-color: rgba(0, 0, 0, 0.1) !important;
-  }
-
-  .modal button:active,
-  button[aria-label^="Cerrar"]:active,
-  button[aria-label*="cerrar"]:active,
-  .close-button:active {
-    background-color: rgba(0, 0, 0, 0.2) !important;
-    transform: scale(0.95) !important;
   }
 }

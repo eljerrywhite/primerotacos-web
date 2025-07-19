@@ -228,8 +228,8 @@ const HomePage = () => {
               PRIMERO TACOS × LOS KNIJOS
             </h1>
             <p className="text-base sm:text-lg max-w-2xl mx-auto leading-normal">
-              Directorio taquero creado por la banda chilanga. Calificaciones
-              reales, sin pretensiones, directo al taco.
+              Directorio taquero hecho por chilangos, pa’ chilangos. Aquí se
+              califica todo: taco, trato y rincón.
             </p>
           </div>
 
@@ -739,7 +739,6 @@ const HomePage = () => {
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = "#000000";
                 e.currentTarget.style.color = "#ffffff";
-                
               }}
               onClick={() => {
                 tacoEvents.clickCalificar();
@@ -752,17 +751,17 @@ const HomePage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="pattern-background bg-white py-8">
+      <footer className="pattern-background py-8" style={{ backgroundColor: "var(--bg-secondary)" }}>
         <div className="container mx-auto px-4">
           <div className="flex justify-center mb-4">
             <div className="h-12 md:h-16">
               <PrimeroTacosLogo
-                className="h-full w-auto max-w-[180px] md:max-w-[240px]"
-                variant="negative"
-              />
+  className="h-full w-auto max-w-[180px] md:max-w-[240px] dark-mode-invert"
+  variant="positive"
+/>
             </div>
           </div>
-          <div className="text-center text-sm sm:text-base text-white">
+          <div className="text-center text-sm sm:text-base" style={{ color: "var(--text-secondary)" }}>
             <p>© 2025 PRIMERO TACOS × LOS KNIJOS</p>
             <p className="mt-1">Hecho con 🌮, barrio y amor por la CDMX.</p>
           </div>
@@ -779,7 +778,7 @@ const HomePage = () => {
           className={`scroll-to-top animate-slideIn ${nearFooter ? "near-footer" : ""}`}
           aria-label="Volver arriba"
         >
-          <ChevronUp className="h-5 w-5 sm:h-6 sm:w-6" />
+          <ChevronUp style={{ width: "36px", height: "36px" }} />
         </button>
       )}
 
@@ -911,7 +910,7 @@ const HomePage = () => {
                         className="h-4 w-4 mt-0.5 flex-shrink-0"
                         style={{ color: "var(--text-secondary)" }}
                       />
-                      <p 
+                      <p
                         className="text-sm leading-relaxed"
                         style={{ color: "var(--text-secondary)" }}
                       >
