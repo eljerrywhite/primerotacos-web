@@ -334,17 +334,20 @@ html {
   z-index: 40;
 }
 
-/* Tamaño específico del ícono SVG */
+/* Forzar tamaño del ícono SVG */
 .scroll-to-top svg {
-  width: 40px !important;
-  height: 40px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+  max-width: 36px !important;
+  max-height: 36px !important;
 }
 
-/* En desktop, ícono más pequeño */
 @media (min-width: 768px) {
   .scroll-to-top svg {
-    width: 28px !important;
-    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+    max-width: 28px !important;
+    max-height: 28px !important;
   }
 }
 

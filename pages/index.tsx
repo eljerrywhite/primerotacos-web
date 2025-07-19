@@ -779,11 +779,10 @@ const HomePage = () => {
           aria-label="Volver arriba"
         >
           <ChevronUp 
-            className="h-12 w-12 md:h-7 md:w-7" 
             style={{ 
-              width: '48px', 
-              height: '48px',
-              strokeWidth: '2px'
+              width: '36px !important', 
+              height: '36px !important',
+              strokeWidth: '2.5px'
             }} 
           />
         </button>
