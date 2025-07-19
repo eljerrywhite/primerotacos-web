@@ -780,9 +780,9 @@ const HomePage = () => {
         >
           <ChevronUp 
             style={{ 
-              width: '36px !important', 
-              height: '36px !important',
-              strokeWidth: '2.5px'
+              width: '28px !important', 
+              height: '28px !important',
+              strokeWidth: '2px'
             }} 
           />
         </button>

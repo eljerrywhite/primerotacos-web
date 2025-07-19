@@ -336,18 +336,18 @@ html {
 
 /* Forzar tamaño del ícono SVG */
 .scroll-to-top svg {
-  min-width: 36px !important;
-  min-height: 36px !important;
-  max-width: 36px !important;
-  max-height: 36px !important;
+  min-width: 28px !important;
+  min-height: 28px !important;
+  max-width: 28px !important;
+  max-height: 28px !important;
 }
 
 @media (min-width: 768px) {
   .scroll-to-top svg {
-    min-width: 28px !important;
-    min-height: 28px !important;
-    max-width: 28px !important;
-    max-height: 28px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+    max-width: 24px !important;
+    max-height: 24px !important;
   }
 }
 
