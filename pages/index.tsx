@@ -233,8 +233,7 @@ const HomePage = () => {
               PRIMERO TACOS × LOS KNIJOS
             </h1>
             <p className="text-base sm:text-lg max-w-2xl mx-auto leading-normal">
-              Directorio taquero hecho por chilangos, pa’ chilangos. Aquí se
-              califica todo: taco, trato y rincón.
+              Directorio taquero hecho por chilangos, pa’ chilangos. Aquí se califica todo: taco, trato y rincón.
             </p>
           </div>
 
@@ -723,7 +722,7 @@ const HomePage = () => {
             }}
           >
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold uppercase mb-4 leading-tight">
-              ¿CONOCES UNA TAQUERÍA QUE NO ESTÁ EN ESTÁ EN EL RADAR?
+              ¿CONOCES ALGUNA TAQUERÍA QUE NO ESTÁ EN NUESTRO RADAR?
             </h2>
             <p className="mb-6 text-base sm:text-lg leading-normal">
               Ayúdanos a descubrir joyitas del barrio. Comparte tus tacos
