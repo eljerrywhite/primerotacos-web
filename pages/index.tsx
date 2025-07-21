@@ -303,18 +303,16 @@ const HomePage = () => {
             </div>
 
             {/* Botón de filtros móvil */}
-            <div className="flex justify-center mt-4 md:hidden">
-              <button
-                onClick={() => setShowFilters(!showFilters)}
-                className="py-3 sm:py-4 px-4 bg-white text-black inline-flex items-center gap-2 text-base font-medium"
-              >
-                <Filter className="h-4 w-4" />
-                <span className="uppercase">Filtros</span>
-                <ChevronDown
-                  className={`h-4 w-4 transition-transform ${showFilters ? "rotate-180" : ""}`}
-                />
-              </button>
-            </div>
+            <button
+              onClick={() => setShowFilters(!showFilters)}
+              className="w-full mt-4 py-3 sm:py-4 bg-white text-black flex items-center justify-center gap-2 md:hidden text-base font-medium"
+            >
+              <Filter className="h-4 w-4" />
+              <span className="uppercase">Filtros</span>
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${showFilters ? "rotate-180" : ""}`}
+              />
+            </button>
 
             {/* Filtros desktop */}
             <div className="hidden md:flex gap-4 mt-4">
