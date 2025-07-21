@@ -233,7 +233,9 @@ const HomePage = () => {
               PRIMERO TACOS × LOS KNIJOS
             </h1>
             <p className="text-base sm:text-lg max-w-2xl mx-auto leading-normal">
-              Directorio taquero hecho por chilangos, pa’ chilangos. Aquí se califica todo: taco, trato y rincón.
+              Directorio taquero hecho por chilangos, pa’ chilangos.
+              <br />
+              Aquí se califica todo: taco, trato y rincón.
             </p>
           </div>
 
