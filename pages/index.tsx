@@ -235,7 +235,7 @@ const HomePage = () => {
             <p className="text-base sm:text-lg max-w-2xl mx-auto leading-normal">
               Directorio taquero hecho por chilangos, pa’ chilangos.
               <br />
-              Aquí se califica todo: taco, trato y rincón.
+              Aquí se califica todo: <em>taco, trato y rincón.</em>
             </p>
           </div>
 
@@ -795,7 +795,7 @@ style={{
       {/* Botón flotante Volver arriba */}
       {showScrollTop && (
         <button
-          onClick={() => {
+          onClick={()={() => {
             window.scrollTo({ top: 0, behavior: "smooth" });
             tacoEvents.returnToTop("floating-button");
           }}
