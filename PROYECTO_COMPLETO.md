@@ -256,6 +256,10 @@ async headers() {
 ### 🔄 **Archivos Modificados en la Última Actualización:**
 
 #### **Frontend (primerotacos-web):**
+- ✅ **`styles/theme.css`** - CREADO
+  - Variables CSS para light y dark mode
+  - Colores, fondos, bordes adaptativos
+  - Sistema completo de temas
 - ✅ **`pages/index.tsx`** - MODIFICADO
   - Cards completamente clickeables con hover effects
   - Logo con animación de escala al scroll
@@ -273,12 +277,29 @@ async headers() {
  - Optimizado para performance
 
 - ✅ **`styles/globals.css`** - MODIFICADO
+  - Pattern de fondo adaptativo
+  - Focus states mejorados
+  - Botón scroll-to-top optimizado
   - CSS para efecto shimmer del skeleton
   - Animación optimizada con GPU 
   - Animaciones CSS para modal, cards y botones
   - Estilos del botón flotante circular
   - CSP headers actualizados para Google Fonts
   - Optimizaciones de interlineado
+
+- ✅ **`pages/index.tsx`** - MODIFICADO
+  - Implementación de variables CSS
+  - Filtros móviles con tema dinámico
+  - Chevrons adaptativos
+  - Focus states consistentes
+
+- ✅ **`components/EmptyState.tsx`** - MODIFICADO
+  - Adaptado a variables de tema
+  - Iconos y textos dinámicos
+
+- ✅ **`components/TaqueriaSkeleton.tsx`** - MODIFICADO
+  - Colores adaptativos para skeleton loader
+
 
 - ✅ **`components/RotatingTagline.tsx`** - MODIFICADO
   - Color del ícono Gem consistente (text-gray-600)
