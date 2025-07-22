@@ -74,6 +74,9 @@
 - ✅ Iconos contextuales (MapPin, Gem)
 - ✅ 100% responsive
 - ✅ **Paginación responsive**: 10 items iniciales
+- ✅ **Dark mode automático**: Basado en preferencias del sistema
+- ✅ **Sistema de variables CSS**: Temas centralizados y mantenibles
+- ✅ **Focus states accesibles**: Consistentes en todos los navegadores
 
 ### Funcionalidades
 - ✅ Sistema de calificaciones con promedio
@@ -177,7 +180,8 @@ primerotacos-web/
 │       └── taquerias.js          # API route para datos
 ├── public/                       # Assets estáticos (ver abajo)
 ├── styles/
-│   └── globals.css               # Estilos globales y animaciones
+│   ├── globals.css               # Estilos globales y animaciones
+│   └── theme.css                 # Variables CSS para light/dark mode
 ├── types/
 │   └── index.ts                  # TypeScript types (Taqueria, etc)
 ├── .env.local                    # Variables de entorno

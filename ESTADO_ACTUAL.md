@@ -7,6 +7,16 @@
 - Base de datos: MongoDB Atlas ✅
 - Google Analytics: Implementado y rastreando eventos ✅
 
+### 🔄 Últimas Actualizaciones Julio 21, 2025
+- ✅ **Dark Mode Automático**: Detecta preferencias del sistema (no toggle manual)
+- ✅ **Variables CSS**: Sistema completo de temas con `theme.css`
+- ✅ **Pattern adaptativo**: Fondo ajustado para light/dark mode
+- ✅ **Accesibilidad mejorada**: Focus states consistentes en todos los elementos
+- ✅ **Filtros móviles**: Corregidos para dark mode
+- ✅ **Botón scroll-to-top**: Más grande y visible en móvil
+- ✅ **Chevrons adaptativos**: Cambian color según el tema
+- ✅ **Footer dinámico**: Logo y colores se adaptan al modo
+- 
 ## 🔄 Últimas Actualizaciones (Julio 2-9, 2025)
 - ✅ **Skeleton loaders**: Feedback visual mientras cargan las taquerías
 - ✅ **Búsqueda mejorada**: Ignora acentos para mejor UX
