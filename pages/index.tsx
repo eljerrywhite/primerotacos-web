@@ -249,11 +249,12 @@ const HomePage = () => {
               <input
                 id="search-input"
                 type="text"
-                placeholder="Buscar taquería o especialidad"
-                className="w-full pl-10 pr-12 py-3 sm:py-4 rounded-none text-base focus:outline-none focus:ring-2 focus:ring-gray-400"
+                placeholder="Buscar por taco o taquería"
+                className="w-full pl-10 pr-12 py-3 sm:py-4 rounded-none border text-base focus:outline-none focus:ring-2 focus:ring-gray-400"
                 style={{
                   backgroundColor: "var(--search-bg)",
                   color: "var(--search-text)",
+                  borderColor: "var(--btn-border)"
                 }}
                 value={searchTerm}
                 onChange={(e) => {
@@ -294,7 +295,7 @@ const HomePage = () => {
                     }
                     setSearchTerm("");
                   }}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 p-2 focus:outline-none focus:ring-2 focus:ring-gray-400 rounded transition-colors"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 p-2 border focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none rounded transition-colors"
                   aria-label="Limpiar búsqueda"
                 >
                   <X className="h-5 w-5" />
@@ -304,15 +305,20 @@ const HomePage = () => {
 
             {/* Botón de filtros móvil */}
             <button
-              onClick={() => setShowFilters(!showFilters)}
-              className="w-full mt-4 py-3 sm:py-4 bg-white text-black flex items-center justify-center gap-2 md:hidden text-base font-medium"
-            >
-              <Filter className="h-4 w-4" />
-              <span className="uppercase">Filtros</span>
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${showFilters ? "rotate-180" : ""}`}
-              />
-            </button>
+  onClick={() => setShowFilters(!showFilters)}
+  className="w-full mt-4 py-3 sm:py-4 flex items-center justify-center gap-2 md:hidden text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors cursor-pointer"
+style={{
+  backgroundColor: "var(--btn-bg)",
+  color: "var(--btn-text)",
+  borderColor: "var(--btn-border)"
+}}
+>
+  <Filter className="h-4 w-4" />
+  <span className="uppercase">Filtros</span>
+  <ChevronDown
+    className={`h-4 w-4 transition-transform ${showFilters ? "rotate-180" : ""}`}
+  />
+</button>
 
             {/* Filtros desktop */}
             <div className="hidden md:flex gap-4 mt-4">
@@ -348,7 +354,7 @@ const HomePage = () => {
                     <option value="nombre">Alfabético</option>
                     <option value="fecha">Últimos agregados</option>
                   </select>
-                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
+                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none" style={{ color: "var(--text-secondary)" }}/>
                 </div>
               </div>
               <div className="flex-1">
@@ -406,7 +412,7 @@ const HomePage = () => {
                       </option>
                     ))}
                   </select>
-                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
+                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none" style={{ color: "var(--text-secondary)" }} />
                 </div>
               </div>
             </div>
@@ -423,9 +429,14 @@ const HomePage = () => {
                   </label>
                   <div className="relative">
                     <select
-                      id="sort-order-mobile"
-                      className="w-full px-4 py-3 pr-10 text-base bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none"
-                      value={sortOrder}
+  id="sort-order-mobile"
+  className="w-full px-4 py-3 pr-10 text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
+  style={{
+    backgroundColor: "var(--btn-bg)",
+    color: "var(--btn-text)",
+    borderColor: "var(--btn-border)"
+  }}
+  value={sortOrder}
                       onChange={(e) => {
                         const newSortOrder = e.target.value;
                         setSortOrder(newSortOrder);
@@ -441,7 +452,7 @@ const HomePage = () => {
                       <option value="nombre">Alfabético</option>
                       <option value="fecha">Últimos agregados</option>
                     </select>
-                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
+                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none" style={{ color: "var(--text-secondary)" }}/>
                   </div>
                 </div>
                 <div>
@@ -453,9 +464,14 @@ const HomePage = () => {
                   </label>
                   <div className="relative">
                     <select
-                      id="alcaldia-filter-mobile"
-                      className="w-full px-4 py-3 pr-10 text-base bg-white text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none"
-                      value={selectedAlcaldia}
+  id="alcaldia-filter-mobile"
+  className="w-full px-4 py-3 pr-10 text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
+  style={{
+    backgroundColor: "var(--btn-bg)",
+    color: "var(--btn-text)",
+    borderColor: "var(--btn-border)"
+  }}
+  value={selectedAlcaldia}
                       onChange={(e) => {
                         const newAlcaldia = e.target.value;
                         setSelectedAlcaldia(newAlcaldia);
@@ -494,7 +510,7 @@ const HomePage = () => {
                         </option>
                       ))}
                     </select>
-                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-600 pointer-events-none" />
+                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none" style={{ color: "var(--text-secondary)" }} />
                   </div>
                 </div>
               </div>
@@ -509,7 +525,7 @@ const HomePage = () => {
       </section>
 
       {/* Lista de taquerías */}
-      <main id="main-content" className="px-4 py-8">
+      <main id="main-content" className="pattern-background px-4 py-8" style={{ backgroundColor: "var(--bg-secondary)" }}>
         {loading ? (
           <div className="max-w-4xl mx-auto space-y-4">
             {[...Array(5)].map((_, i) => (

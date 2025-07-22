@@ -93,7 +93,7 @@ button, a {
   background-repeat: repeat;
   background-position: center;
   background-attachment: fixed;
-  opacity: 0.2;
+  opacity: 0.1;
   pointer-events: none;
   z-index: 0;
 }
