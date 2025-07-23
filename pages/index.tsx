@@ -305,13 +305,31 @@ const HomePage = () => {
 
             {/* Botón de filtros móvil */}
             <button
-  onClick={() => setShowFilters(!showFilters)}
+  onClick={() => {
+    setShowFilters(!showFilters);
+    // Si estamos abriendo los filtros, hacer scroll
+    if (!showFilters) {
+      setTimeout(() => {
+        const filtersSection = document.getElementById('mobile-filters');
+        if (filtersSection) {
+          const headerHeight = 280; // Ajusta según el alto de tu header
+          const elementPosition = filtersSection.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100); // Pequeño delay para que el DOM se actualice
+    }
+  }}
   className="w-full mt-4 py-3 sm:py-4 flex items-center justify-center gap-2 md:hidden text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors cursor-pointer"
-style={{
-  backgroundColor: "var(--btn-bg)",
-  color: "var(--btn-text)",
-  borderColor: "var(--btn-border)"
-}}
+  style={{
+    backgroundColor: "var(--btn-bg)",
+    color: "var(--btn-text)",
+    borderColor: "var(--btn-border)"
+  }}
 >
   <Filter className="h-4 w-4" />
   <span className="uppercase">Filtros</span>
@@ -419,7 +437,7 @@ style={{
 
             {/* Filtros móvil expandible */}
             {showFilters && (
-              <div className="md:hidden space-y-4 mt-4">
+              <div id="mobile-filters" className="md:hidden space-y-4 mt-4">
                 <div>
                   <label
                     htmlFor="sort-order-mobile"
