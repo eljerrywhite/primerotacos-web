@@ -29,6 +29,7 @@ const HomePage = () => {
     null,
   );
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalKnijosOpen, setModalKnijosOpen] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [displayLimit, setDisplayLimit] = useState(10);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -140,12 +141,30 @@ const HomePage = () => {
     return () => window.removeEventListener("scroll", handleScrollForButton);
   }, []);
 
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && modalKnijosOpen) {
+        setModalKnijosOpen(false);
+      }
+    };
+
+    if (modalKnijosOpen) {
+      document.addEventListener("keydown", handleEsc);
+      return () => document.removeEventListener("keydown", handleEsc);
+    }
+  }, [modalKnijosOpen]);
+
   // AQUÍ VA LA FUNCIÓN normalizeText
   const normalizeText = (text: string): string => {
     return text
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, ""); // Remueve diacríticos (acentos)
+  };
+  // Contar taquerías por alcaldía
+  const getAlcaldiaCount = (alcaldia: string) => {
+    if (alcaldia === "Todas") return taquerias.length;
+    return taquerias.filter(t => t.alcaldia === alcaldia).length;
   };
 
   // Filtrar y ordenar taquerías
@@ -254,7 +273,7 @@ const HomePage = () => {
                 style={{
                   backgroundColor: "var(--search-bg)",
                   color: "var(--search-text)",
-                  borderColor: "var(--btn-border)"
+                  borderColor: "var(--btn-border)",
                 }}
                 value={searchTerm}
                 onChange={(e) => {
@@ -305,38 +324,41 @@ const HomePage = () => {
 
             {/* Botón de filtros móvil */}
             <button
-  onClick={() => {
-    setShowFilters(!showFilters);
-    // Si estamos abriendo los filtros, hacer scroll
-    if (!showFilters) {
-      setTimeout(() => {
-        const filtersSection = document.getElementById('mobile-filters');
-        if (filtersSection) {
-          const headerHeight = 280; // Ajusta según el alto de tu header
-          const elementPosition = filtersSection.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }, 100); // Pequeño delay para que el DOM se actualice
-    }
-  }}
-  className="w-full mt-4 py-3 sm:py-4 flex items-center justify-center gap-2 md:hidden text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors cursor-pointer"
-  style={{
-    backgroundColor: "var(--btn-bg)",
-    color: "var(--btn-text)",
-    borderColor: "var(--btn-border)"
-  }}
->
-  <Filter className="h-4 w-4" />
-  <span className="uppercase">Filtros</span>
-  <ChevronDown
-    className={`h-4 w-4 transition-transform ${showFilters ? "rotate-180" : ""}`}
-  />
-</button>
+              onClick={() => {
+                setShowFilters(!showFilters);
+                // Si estamos abriendo los filtros, hacer scroll
+                if (!showFilters) {
+                  setTimeout(() => {
+                    const filtersSection =
+                      document.getElementById("mobile-filters");
+                    if (filtersSection) {
+                      const headerHeight = 280; // Ajusta según el alto de tu header
+                      const elementPosition =
+                        filtersSection.getBoundingClientRect().top;
+                      const offsetPosition =
+                        elementPosition + window.pageYOffset - headerHeight;
+
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth",
+                      });
+                    }
+                  }, 100); // Pequeño delay para que el DOM se actualice
+                }
+              }}
+              className="w-full mt-4 py-3 sm:py-4 flex items-center justify-center gap-2 md:hidden text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors cursor-pointer"
+              style={{
+                backgroundColor: "var(--btn-bg)",
+                color: "var(--btn-text)",
+                borderColor: "var(--btn-border)",
+              }}
+            >
+              <Filter className="h-4 w-4" />
+              <span className="uppercase">Filtros</span>
+              <ChevronDown
+                className={`h-4 w-4 transition-transform ${showFilters ? "rotate-180" : ""}`}
+              />
+            </button>
 
             {/* Filtros desktop */}
             <div className="hidden md:flex gap-4 mt-4">
@@ -372,7 +394,10 @@ const HomePage = () => {
                     <option value="nombre">Alfabético</option>
                     <option value="fecha">Últimos agregados</option>
                   </select>
-                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none" style={{ color: "var(--text-secondary)" }}/>
+                  <ChevronDown
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none"
+                    style={{ color: "var(--text-secondary)" }}
+                  />
                 </div>
               </div>
               <div className="flex-1">
@@ -424,13 +449,21 @@ const HomePage = () => {
                       });
                     }}
                   >
-                    {alcaldias.map((alcaldia) => (
-                      <option key={alcaldia} value={alcaldia.toLowerCase()}>
-                        {alcaldia}
-                      </option>
-                    ))}
+                    {alcaldias.map((alcaldia) => {
+                      const count = getAlcaldiaCount(alcaldia);
+                      const displayName = alcaldia === "Todas" ? "Todas las alcaldías" : alcaldia;
+
+                      return (
+                        <option key={alcaldia} value={alcaldia.toLowerCase()}>
+                          {displayName} ({count})
+                        </option>
+                      );
+                    })}
                   </select>
-                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none" style={{ color: "var(--text-secondary)" }} />
+                  <ChevronDown
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none"
+                    style={{ color: "var(--text-secondary)" }}
+                  />
                 </div>
               </div>
             </div>
@@ -447,14 +480,14 @@ const HomePage = () => {
                   </label>
                   <div className="relative">
                     <select
-  id="sort-order-mobile"
-  className="w-full px-4 py-3 pr-10 text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
-  style={{
-    backgroundColor: "var(--btn-bg)",
-    color: "var(--btn-text)",
-    borderColor: "var(--btn-border)"
-  }}
-  value={sortOrder}
+                      id="sort-order-mobile"
+                      className="w-full px-4 py-3 pr-10 text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
+                      style={{
+                        backgroundColor: "var(--btn-bg)",
+                        color: "var(--btn-text)",
+                        borderColor: "var(--btn-border)",
+                      }}
+                      value={sortOrder}
                       onChange={(e) => {
                         const newSortOrder = e.target.value;
                         setSortOrder(newSortOrder);
@@ -470,7 +503,10 @@ const HomePage = () => {
                       <option value="nombre">Alfabético</option>
                       <option value="fecha">Últimos agregados</option>
                     </select>
-                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none" style={{ color: "var(--text-secondary)" }}/>
+                    <ChevronDown
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none"
+                      style={{ color: "var(--text-secondary)" }}
+                    />
                   </div>
                 </div>
                 <div>
@@ -482,14 +518,14 @@ const HomePage = () => {
                   </label>
                   <div className="relative">
                     <select
-  id="alcaldia-filter-mobile"
-  className="w-full px-4 py-3 pr-10 text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
-  style={{
-    backgroundColor: "var(--btn-bg)",
-    color: "var(--btn-text)",
-    borderColor: "var(--btn-border)"
-  }}
-  value={selectedAlcaldia}
+                      id="alcaldia-filter-mobile"
+                      className="w-full px-4 py-3 pr-10 text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 appearance-none cursor-pointer"
+                      style={{
+                        backgroundColor: "var(--btn-bg)",
+                        color: "var(--btn-text)",
+                        borderColor: "var(--btn-border)"
+                      }}
+                      value={selectedAlcaldia}
                       onChange={(e) => {
                         const newAlcaldia = e.target.value;
                         setSelectedAlcaldia(newAlcaldia);
@@ -522,13 +558,21 @@ const HomePage = () => {
                         });
                       }}
                     >
-                      {alcaldias.map((alcaldia) => (
-                        <option key={alcaldia} value={alcaldia.toLowerCase()}>
-                          {alcaldia}
-                        </option>
-                      ))}
+                      {alcaldias.map((alcaldia) => {
+                        const count = getAlcaldiaCount(alcaldia);
+                        const displayName = alcaldia === "Todas" ? "Todas las alcaldías" : alcaldia;
+
+                        return (
+                          <option key={alcaldia} value={alcaldia.toLowerCase()}>
+                            {displayName} ({count})
+                          </option>
+                        );
+                      })}
                     </select>
-                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none" style={{ color: "var(--text-secondary)" }} />
+                    <ChevronDown
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none"
+                      style={{ color: "var(--text-secondary)" }}
+                    />
                   </div>
                 </div>
               </div>
@@ -543,7 +587,11 @@ const HomePage = () => {
       </section>
 
       {/* Lista de taquerías */}
-      <main id="main-content" className="pattern-background px-4 py-8" style={{ backgroundColor: "var(--bg-secondary)" }}>
+      <main
+        id="main-content"
+        className="pattern-background px-4 py-8"
+        style={{ backgroundColor: "var(--bg-secondary)" }}
+      >
         {loading ? (
           <div className="max-w-4xl mx-auto space-y-4">
             {[...Array(5)].map((_, i) => (
@@ -768,7 +816,7 @@ const HomePage = () => {
               href="https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block border-2 px-6 py-3 sm:py-4 text-base sm:text-lg transition-colors uppercase focus:outline-none focus:ring-2 focus:ring-offset-2"
+              className="inline-block border-2 px-6 py-3 sm:py-4 text-base sm:text-lg transition-colors uppercase focus:outline-none focus:ring-2 focus:ring-offset-2 mb-4"
               style={{
                 borderColor: "#ffffff",
                 color: "#ffffff",
@@ -788,22 +836,42 @@ const HomePage = () => {
             >
               CALIFICAR CON GPT
             </a>
+
+            {/* NUEVO ENLACE PARA MODAL KNIJOS */}
+            <div className="mt-4">
+              <button
+    onClick={() => setModalKnijosOpen(true)}
+    className="text-sm sm:text-base underline hover:no-underline p-2 focus:outline-none focus:ring-2 focus:ring-white rounded transition-colors relative z-10"
+    style={{ 
+      color: "#ffffff !important",
+      textDecoration: "underline"
+    }}
+  >
+    ¿QUIÉNES SON LOS KNIJOS?
+  </button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="pattern-background py-8" style={{ backgroundColor: "var(--bg-secondary)" }}>
+      <footer
+        className="pattern-background py-8"
+        style={{ backgroundColor: "var(--bg-secondary)" }}
+      >
         <div className="container mx-auto px-4">
           <div className="flex justify-center mb-4">
             <div className="h-12 md:h-16">
               <PrimeroTacosLogo
-  className="h-full w-auto max-w-[180px] md:max-w-[240px] dark-mode-invert"
-  variant="positive"
-/>
+                className="h-full w-auto max-w-[180px] md:max-w-[240px] dark-mode-invert"
+                variant="positive"
+              />
             </div>
           </div>
-          <div className="text-center text-sm sm:text-base" style={{ color: "var(--text-secondary)" }}>
+          <div
+            className="text-center text-sm sm:text-base"
+            style={{ color: "var(--text-secondary)" }}
+          >
             <p>© 2025 PRIMERO TACOS × LOS KNIJOS</p>
             <p className="mt-1">Hecho con 🌮, barrio y amor por la CDMX.</p>
           </div>
@@ -820,12 +888,12 @@ const HomePage = () => {
           className={`scroll-to-top animate-slideIn ${nearFooter ? "near-footer" : ""}`}
           aria-label="Volver arriba"
         >
-          <ChevronUp 
-            style={{ 
-              width: '28px !important', 
-              height: '28px !important',
-              strokeWidth: '2px'
-            }} 
+          <ChevronUp
+            style={{
+              width: "28px !important",
+              height: "28px !important",
+              strokeWidth: "2px",
+            }}
           />
         </button>
       )}
@@ -881,7 +949,7 @@ const HomePage = () => {
                   className="text-sm"
                   style={{ color: "var(--text-secondary)" }}
                 >
-                  Promedio ponderado de 5.0
+                  Promedio ponderado
                 </p>
               </div>
 
@@ -1044,6 +1112,67 @@ const HomePage = () => {
                 >
                   CALIFICAR
                 </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Modal Acerca de los Knijos */}
+      {modalKnijosOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Overlay con blur */}
+          <div
+            className="absolute inset-0 backdrop-blur-sm"
+            style={{ backgroundColor: "var(--modal-overlay)" }}
+            onClick={() => setModalKnijosOpen(false)}
+          />
+
+          {/* Modal con borde */}
+          <div
+            className="relative max-w-lg w-full border-2 animate-modalSlideUp"
+            style={{
+              backgroundColor: "var(--modal-bg)",
+              borderColor: "var(--modal-border)",
+            }}
+          >
+            {/* Header */}
+            <div
+              className="px-4 py-3 sm:px-6 sm:py-4 relative"
+              style={{
+                backgroundColor: "var(--header-bg)",
+                color: "var(--header-text)",
+              }}
+            >
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg sm:text-xl font-bold uppercase pr-2">
+                  ¿Quiénes son los KNIJOS?
+                </h3>
+                <button
+                  onClick={() => setModalKnijosOpen(false)}
+                  className="p-1 -m-1 focus:outline-none focus:ring-2 focus:ring-white rounded hover:bg-white/10 transition-colors"
+                  aria-label="Cerrar modal (ESC)"
+                >
+                  <X className="h-5 w-5 sm:h-6 sm:w-6" />
+                </button>
+              </div>
+            </div>
+
+            {/* Contenido */}
+            <div className="px-4 py-6 sm:px-6 sm:py-8">
+              <div className="space-y-4 text-base sm:text-lg leading-relaxed">
+                <p>
+                  Somos un grupo de amigos que, cuando reabrieron las taquerías en CDMX en 
+                  septiembre de 2020 (modo "solo para llevar" por la pandemia), encontramos 
+                  el mejor pretexto para vernos: <strong>ir por tacos</strong>. Desde entonces, 
+                  cada jueves visitamos una taquería nueva. Así nació{" "}
+                  <strong>Primero Tacos</strong>.
+                </p>
+
+                <div className="text-center pt-4">
+                  <p className="text-lg sm:text-xl font-bold">
+                    Y tú… ya calificaste tus tacos favoritos? 🌮
+                  </p>
+                </div>
               </div>
             </div>
           </div>
