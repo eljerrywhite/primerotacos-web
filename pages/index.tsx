@@ -161,22 +161,72 @@ const HomePage = () => {
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, ""); // Remueve diacríticos (acentos)
   };
+
+  const getSynonyms = (term: string): string[] => {
+    const synonymMap: { [key: string]: string[] } = {
+      // Errores de ortografía comunes
+      sirloin: ["sirlion", "sirlon"],
+      sirlion: ["sirloin", "sirlon"],
+      sirlon: ["sirloin", "sirlion"],
+
+      costilla: ["costiya", "costillita"],
+      costiya: ["costilla", "costillita"],
+      costillita: ["costilla", "costiya"],
+
+      // Variaciones vegetarianas
+      vegetariano: ["veggie", "veggies", "vegetariana"],
+      vegetariana: ["veggie", "veggies", "vegetariano"],
+      veggie: ["vegetariano", "vegetariana", "veggies"],
+      veggies: ["vegetariano", "vegetariana", "veggie"],
+
+      // Otros términos
+      suadero: ["suadera"],
+      suadera: ["suadero"],
+
+      pastor: ["al pastor", "trompo"],
+      trompo: ["pastor", "al pastor"],
+
+      carnitas: ["carnita"],
+      carnita: ["carnitas"],
+
+      chorizera: ["chorizo", "chorisera"],
+      chorizo: ["chorizera", "chorisera"],
+      chorisera: ["chorizera", "chorizo"],
+
+      bistec: ["bistek"],
+      bistek: ["bistec"],
+    };
+
+    const normalizedTerm = normalizeText(term);
+    const synonyms = synonymMap[normalizedTerm] || [];
+
+    // Retornar el término original + sus sinónimos
+    return [term, ...synonyms];
+  };
+
   // Contar taquerías por alcaldía
   const getAlcaldiaCount = (alcaldia: string) => {
     if (alcaldia === "Todas") return taquerias.length;
-    return taquerias.filter(t => t.alcaldia === alcaldia).length;
+    return taquerias.filter((t) => t.alcaldia === alcaldia).length;
   };
 
   // Filtrar y ordenar taquerías
   const filteredTaquerias = taquerias
     .filter((taqueria) => {
-      const searchNormalized = normalizeText(searchTerm);
-      const matchesSearch =
-        normalizeText(taqueria.nombre).includes(searchNormalized) ||
-        normalizeText(taqueria.especialidad || "").includes(searchNormalized) ||
-        taqueria.taglines?.some((tag) =>
-          normalizeText(tag).includes(searchNormalized),
+      // NUEVA LÓGICA: Buscar con sinónimos
+      const searchTerms = getSynonyms(searchTerm);
+      const matchesSearch = searchTerms.some((term) => {
+        const searchNormalized = normalizeText(term);
+        return (
+          normalizeText(taqueria.nombre).includes(searchNormalized) ||
+          normalizeText(taqueria.especialidad || "").includes(
+            searchNormalized,
+          ) ||
+          taqueria.taglines?.some((tag) =>
+            normalizeText(tag).includes(searchNormalized),
+          )
         );
+      });
 
       const matchesAlcaldia =
         selectedAlcaldia === "todas" ||
@@ -451,11 +501,18 @@ const HomePage = () => {
                   >
                     {alcaldias.map((alcaldia) => {
                       const count = getAlcaldiaCount(alcaldia);
-                      const displayName = alcaldia === "Todas" ? "Todas las alcaldías" : alcaldia;
+                      const displayName =
+                        alcaldia === "Todas" ? "Todas las alcaldías" : alcaldia;
+
+                      // NUEVA LÓGICA: Solo mostrar número si hay taquerías Y no es "Todas"
+                      const showCount = count > 0 && alcaldia !== "Todas";
+                      const finalDisplayName = showCount
+                        ? `${displayName} (${count})`
+                        : displayName;
 
                       return (
                         <option key={alcaldia} value={alcaldia.toLowerCase()}>
-                          {displayName} ({count})
+                          {finalDisplayName}
                         </option>
                       );
                     })}
@@ -523,7 +580,7 @@ const HomePage = () => {
                       style={{
                         backgroundColor: "var(--btn-bg)",
                         color: "var(--btn-text)",
-                        borderColor: "var(--btn-border)"
+                        borderColor: "var(--btn-border)",
                       }}
                       value={selectedAlcaldia}
                       onChange={(e) => {
@@ -560,11 +617,20 @@ const HomePage = () => {
                     >
                       {alcaldias.map((alcaldia) => {
                         const count = getAlcaldiaCount(alcaldia);
-                        const displayName = alcaldia === "Todas" ? "Todas las alcaldías" : alcaldia;
+                        const displayName =
+                          alcaldia === "Todas"
+                            ? "Todas las alcaldías"
+                            : alcaldia;
+
+                        // NUEVA LÓGICA: Solo mostrar número si hay taquerías Y no es "Todas"
+                        const showCount = count > 0 && alcaldia !== "Todas";
+                        const finalDisplayName = showCount
+                          ? `${displayName} (${count})`
+                          : displayName;
 
                         return (
                           <option key={alcaldia} value={alcaldia.toLowerCase()}>
-                            {displayName} ({count})
+                            {finalDisplayName}
                           </option>
                         );
                       })}
@@ -840,15 +906,15 @@ const HomePage = () => {
             {/* NUEVO ENLACE PARA MODAL KNIJOS */}
             <div className="mt-4">
               <button
-    onClick={() => setModalKnijosOpen(true)}
-    className="text-sm sm:text-base underline hover:no-underline p-2 focus:outline-none focus:ring-2 focus:ring-white rounded transition-colors relative z-10"
-    style={{ 
-      color: "#ffffff !important",
-      textDecoration: "underline"
-    }}
-  >
-    ¿QUIÉNES SON LOS KNIJOS?
-  </button>
+                onClick={() => setModalKnijosOpen(true)}
+                className="text-sm sm:text-base underline hover:no-underline p-2 focus:outline-none focus:ring-2 focus:ring-white rounded transition-colors relative z-10"
+                style={{
+                  color: "#ffffff !important",
+                  textDecoration: "underline",
+                }}
+              >
+                ¿QUIÉNES SON LOS KNIJOS?
+              </button>
             </div>
           </div>
         </div>
@@ -1161,10 +1227,11 @@ const HomePage = () => {
             <div className="px-4 py-6 sm:px-6 sm:py-8">
               <div className="space-y-4 text-base sm:text-lg leading-relaxed">
                 <p>
-                  Somos un grupo de amigos que, cuando reabrieron las taquerías en CDMX en 
-                  septiembre de 2020 (modo "solo para llevar" por la pandemia), encontramos 
-                  el mejor pretexto para vernos: <strong>ir por tacos</strong>. Desde entonces, 
-                  cada jueves visitamos una taquería nueva. Así nació{" "}
+                  Somos un grupo de amigos que, cuando reabrieron las taquerías
+                  en CDMX en septiembre de 2020 (modo "solo para llevar" por la
+                  pandemia), encontramos el mejor pretexto para vernos:{" "}
+                  <strong>ir por tacos</strong>. Desde entonces, cada jueves
+                  visitamos una taquería nueva. Así nació{" "}
                   <strong>Primero Tacos</strong>.
                 </p>
 
