@@ -1227,10 +1227,8 @@ const HomePage = () => {
             <div className="px-4 py-6 sm:px-6 sm:py-8">
               <div className="space-y-4 text-base sm:text-lg leading-relaxed">
                 <p>
-                  Somos un grupo de amigos que, cuando reabrieron las taquerías
-                  en CDMX en septiembre de 2020 (modo "solo para llevar" por la
-                  pandemia), encontramos el mejor pretexto para vernos:{" "}
-                  <strong>ir por tacos</strong>. Desde entonces, cada jueves
+                  Somos un grupo de amigos de la CDMX que, durante la pandemia, encontramos en las taquerías y su modalidad "solo para llevar" el mejor pretexto para vernos:{" "}
+                  <strong>¡ir por tacos!</strong> Desde entonces, cada jueves
                   visitamos una taquería nueva. Así nació{" "}
                   <strong>Primero Tacos</strong>.
                 </p>
