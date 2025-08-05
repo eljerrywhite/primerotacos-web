@@ -173,6 +173,8 @@ const HomePage = () => {
       costiya: ["costilla", "costillita"],
       costillita: ["costilla", "costiya"],
 
+      campeche: ["campechano", "campechanos"],
+
       // Variaciones vegetarianas
       vegetariano: ["veggie", "veggies", "vegetariana"],
       vegetariana: ["veggie", "veggies", "vegetariano"],
