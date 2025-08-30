@@ -107,19 +107,12 @@ const ElReyDelPastor = () => {
 
           {/* Hero Content */}
           <div 
-            className="relative z-20 text-center px-6 py-8 md:px-8 md:py-10 max-w-2xl mx-4 rounded-lg backdrop-blur-md animate-fadeInUp"
+            className="relative z-20 text-center px-6 py-8 md:px-8 md:py-10 max-w-2xl mx-4 rounded-lg backdrop-blur-md animate-fadeInUp hero-content-box"
             style={{
               background: 'linear-gradient(to bottom, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%)',
             }}
           >
-            <style jsx>{`
-              @media (prefers-color-scheme: dark) {
-                .hero-content-box {
-                  background: linear-gradient(to bottom, rgba(26,26,26,0.95) 0%, rgba(26,26,26,0.9) 100%) !important;
-                }
-              }
-            `}</style>
-            <div className="hero-content-box">
+            <div>
               <h1 className="text-3xl md:text-5xl font-bold uppercase mb-2 tracking-tight" 
                   style={{ color: 'var(--text-primary)' }}>
                 {taqueriaData.nombre}
@@ -366,6 +359,9 @@ const ElReyDelPastor = () => {
         @media (prefers-color-scheme: dark) {
           video {
             filter: brightness(0.7);
+          }
+          .hero-content-box {
+            background: linear-gradient(to bottom, rgba(26,26,26,0.95) 0%, rgba(26,26,26,0.9) 100%) !important;
           }
         }
       `}</style>
