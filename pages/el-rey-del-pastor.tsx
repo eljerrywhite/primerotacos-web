@@ -88,7 +88,7 @@ const ElReyDelPastor = () => {
             playsInline
             style={{ filter: 'var(--video-filter, none)' }}
           >
-            <source src="/videos/hero-taqueria.mp4" type="video/mp4" />
+            <source src="/videos/pr-rey_del_pastor-final.mp4" type="video/mp4" />
           </video>
 
           {/* Pattern Overlay */}
