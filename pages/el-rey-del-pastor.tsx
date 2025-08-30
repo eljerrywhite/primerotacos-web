@@ -324,7 +324,7 @@ const ElReyDelPastor = () => {
                 </div>
 
               {/* Tags Section - Outside card */}
-              <div className="mt-6">
+              <div className="mt-12">
                 <div className="flex flex-wrap gap-3 justify-center">
                   {taqueriaData.hashtags.map((tag, index) => (
                     <span key={index}
