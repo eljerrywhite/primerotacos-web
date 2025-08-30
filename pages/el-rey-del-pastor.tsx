@@ -98,36 +98,32 @@ const ElReyDelPastor = () => {
             {/* Logo Component with transparent background */}
             <div className="mb-6">
               <PrimeroTacosLogo 
-                className="h-8 md:h-10" 
+                className="h-12 md:h-16" 
                 variant="negative" 
               />
             </div>
 
             <div>
-              <h1 className="text-5xl md:text-6xl font-medium uppercase mb-2 tracking-tight" 
+              <h1 className="text-5xl md:text-6xl font-medium uppercase mb-6 tracking-tight" 
                   style={{ color: 'white' }}>
                 {taqueriaData.nombre}
               </h1>
-              <p className="text-base md:text-lg mb-6" 
-                 style={{ color: 'white' }}>
-                Desde {taqueriaData.desde}
-              </p>
 
-              {/* Tagline in Hero */}
+              {/* Updated Description */}
               <div className="mb-6">
-                <p className="text-base md:text-lg leading-relaxed" 
+                <p className="text-lg md:text-xl leading-relaxed" 
                    style={{ color: 'white' }}>
-                  {taqueriaData.taglines[0]}
+                  Más de 50 años sirviendo tacos al pastor y de cabeza únicos en la colonia Guerrero.
                 </p>
               </div>
 
               {/* Rating */}
-              <div className="text-4xl md:text-5xl font-bold flex items-center gap-2"
+              <div className="text-3xl md:text-4xl font-bold flex items-center gap-2"
                    style={{ color: 'white' }}>
-                <Star className="w-8 h-8 md:w-10 md:h-10 fill-current" />
+                <Star className="w-6 h-6 md:w-7 md:h-7 fill-current" />
                 {taqueriaData.calificacionFinal.toFixed(1)}
                 <span className="text-sm md:text-base font-normal ml-2">
-                  calificación knija
+                  Calificación Knija
                 </span>
               </div>
             </div>
@@ -135,7 +131,11 @@ const ElReyDelPastor = () => {
         </section>
 
         {/* Main Content */}
-        <main className="container mx-auto px-4 py-8 md:py-16 max-w-6xl">
+        <main className="container mx-auto py-8 md:py-16 max-w-6xl" 
+              style={{
+                paddingLeft: '24px',
+                paddingRight: '24px',
+              }}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
 
             {/* Left Column - Editorial Content */}
