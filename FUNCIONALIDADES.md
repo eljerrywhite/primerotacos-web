@@ -125,4 +125,15 @@
 
 ### **CTAs Estratégicos**
 - **Calificar con GPT:** Principal conversion
-- **Ver mapa:** Secondary actio
+- **Ver mapa:** Secondary action
+
+## 📄 Páginas Individuales de Taquerías
+
+### **El Rey del Pastor**
+- **Hero con video:** Background video autoplay optimizado
+- **Layout profesional:** Dos columnas responsive con información detallada
+- **Alineación perfecta:** Padding consistente entre hero y contenido principal
+- **Calificaciones destacadas:** Sistema visual con estrellas y badges
+- **Links estratégicos:** Integración con Google Maps y sitio principal
+- **Footer consistente:** Mismo diseño que página principal
+- **Responsive optimizado:** Espaciado perfecto en mobile y desktop

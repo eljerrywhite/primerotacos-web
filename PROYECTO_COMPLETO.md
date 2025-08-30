@@ -77,6 +77,8 @@
 - ✅ **Dark mode automático**: Basado en preferencias del sistema
 - ✅ **Sistema de variables CSS**: Temas centralizados y mantenibles
 - ✅ **Focus states accesibles**: Consistentes en todos los navegadores
+- ✅ **Páginas individuales**: Template para taquerías específicas con video hero
+- ✅ **Alineación perfecta**: Padding consistente 40px entre secciones
 
 ### Funcionalidades
 - ✅ Sistema de calificaciones con promedio
@@ -176,6 +178,7 @@ primerotacos-web/
 │   ├── _app.tsx                  # App wrapper de Next.js
 │   ├── _document.tsx             # Documento HTML personalizado
 │   ├── index.tsx                 # Página principal
+│   ├── el-rey-del-pastor.tsx     # Página individual de taquería
 │   └── api/
 │       └── taquerias.js          # API route para datos
 ├── public/                       # Assets estáticos (ver abajo)

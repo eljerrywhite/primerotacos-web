@@ -23,6 +23,7 @@
 - ✅ **Modal informativo** sobre los Knijos
 - ✅ **SEO completo** con meta tags y sitemap
 - ✅ **Headers de seguridad** (calificación A)
+- ✅ **Página de taquería individual** - El Rey del Pastor con padding perfecto
 
 ## 🎯 Performance y Seguridad
 - **SSL:** Certificados válidos ✅
