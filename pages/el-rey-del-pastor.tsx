@@ -352,9 +352,31 @@ const ElReyDelPastor = () => {
           </div>
         </main>
 
+        {/* Promotional Section */}
+        <section className="py-12 text-center"
+                 style={{ backgroundColor: 'var(--bg-secondary)' }}>
+          <div className="container mx-auto px-6">
+            <p className="text-lg md:text-xl mb-2"
+               style={{ color: 'var(--text-primary)' }}>
+              ¿Listo pa' la ruta taquera?
+            </p>
+            <p className="text-base md:text-lg"
+               style={{ color: 'var(--text-secondary)' }}>
+              Encuentra más joyas como esta en{' '}
+              <a 
+                href="/"
+                className="underline hover:opacity-70 transition-opacity font-medium"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                primerotacos.mx
+              </a>
+            </p>
+          </div>
+        </section>
+
         {/* Footer */}
-        <footer className="mt-16 py-12 text-center"
-                style={{ backgroundColor: 'var(--bg-secondary)' }}>
+        <footer className="py-12 text-center"
+                style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--card-border)' }}>
           <a href="/"
              className="inline-flex items-center gap-2 font-medium hover:opacity-70 transition-opacity"
              style={{ color: 'var(--text-primary)' }}>
