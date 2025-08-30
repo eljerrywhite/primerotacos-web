@@ -65,7 +65,7 @@ const ElReyDelPastor = () => {
           <div 
             className="absolute inset-0 w-full h-full object-cover"
             style={{ 
-              backgroundImage: 'url(/public/45-degree-fabric-dark.png)',
+              backgroundImage: 'url(/45-degree-fabric-dark.png)',
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}
