@@ -15,7 +15,7 @@ const ElReyDelPastor = () => {
     servicio: 4.0,
     lugar: 3.8,
     direccion: "06300, Eje 1 Nte. 184, Guerrero, Cuauhtémoc, Ciudad de México, CDMX. Afuera del Metro Guerrero",
-    instagram: "@elreydelpastor",
+    
     ubicacion: "https://maps.google.com/?q=El+Rey+del+Pastor+Guerrero+CDMX",
 
     taglines: [
@@ -265,16 +265,19 @@ const ElReyDelPastor = () => {
                     </a>
                   </div>
 
-                  {taqueriaData.instagram && (
-                    <div className="flex items-start gap-3">
-                      <Globe className="h-5 w-5 mt-0.5 flex-shrink-0"
-                             style={{ color: 'var(--text-secondary)' }} />
-                      <span className="text-sm"
-                            style={{ color: 'var(--text-secondary)' }}>
-                        {taqueriaData.instagram}
-                      </span>
-                    </div>
-                  )}
+                  <div className="flex items-start gap-3">
+                    <Globe className="h-5 w-5 mt-0.5 flex-shrink-0"
+                           style={{ color: 'var(--text-secondary)' }} />
+                    <a 
+                      href="https://www.facebook.com/people/El-Rey-del-Pastor/100062337296268/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm underline hover:opacity-70 transition-opacity"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
+                      El Rey del Pastor en Facebook
+                    </a>
+                  </div>
 
                   {/* Precios */}
                   <div className="flex items-start gap-3">
