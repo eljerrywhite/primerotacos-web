@@ -30,7 +30,7 @@ const ElReyDelPastor = () => {
 
         "La joya escondida son los tacos de cabeza. Lengua y surtida que se discuten. Te lo decimos sin rodeos: están pa' repetir. Y la salsa ya viene servida en los de pastor —es su sello. Esos tacos ya te los dan listos, bañaditos con una salsa casera estupenda que eleva todo el viaje.",
 
-        "Tacos normales a $11-12 pesos, el de lengua a $20 pesos. Comida de barrio, precio de barrio, sabor auténtico. Porque este lugar no es moda, es tradición taquera. Su pastor es distinto a todo lo que has probado. No olvides bajarte el taco con un buen tepache."
+        "Tacos normales a $11-12 pesos, el de lengua a $20 pesos. Comida de barrio, precio de barrio, sabor auténtico. Porque este lugar no es moda, es tradición taquera. Su pastor es distinto a todo lo que has probado."
       ]
     },
 
@@ -276,20 +276,6 @@ const ElReyDelPastor = () => {
                   </div>
                 </div>
 
-                {/* Tags Section - Below info */}
-                <section className="mb-8 pt-6 border-t" 
-                         style={{ borderColor: 'var(--card-border)' }}>
-                  <div className="flex flex-wrap gap-3">
-                    {taqueriaData.hashtags.map((tag, index) => (
-                      <span key={index} 
-                            className="text-sm"
-                            style={{ color: 'var(--text-secondary)' }}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </section>
-
                 {/* Buttons */}
                 <div className="flex gap-3">
                   <a
@@ -336,6 +322,20 @@ const ElReyDelPastor = () => {
               </div>
             </div>
           </div>
+
+          {/* Tags Section - Outside grid */}
+          <section className="pt-8 border-t" 
+                   style={{ borderColor: 'var(--card-border)' }}>
+            <div className="flex flex-wrap gap-3 justify-center">
+              {taqueriaData.hashtags.map((tag, index) => (
+                <span key={index} 
+                      className="text-sm"
+                      style={{ color: 'var(--text-secondary)' }}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </section>
         </main>
 
         {/* Promotional Section */}
