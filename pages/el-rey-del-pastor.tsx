@@ -178,20 +178,6 @@ const ElReyDelPastor = () => {
                   </p>
                 ))}
               </section>
-
-              {/* Tags Section - Desktop only */}
-              <section className="hidden lg:block pt-8 border-t" 
-                       style={{ borderColor: 'var(--card-border)' }}>
-                <div className="flex flex-wrap gap-3">
-                  {taqueriaData.hashtags.map((tag, index) => (
-                    <span key={index} 
-                          className="text-sm"
-                          style={{ color: 'var(--text-secondary)' }}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </section>
             </div>
 
             {/* Right Column - Details Card */}
@@ -290,8 +276,8 @@ const ElReyDelPastor = () => {
                   </div>
                 </div>
 
-                {/* Tags Section - Mobile only, moved below info */}
-                <section className="lg:hidden mb-8 pt-8 border-t" 
+                {/* Tags Section - Below info */}
+                <section className="mb-8 pt-6 border-t" 
                          style={{ borderColor: 'var(--card-border)' }}>
                   <div className="flex flex-wrap gap-3">
                     {taqueriaData.hashtags.map((tag, index) => (
