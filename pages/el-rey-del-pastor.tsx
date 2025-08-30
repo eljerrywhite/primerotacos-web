@@ -134,8 +134,8 @@ const ElReyDelPastor = () => {
         {/* Main Content */}
         <main className="container mx-auto py-8 md:py-16 max-w-6xl"
               style={{
-                paddingLeft: '24px',
-                paddingRight: '24px',
+                paddingLeft: '40px',
+                paddingRight: '40px',
               }}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
 
