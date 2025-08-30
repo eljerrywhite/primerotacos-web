@@ -1,10 +1,15 @@
 // pages/el-rey-del-pastor.tsx
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import Head from "next/head";
 import { MapPin, Star, ChevronLeft, Globe, DollarSign } from "lucide-react";
 import PrimeroTacosLogo from "../components/PrimeroTacosLogo";
 
 const ElReyDelPastor = () => {
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setShouldLoadVideo(true), 500);
+    return () => clearTimeout(timer);
+  }, []);
   // Data para El Rey del Pastor
   const taqueriaData = {
     nombre: "El Rey del Pastor",
@@ -72,6 +77,9 @@ const ElReyDelPastor = () => {
           name="twitter:description"
           content="50 años de tacos bien puestos en la Colonia Guerrero"
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="canonical" href="https://primerotacos.mx/el-rey-del-pastor" />
       </Head>
 
       <div
@@ -81,25 +89,33 @@ const ElReyDelPastor = () => {
         {/* Hero Section */}
         <section className="relative h-[60vh] md:h-[70vh] min-h-[400px] md:min-h-[500px] overflow-hidden flex items-center justify-start">
           {/* Background Video */}
-          <video
-            className="absolute inset-0 w-full h-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/images/poster-rey.jpg" // <-- AGREGAR ESTA LÍNEA
-            style={{ filter: "var(--video-filter, none)" }}
-          >
-            <source
-              src="/videos/pr-rey_del_pastor-final.mp4"
-              type="video/mp4"
+          {/* Background Video */}
+          {shouldLoadVideo ? (
+            <video
+              className="absolute inset-0 w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster="/images/poster-rey.jpg"
+              style={{ filter: "var(--video-filter, none)" }}
+            >
+              <source
+                src="/videos/pr-rey_del_pastor-final.mp4"
+                type="video/mp4"
+              />
+            </video>
+          ) : (
+            <img
+              src="/images/poster-rey.jpg"
+              className="absolute inset-0 w-full h-full object-cover"
+              alt="El Rey del Pastor"
             />
-          </video>
-
+          )}
 
           {/* Dark gradient overlay for better text readability */}
           <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-black/50 to-black/40" />
-          
+
           {/* Hero Content */}
           <div className="relative z-20 text-left py-8 md:py-10 max-w-2xl mx-4 animate-fadeInUp hero-content-box px-2 md:px-8">
             {/* Logo Component with transparent background */}
