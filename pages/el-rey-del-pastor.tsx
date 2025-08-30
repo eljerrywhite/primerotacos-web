@@ -22,14 +22,14 @@ const ElReyDelPastor = () => {
     ],
 
     descripcion: {
-      quote: "Pastor directo desde Jalisco: sin piña, sin cebolla, sin cilantro. Puro trompo con carne y cebolla caramelizada al fuego directo. Resultado: un sabor profundo, chingón y sin distracciones.",
+      quote: "Pastor directo desde Jalisco: sin piña, sin cebolla, sin cilantro. Puro trompo con carne y cebolla caramelizada al fuego directo. Resultado: un sabor profundo, intenso y sin distracciones.",
 
       paragraphs: [
-        "Si andas rolando por la Guerrero, justo saliendo del Metro o Metrobús, lánzate sin pensarla a El Rey del Pastor —una taquería con más de medio siglo de historia, donde dos generaciones han perfeccionado el taco al punto de leyenda.",
+        "Si andas dando la vuelta por la Guerrero, justo saliendo del Metro o Metrobús, lánzate sin pensarla a El Rey del Pastor —una taquería con más de medio siglo de historia, donde dos generaciones han perfeccionado el taco al punto de leyenda.",
 
         "La joya escondida son los tacos de cabeza. Lengua y surtida que se discuten. Te lo decimos sin rodeos: están pa' repetir. Y la salsa ya viene servida en los de pastor —es su sello. Esos tacos ya te los dan listos, bañaditos con una salsa casera estupenda que eleva todo el viaje.",
 
-        "Tacos normales a $11-12 pesos, el de lengua a $20 baros. Comida de barrio, precio de barrio, sabor muy auténtico. Porque este lugar no es moda, es tradición taquera. Su pastor es distinto a todo lo que has probado."
+        "Tacos normales a $11-12 pesos, el de lengua a $20 pesos. Comida de barrio, precio de barrio, sabor auténtico. Porque este lugar no es moda, es tradición taquera. Su pastor es distinto a todo lo que has probado. No olvides bajarte el taco con un buen tepache."
       ]
     },
 
