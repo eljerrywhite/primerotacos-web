@@ -321,18 +321,18 @@ const ElReyDelPastor = () => {
                   </a>
                 </div>
 
-                {/* Tags Section - Inside card */}
-                <div className="pt-6 mt-6 border-t"
-                     style={{ borderColor: 'var(--card-border)' }}>
-                  <div className="flex flex-wrap gap-3 justify-center">
-                    {taqueriaData.hashtags.map((tag, index) => (
-                      <span key={index}
-                            className="text-sm"
-                            style={{ color: 'var(--text-secondary)' }}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                </div>
+
+              {/* Tags Section - Outside card */}
+              <div className="mt-6">
+                <div className="flex flex-wrap gap-3 justify-center">
+                  {taqueriaData.hashtags.map((tag, index) => (
+                    <span key={index}
+                          className="text-sm"
+                          style={{ color: 'var(--text-secondary)' }}>
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
