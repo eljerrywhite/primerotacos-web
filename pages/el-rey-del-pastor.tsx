@@ -1,8 +1,9 @@
+
 // pages/el-rey-del-pastor.tsx
 import React from 'react';
 import Head from 'next/head';
-import { MapPin, Star, ChevronLeft } from 'lucide-react';
-import RotatingTagline from '../components/RotatingTagline';
+import { MapPin, Star, ChevronLeft, Globe, DollarSign } from 'lucide-react';
+import PrimeroTacosLogo from '../components/PrimeroTacosLogo';
 
 const ElReyDelPastor = () => {
   // Data para El Rey del Pastor
@@ -55,12 +56,11 @@ const ElReyDelPastor = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="El Rey del Pastor - Primero Tacos" />
         <meta name="twitter:description" content="50 años de tacos bien puestos en la Colonia Guerrero" />
-        <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
 
       <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
         {/* Hero Section */}
-        <section className="relative h-[60vh] md:h-[70vh] min-h-[400px] md:min-h-[500px] overflow-hidden flex items-center justify-center">
+        <section className="relative h-[60vh] md:h-[70vh] min-h-[400px] md:min-h-[500px] overflow-hidden flex items-center justify-start">
           {/* Background Video */}
           <video
             className="absolute inset-0 w-full h-full object-cover"
@@ -89,33 +89,46 @@ const ElReyDelPastor = () => {
 
           {/* Hero Content */}
           <div 
-            className="relative z-20 text-center px-6 py-8 md:px-8 md:py-10 max-w-2xl mx-4 rounded-lg animate-fadeInUp hero-content-box"
+            className="relative z-20 text-left px-6 py-8 md:px-8 md:py-10 max-w-2xl mx-4 animate-fadeInUp hero-content-box"
             style={{
-              background: 'transparent', // Make the container transparent
-              paddingLeft: '24px', // Add padding to the left
-              paddingRight: '24px', // Add padding to the right
+              paddingLeft: '24px',
+              paddingRight: '24px',
             }}
           >
+            {/* Logo Component with transparent background */}
+            <div className="mb-6">
+              <PrimeroTacosLogo 
+                className="h-8 md:h-10" 
+                variant="negative" 
+              />
+            </div>
+
             <div>
-              <h1 className="text-3xl md:text-5xl font-medium uppercase mb-2 tracking-tight" 
-                  style={{ color: 'var(--text-primary)' }}>
+              <h1 className="text-5xl md:text-6xl font-medium uppercase mb-2 tracking-tight" 
+                  style={{ color: 'white' }}>
                 {taqueriaData.nombre}
               </h1>
               <p className="text-base md:text-lg mb-6" 
-                 style={{ color: 'var(--text-secondary)' }}>
+                 style={{ color: 'white' }}>
                 Desde {taqueriaData.desde}
               </p>
 
               {/* Tagline in Hero */}
-              <div className="mb-6 flex justify-center">
-                {taqueriaData.taglines[0]} {/* Display only the first tagline */}
+              <div className="mb-6">
+                <p className="text-base md:text-lg leading-relaxed" 
+                   style={{ color: 'white' }}>
+                  {taqueriaData.taglines[0]}
+                </p>
               </div>
 
               {/* Rating */}
-              <div className="text-4xl md:text-5xl font-bold flex items-center justify-center gap-2"
-                   style={{ color: 'var(--text-primary)' }}>
+              <div className="text-4xl md:text-5xl font-bold flex items-center gap-2"
+                   style={{ color: 'white' }}>
                 <Star className="w-8 h-8 md:w-10 md:h-10 fill-current" />
                 {taqueriaData.calificacionFinal.toFixed(1)}
+                <span className="text-sm md:text-base font-normal ml-2">
+                  calificación knija
+                </span>
               </div>
             </div>
           </div>
@@ -145,7 +158,23 @@ const ElReyDelPastor = () => {
                   <p key={index} 
                      className="text-base md:text-lg leading-relaxed"
                      style={{ color: 'var(--text-primary)' }}>
-                    {paragraph}
+                    {index === 0 ? (
+                      <>
+                        Si andas dando la vuelta por la Guerrero, justo saliendo del Metro o Metrobús, lánzate sin pensarla a{' '}
+                        <a 
+                          href={taqueriaData.ubicacion}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline hover:opacity-70 transition-opacity"
+                          style={{ color: 'var(--text-primary)' }}
+                        >
+                          El Rey del Pastor
+                        </a>
+                        {' '}—una taquería con más de medio siglo de historia, donde dos generaciones han perfeccionado el taco al punto de leyenda.
+                      </>
+                    ) : (
+                      paragraph
+                    )}
                   </p>
                 ))}
               </section>
@@ -225,29 +254,52 @@ const ElReyDelPastor = () => {
                   <div className="flex items-start gap-3">
                     <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0"
                             style={{ color: 'var(--text-secondary)' }} />
-                    <p className="text-sm leading-relaxed"
-                       style={{ color: 'var(--text-secondary)' }}>
+                    <a 
+                      href={taqueriaData.ubicacion}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm leading-relaxed underline hover:opacity-70 transition-opacity"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
                       {taqueriaData.direccion}
-                    </p>
+                    </a>
                   </div>
 
                   {taqueriaData.instagram && (
                     <div className="flex items-start gap-3">
+                      <Globe className="h-5 w-5 mt-0.5 flex-shrink-0"
+                             style={{ color: 'var(--text-secondary)' }} />
                       <span className="text-sm"
                             style={{ color: 'var(--text-secondary)' }}>
-                        📱 {taqueriaData.instagram}
+                        {taqueriaData.instagram}
                       </span>
                     </div>
                   )}
 
                   {/* Precios */}
                   <div className="flex items-start gap-3">
+                    <DollarSign className="h-5 w-5 mt-0.5 flex-shrink-0"
+                                style={{ color: 'var(--text-secondary)' }} />
                     <span className="text-sm"
                           style={{ color: 'var(--text-secondary)' }}>
-                      💵 Tacos: $11-12 | Lengua: $20
+                      Tacos: $11-12 | Lengua: $20
                     </span>
                   </div>
                 </div>
+
+                {/* Tags Section - Mobile only, moved below info */}
+                <section className="lg:hidden mb-8 pt-8 border-t" 
+                         style={{ borderColor: 'var(--card-border)' }}>
+                  <div className="flex flex-wrap gap-3">
+                    {taqueriaData.hashtags.map((tag, index) => (
+                      <span key={index} 
+                            className="text-sm"
+                            style={{ color: 'var(--text-secondary)' }}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </section>
 
                 {/* Buttons */}
                 <div className="flex gap-3">
@@ -293,20 +345,6 @@ const ElReyDelPastor = () => {
                   </a>
                 </div>
               </div>
-
-              {/* Tags Section - Mobile only */}
-              <section className="lg:hidden mt-8 pt-8 border-t" 
-                       style={{ borderColor: 'var(--card-border)' }}>
-                <div className="flex flex-wrap gap-3">
-                  {taqueriaData.hashtags.map((tag, index) => (
-                    <span key={index} 
-                          className="text-sm"
-                          style={{ color: 'var(--text-secondary)' }}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </section>
             </div>
           </div>
         </main>
@@ -341,20 +379,12 @@ const ElReyDelPastor = () => {
         }
 
         .hero-content-box {
-          /* Ensuring text is readable on the new background */
-          color: white; /* Default text color for better contrast on dark backgrounds */
+          color: white;
         }
         
-        /* Adjusting text color for better contrast against the new background */
         .hero-content-box h1,
         .hero-content-box p {
           color: white !important; 
-        }
-
-        @media (prefers-color-scheme: dark) {
-          .hero-content-box {
-            background: linear-gradient(to bottom, rgba(26,26,26,0.95) 0%, rgba(26,26,26,0.9) 100%) !important;
-          }
         }
       `}</style>
     </>
