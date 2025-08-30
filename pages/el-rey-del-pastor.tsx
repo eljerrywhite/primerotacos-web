@@ -61,13 +61,26 @@ const ElReyDelPastor = () => {
       <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
         {/* Hero Section */}
         <section className="relative h-[60vh] md:h-[70vh] min-h-[400px] md:min-h-[500px] overflow-hidden flex items-center justify-center">
-          {/* Background Image */}
+          {/* Background Video */}
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{ filter: 'var(--video-filter, none)' }}
+          >
+            <source src="/videos/pr-rey_del_pastor-final.mp4" type="video/mp4" />
+          </video>
+
+          {/* Background Image Fallback */}
           <div 
             className="absolute inset-0 w-full h-full object-cover"
             style={{ 
               backgroundImage: 'url(/45-degree-fabric-dark.png)',
               backgroundSize: 'cover',
-              backgroundPosition: 'center'
+              backgroundPosition: 'center',
+              zIndex: -1
             }}
           />
 
