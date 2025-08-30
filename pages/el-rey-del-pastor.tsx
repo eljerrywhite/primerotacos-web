@@ -88,11 +88,7 @@ const ElReyDelPastor = () => {
 
           {/* Hero Content */}
           <div
-            className="relative z-20 text-left px-6 py-8 md:px-8 md:py-10 max-w-2xl mx-4 animate-fadeInUp hero-content-box"
-            style={{
-              paddingLeft: '24px',
-              paddingRight: '24px',
-            }}
+            className="relative z-20 text-left py-8 md:py-10 max-w-2xl mx-4 animate-fadeInUp hero-content-box px-2 md:px-8"
           >
             {/* Logo Component with transparent background */}
             <div className="mb-6">
@@ -105,7 +101,7 @@ const ElReyDelPastor = () => {
             </div>
 
             <div>
-              <h1 className="text-5xl md:text-6xl font-medium uppercase mb-6 tracking-tight"
+              <h1 className="text-5xl md:text-6xl font-bold uppercase mb-6 tracking-tight"
                   style={{ color: 'white' }}>
                 {taqueriaData.nombre}
               </h1>
@@ -132,11 +128,7 @@ const ElReyDelPastor = () => {
         </section>
 
         {/* Main Content */}
-        <main className="container mx-auto py-8 md:py-16 max-w-6xl"
-              style={{
-                paddingLeft: '40px',
-                paddingRight: '40px',
-              }}>
+        <main className="container mx-auto py-8 md:py-16 max-w-6xl px-6 md:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
 
             {/* Left Column - Editorial Content */}
