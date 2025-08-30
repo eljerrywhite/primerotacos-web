@@ -9,10 +9,10 @@ const ElReyDelPastor = () => {
   const taqueriaData = {
     nombre: "El Rey del Pastor",
     desde: "1974",
-    calificacionFinal: 4.2,
-    calidad: 4.5,
+    calificacionFinal: 4.6,
+    calidad: 5.0,
     servicio: 4.0,
-    lugar: 3.8,
+    lugar: 3.0,
     direccion: "06300, Eje 1 Nte. 184, Guerrero, Cuauhtémoc, Ciudad de México, CDMX. Afuera del Metro Guerrero",
 
     ubicacion: "https://maps.google.com/?q=El+Rey+del+Pastor+Guerrero+CDMX",
@@ -25,9 +25,9 @@ const ElReyDelPastor = () => {
       quote: "Pastor directo desde Jalisco: sin piña, sin cebolla, sin cilantro. Puro trompo con carne y cebolla caramelizada al fuego directo. Resultado: un sabor profundo, intenso y sin distracciones.",
 
       paragraphs: [
-        "Si andas dando la vuelta por la Guerrero, justo saliendo del Metro o Metrobús, lánzate sin pensarla a El Rey del Pastor —una taquería con más de medio siglo de historia, donde dos generaciones han perfeccionado el taco al punto de leyenda.",
+        "Si andas por la Guerrero, justo saliendo del Metro o Metrobús, lánzate sin pensarla a El Rey del Pastor —una taquería con más de medio siglo de historia, donde dos generaciones han perfeccionado el taco al punto de leyenda.",
 
-        "La joya escondida son los tacos de cabeza. Lengua y surtida que se discuten. Te lo decimos sin rodeos: están pa' repetir. Y la salsa ya viene servida en los de pastor —es su sello. Esos tacos ya te los dan listos, bañaditos con una salsa casera estupenda que eleva todo el viaje y aún mejor si te lo bajas con el tapache de la casa.",
+        "La joya escondida son los tacos de cabeza. Lengua y surtida que se discuten. Te lo decimos sin rodeos: están pa' repetir. Y la salsa ya viene servida en los de pastor —es su sello. Esos tacos ya te los dan listos, bañaditos con una salsa casera estupenda que eleva todo el viaje y aún mejor si te lo bajas con el tepache de la casa.",
 
         "Tacos normales a $11-12 pesos, el de lengua a $20 pesos. Comida de barrio, precio de barrio, sabor auténtico. Porque este lugar no es moda, es tradición taquera. Su pastor es distinto a todo lo que has probado."
       ]
