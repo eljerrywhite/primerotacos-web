@@ -14,7 +14,7 @@ const ElReyDelPastor = () => {
     calidad: 4.5,
     servicio: 4.0,
     lugar: 3.8,
-    direccion: "Colonia Guerrero, afuera del Metro Guerrero",
+    direccion: "06300, Eje 1 Nte. 184, Guerrero, Cuauhtémoc, Ciudad de México, CDMX. Afuera del Metro Guerrero",
     instagram: "@elreydelpastor",
     ubicacion: "https://maps.google.com/?q=El+Rey+del+Pastor+Guerrero+CDMX",
 
