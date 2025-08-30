@@ -97,10 +97,12 @@ const ElReyDelPastor = () => {
           >
             {/* Logo Component with transparent background */}
             <div className="mb-6">
-              <PrimeroTacosLogo 
-                className="h-12 md:h-16" 
-                variant="negative" 
-              />
+              <a href="/" className="inline-block hover:opacity-80 transition-opacity">
+                <PrimeroTacosLogo 
+                  className="h-12 md:h-16" 
+                  variant="negative" 
+                />
+              </a>
             </div>
 
             <div>
@@ -361,14 +363,27 @@ const ElReyDelPastor = () => {
         </section>
 
         {/* Footer */}
-        <footer className="py-12 text-center"
-                style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--card-border)' }}>
-          <a href="/"
-             className="inline-flex items-center gap-2 font-medium hover:opacity-70 transition-opacity"
-             style={{ color: 'var(--text-primary)' }}>
-            <ChevronLeft className="w-5 h-5" />
-            Ver directorio de taquerías
-          </a>
+        <footer
+          className="pattern-background py-8"
+          style={{ backgroundColor: "var(--bg-secondary)" }}
+        >
+          <div className="container mx-auto px-4">
+            <div className="flex justify-center mb-4">
+              <div className="h-12 md:h-16">
+                <PrimeroTacosLogo
+                  className="h-full w-auto max-w-[180px] md:max-w-[240px] dark-mode-invert"
+                  variant="positive"
+                />
+              </div>
+            </div>
+            <div
+              className="text-center text-sm sm:text-base"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              <p>© 2025 PRIMERO TACOS × LOS KNIJOS</p>
+              <p className="mt-1">Hecho con 🌮, barrio y amor por la CDMX.</p>
+            </div>
+          </div>
         </footer>
       </div>
 
