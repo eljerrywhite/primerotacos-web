@@ -1,12 +1,10 @@
 // pages/el-rey-del-pastor.tsx
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import { MapPin, Gem, ChevronLeft, Star } from 'lucide-react';
+import { MapPin, Star, ChevronLeft } from 'lucide-react';
 import RotatingTagline from '../components/RotatingTagline';
 
 const ElReyDelPastor = () => {
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-
   // Data para El Rey del Pastor
   const taqueriaData = {
     nombre: "El Rey del Pastor",
@@ -21,10 +19,6 @@ const ElReyDelPastor = () => {
 
     taglines: [
       "50 años de tacos bien puestos en la Colonia Guerrero",
-      "Pastor directo desde Jalisco, sin piña, puro trompo con cebolla caramelizada",
-      "Dos generaciones perfeccionando el taco al punto de leyenda",
-      "No es moda, es tradición taquera de medio siglo",
-      "Tacos de cabeza que están pa' repetir, lengua y surtida de antología"
     ],
 
     descripcion: {
@@ -49,16 +43,6 @@ const ElReyDelPastor = () => {
     ]
   };
 
-  useEffect(() => {
-    // Preload video
-    const video = document.querySelector('video');
-    if (video) {
-      video.addEventListener('loadeddata', () => {
-        setIsVideoLoaded(true);
-      });
-    }
-  }, []);
-
   return (
     <>
       <Head>
@@ -77,43 +61,30 @@ const ElReyDelPastor = () => {
       <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)' }}>
         {/* Hero Section */}
         <section className="relative h-[60vh] md:h-[70vh] min-h-[400px] md:min-h-[500px] overflow-hidden flex items-center justify-center">
-          {/* Video Background */}
-          <video 
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-              isVideoLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            style={{ filter: 'var(--video-filter, none)' }}
-          >
-            <source src="/videos/pr-rey_del_pastor-final.mp4" type="video/mp4" />
-          </video>
-
-          {/* Pattern Overlay */}
+          {/* Background Image */}
           <div 
-            className="absolute inset-0 z-10 mix-blend-multiply"
-            style={{
-              backgroundImage: 'url(/bg-pattern.png)',
-              backgroundSize: '480px 480px',
-              backgroundRepeat: 'repeat',
-              opacity: 0.3
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ 
+              backgroundImage: 'url(/public/45-degree-fabric-dark.png)',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
             }}
           />
 
           {/* Dark gradient overlay for better text readability */}
-          <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/20 via-black/30 to-black/20" />
+          <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/70 to-black/60" />
 
           {/* Hero Content */}
           <div 
-            className="relative z-20 text-center px-6 py-8 md:px-8 md:py-10 max-w-2xl mx-4 rounded-lg backdrop-blur-md animate-fadeInUp hero-content-box"
+            className="relative z-20 text-center px-6 py-8 md:px-8 md:py-10 max-w-2xl mx-4 rounded-lg animate-fadeInUp hero-content-box"
             style={{
-              background: 'linear-gradient(to bottom, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%)',
+              background: 'transparent', // Make the container transparent
+              paddingLeft: '24px', // Add padding to the left
+              paddingRight: '24px', // Add padding to the right
             }}
           >
             <div>
-              <h1 className="text-3xl md:text-5xl font-bold uppercase mb-2 tracking-tight" 
+              <h1 className="text-3xl md:text-5xl font-medium uppercase mb-2 tracking-tight" 
                   style={{ color: 'var(--text-primary)' }}>
                 {taqueriaData.nombre}
               </h1>
@@ -122,9 +93,9 @@ const ElReyDelPastor = () => {
                 Desde {taqueriaData.desde}
               </p>
 
-              {/* Rotating Tagline in Hero */}
+              {/* Tagline in Hero */}
               <div className="mb-6 flex justify-center">
-                <RotatingTagline taglines={taqueriaData.taglines} interval={4000} />
+                {taqueriaData.taglines[0]} {/* Display only the first tagline */}
               </div>
 
               {/* Rating */}
@@ -356,10 +327,18 @@ const ElReyDelPastor = () => {
           animation: fadeInUp 0.8s ease-out;
         }
 
+        .hero-content-box {
+          /* Ensuring text is readable on the new background */
+          color: white; /* Default text color for better contrast on dark backgrounds */
+        }
+        
+        /* Adjusting text color for better contrast against the new background */
+        .hero-content-box h1,
+        .hero-content-box p {
+          color: white !important; 
+        }
+
         @media (prefers-color-scheme: dark) {
-          video {
-            filter: brightness(0.7);
-          }
           .hero-content-box {
             background: linear-gradient(to bottom, rgba(26,26,26,0.95) 0%, rgba(26,26,26,0.9) 100%) !important;
           }
