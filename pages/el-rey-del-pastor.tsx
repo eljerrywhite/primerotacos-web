@@ -341,8 +341,7 @@ const ElReyDelPastor = () => {
         </main>
 
         {/* Promotional Section */}
-        <section className="py-12 text-center"
-                 style={{ backgroundColor: 'var(--bg-secondary)' }}>
+        <section className="py-12 text-center">
           <div className="container mx-auto px-6">
             <p className="text-lg md:text-xl mb-2"
                style={{ color: 'var(--text-primary)' }}>
