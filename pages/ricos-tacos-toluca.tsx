@@ -33,7 +33,7 @@ const RicosTacosToluca = () => {
       paragraphs: [
         "En la Calle de López, frente al Mercado de Arcos de Belén, se arma la fila para probar los Ricos Tacos Toluca. Desde 2003, la familia viaja diario desde Toluca pa' servir su especialidad: chorizos rojo, verde, habanero y tamarindo, además de cecina, arrachera, obispo (embutido) y queso de puerco.",
 
-        "El campechano con chorizo y cecina es la joya de la casa, pero el taco de tamarindo es la sorpresa dulce-picosita que te volará la cabeza. Todos los tacos vienen bien armados con papitas, cebollita y salsas caseras únicas, difíciles de dejar de probar. El truco está en mezclarlas y, como decía mi abuelo chef: -guíate poniéndole color-",
+        "El campechano con chorizo y cecina es la joya de la casa, pero el taco de tamarindo es la sorpresa dulce-picosita que te volará la cabeza. Todos los tacos vienen bien armados con papitas, cebollita y salsas caseras únicas, difíciles de dejar de probar. El truco está en mezclarlas y, como decía mi abuelo —pónle color al taco.",
 
         "Tip de la casa: antes de morder el taco, prueba cada chorizo solito. Así descubres la magia del sazón toluqueño, preparado con almendra, cacahuate y pasas."
       ],
@@ -183,17 +183,7 @@ const RicosTacosToluca = () => {
                 </span>
               </div>
 
-              {/* Michelin Badge */}
-              <div className="mt-4">
-                <span className="inline-block px-3 py-1 text-sm font-medium rounded-full"
-                      style={{ 
-                        backgroundColor: "rgba(255, 255, 255, 0.2)",
-                        color: "white",
-                        border: "1px solid rgba(255, 255, 255, 0.3)"
-                      }}>
-                  ⭐ Distinción Michelin
-                </span>
-              </div>
+
             </div>
           </div>
         </section>
@@ -229,7 +219,7 @@ const RicosTacosToluca = () => {
                   >
                     {index === 0 ? (
                       <>
-                        En la <strong>Calle de López</strong>, frente al Mercado de Arcos de Belén, se arma la fila para probar los{" "}
+                        En la Calle de López, frente al Mercado de Arcos de Belén, se arma la fila para probar los{" "}
                         <a
                           href={taqueriaData.ubicacion}
                           target="_blank"
@@ -239,11 +229,11 @@ const RicosTacosToluca = () => {
                         >
                           Ricos Tacos Toluca
                         </a>
-                        . Desde <strong>2003</strong>, la familia viaja diario desde Toluca pa' servir su especialidad: <strong>chorizos rojo, verde, habanero y tamarindo</strong>, además de cecina, arrachera, obispo (embutido) y queso de puerco.
+                        . Desde 2003, la familia viaja diario desde Toluca pa' servir su especialidad: <strong>chorizos rojo, verde, habanero y tamarindo</strong>, además de cecina, arrachera, obispo (embutido) y queso de puerco.
                       </>
                     ) : index === 1 ? (
                       <>
-                        El <strong>campechano con chorizo y cecina</strong> es la joya de la casa, pero el <strong>taco de tamarindo</strong> es la sorpresa dulce-picosita que te volará la cabeza. Todos los tacos vienen bien armados con <strong>papitas, cebollita y salsas caseras únicas</strong>, difíciles de dejar de probar. El truco está en mezclarlas y, como decía mi abuelo chef: <em>"guíate poniéndole color."</em>
+                        El <strong>campechano con chorizo y cecina</strong> es la joya de la casa, pero el <strong>taco de tamarindo</strong> es la sorpresa dulce-picosita que te volará la cabeza. Todos los tacos vienen bien armados con papitas, cebollita y salsas caseras únicas, difíciles de dejar de probar. El truco está en mezclarlas y, como decía mi abuelo: <em>"pónle color al taco"</em>.
                       </>
                     ) : (
                       paragraph
