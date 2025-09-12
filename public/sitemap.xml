@@ -1,23 +1,22 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://primerotacos.mx/</loc>
-    <lastmod>2025-07-03</lastmod>
+    <lastmod>2025-01-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://primerotacos.mx/el-rey-del-pastor</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://primerotacos.mx/ricos-tacos-toluca</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
-
-<url>
-  <loc>https://primerotacos.mx/el-rey-del-pastor</loc>
-  <lastmod>2025-01-02</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-<url>
-  <loc>https://primerotacos.mx/ricos-tacos-toluca</loc>
-  <lastmod>2025-01-02</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
-</url>

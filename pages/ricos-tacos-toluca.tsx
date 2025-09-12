@@ -66,7 +66,7 @@ const RicosTacosToluca = () => {
           property="og:description"
           content="Chorizo rojo, verde, habanero y tamarindo. El campechano con cecina que cambió el juego en CDMX."
         />
-        <meta property="og:image" content="/og-image.png" />
+        <meta property="og:image" content="https://primerotacos.mx/og-image.png" />
         <meta property="og:type" content="restaurant" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
@@ -87,7 +87,7 @@ const RicosTacosToluca = () => {
             "@context": "https://schema.org",
             "@type": "Restaurant",
             "name": "Ricos Tacos Toluca",
-            "image": "/og-image.png",
+            "image": "https://primerotacos.mx/og-image.png",
             "servesCuisine": "Mexican",
             "priceRange": "$$",
             "address": {
