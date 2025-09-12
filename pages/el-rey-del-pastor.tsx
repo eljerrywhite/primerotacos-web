@@ -66,7 +66,7 @@ const ElReyDelPastor = () => {
           property="og:description"
           content="Pastor directo desde Jalisco, sin piña. Tacos de cabeza legendarios. Frente al Metro Guerrero."
         />
-        <meta property="og:image" content="/og-image.png" />
+        <meta property="og:image" content="https://primerotacos.mx/og-image.png" />
         <meta property="og:type" content="restaurant" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
@@ -80,6 +80,32 @@ const ElReyDelPastor = () => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="canonical" href="https://primerotacos.mx/el-rey-del-pastor" />
+
+        {/* Schema.org structured data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Restaurant",
+            "name": "El Rey del Pastor",
+            "image": "https://primerotacos.mx/og-image.png",
+            "servesCuisine": "Mexican",
+            "priceRange": "$",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Eje 1 Nte. 184",
+              "addressLocality": "Ciudad de México",
+              "addressRegion": "CDMX",
+              "postalCode": "06300"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.6",
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "foundingDate": "1974"
+          })}
+        </script>
       </Head>
 
       <div
