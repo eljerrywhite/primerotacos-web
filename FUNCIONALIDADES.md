@@ -129,11 +129,28 @@
 
 ## 📄 Páginas Individuales de Taquerías
 
-### **El Rey del Pastor**
-- **Hero con video:** Background video autoplay optimizado
-- **Layout profesional:** Dos columnas responsive con información detallada
-- **Alineación perfecta:** Padding consistente entre hero y contenido principal
-- **Calificaciones destacadas:** Sistema visual con estrellas y badges
-- **Links estratégicos:** Integración con Google Maps y sitio principal
+### **El Rey del Pastor** (desde 1974)
+- **Hero con video:** Background video autoplay optimizado con poster de respaldo
+- **Contenido editorial:** Historia desde 1974, especialidades únicas (pastor sin piña)
+- **Información completa:** Precios específicos ($11-12 tacos, $20 lengua)
+- **Redes sociales:** Links directos a Facebook oficial
+- **Layout profesional:** Dos columnas responsive con detalles completos
+- **SEO Schema.org:** Restaurant markup completo para buscadores
+
+### **Ricos Tacos Toluca** (desde 2003)
+- **Distinción Michelin:** Badge destacado en hero y contenido
+- **Especialidades únicas:** Chorizo tamarindo, campechano con cecina
+- **Contenido detallado:** Historia familiar, viaje diario desde Toluca
+- **Precios específicos:** Taco $30, Campechano $35, Con queso +$10
+- **Instagram integrado:** Link directo a @ricostacostoluca_
+- **Video hero optimizado:** Lazy loading y poster de respaldo
+
+### **Características Compartidas**
+- **Lazy loading videos:** Cargan después de 500ms para mejor performance
+- **SEO completo:** Meta tags, Open Graph, Twitter Cards individuales
+- **Schema.org Restaurant:** Datos estructurados para cada taquería
+- **Design system:** Integración perfecta con tema principal (dark/light)
+- **Responsive optimizado:** Mobile-first con breakpoints perfectos
+- **CTAs estratégicos:** Botones mapa y calificación en cada página
 - **Footer consistente:** Mismo diseño que página principal
-- **Responsive optimizado:** Espaciado perfecto en mobile y desktop
+- **Navegación fluida:** Links de regreso a página principal

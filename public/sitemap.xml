@@ -7,3 +7,17 @@
     <priority>1.0</priority>
   </url>
 </urlset>
+
+<url>
+  <loc>https://primerotacos.mx/el-rey-del-pastor</loc>
+  <lastmod>2025-01-02</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://primerotacos.mx/ricos-tacos-toluca</loc>
+  <lastmod>2025-01-02</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>

@@ -1,6 +1,40 @@
 # CHANGELOG
 *Historial cronológico de todas las actualizaciones*
 
+## [1.4.0] - 2025-09-12
+### 🆕 PÁGINAS INDIVIDUALES DE TAQUERÍAS
+- **El Rey del Pastor**
+  - Página completa con video hero background optimizado
+  - Historia detallada desde 1974, especialidades únicas (pastor sin piña)
+  - Información completa: precios específicos, ubicación, redes sociales
+  - SEO Schema.org Restaurant markup para mejor posicionamiento
+  
+- **Ricos Tacos Toluca**
+  - Página destacando distinción Michelin y especialidades únicas
+  - Contenido editorial sobre familia viajando desde Toluca diariamente
+  - Chorizo tamarindo y campechano como protagonistas
+  - Integración completa con Instagram oficial
+
+### 🎥 OPTIMIZACIÓN DE VIDEOS
+- **Lazy loading:** Videos cargan después de 500ms para mejor performance
+- **Posters de respaldo:** Imágenes estáticas mientras carga el video
+- **Autoplay responsivo:** Optimizado para mobile y desktop
+- **Compresión optimizada:** Videos ligeros sin perder calidad
+
+### 🔍 SEO AVANZADO INDIVIDUAL
+- **Schema.org Restaurant:** Datos estructurados para cada taquería
+- **Meta tags únicos:** Títulos y descripciones optimizadas por página
+- **Open Graph personalizado:** Mejores previews en redes sociales
+- **Canonical URLs:** SEO optimizado para cada landing page
+
+### 🎨 DESIGN SYSTEM CONSISTENTE
+- **Integración perfecta:** Mismo tema dark/light que página principal
+- **Variables CSS:** Reutilización del sistema de colores existente
+- **Responsive óptimo:** Mobile-first con breakpoints perfectos
+- **CTAs estratégicos:** Botones para mapa y calificación en cada página
+
+---
+
 ## [1.3.0] - 2025-07-24
 ### 🎯 NUEVAS FUNCIONALIDADES
 - **Filtro contador inteligente:** Solo muestra números cuando hay taquerías

@@ -1,5 +1,5 @@
 # PROYECTO PRIMERO TACOS - DOCUMENTACIÓN COMPLETA
-*Fecha: 2 de Julio de 2025*
+*Última actualización: 12 de Septiembre de 2025*
 
 ## 🎯 RESUMEN EJECUTIVO
 
@@ -77,7 +77,10 @@
 - ✅ **Dark mode automático**: Basado en preferencias del sistema
 - ✅ **Sistema de variables CSS**: Temas centralizados y mantenibles
 - ✅ **Focus states accesibles**: Consistentes en todos los navegadores
-- ✅ **Páginas individuales**: Template para taquerías específicas con video hero
+- ✅ **Páginas individuales**: El Rey del Pastor y Ricos Tacos Toluca con template completo
+- ✅ **Videos hero optimizados**: Lazy loading, posters de respaldo, autoplay responsivo
+- ✅ **Schema.org completo**: Restaurant markup para SEO avanzado
+- ✅ **Contenido editorial**: Historias auténticas, especialidades, precios detallados
 - ✅ **Alineación perfecta**: Padding consistente 40px entre secciones
 
 ### Funcionalidades
@@ -178,7 +181,8 @@ primerotacos-web/
 │   ├── _app.tsx                  # App wrapper de Next.js
 │   ├── _document.tsx             # Documento HTML personalizado
 │   ├── index.tsx                 # Página principal
-│   ├── el-rey-del-pastor.tsx     # Página individual de taquería
+│   ├── el-rey-del-pastor.tsx     # Página individual - El Rey del Pastor
+│   ├── ricos-tacos-toluca.tsx    # Página individual - Ricos Tacos Toluca
 │   └── api/
 │       └── taquerias.js          # API route para datos
 ├── public/                       # Assets estáticos (ver abajo)
@@ -485,4 +489,4 @@ npm start # localhost:3000
 
 *"Hecho con 🌮 en la CDMX"*
 
-*Última actualización: 21 de Junio 2025 - Taglines rotativos implementados*
+*Última actualización: 12 de Septiembre 2025 - Páginas individuales con videos y SEO avanzado*
