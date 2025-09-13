@@ -101,7 +101,8 @@ const RicosTacosToluca = () => {
               "@type": "AggregateRating",
               "ratingValue": "4.6",
               "bestRating": "5",
-              "worstRating": "1"
+              "worstRating": "1",
+              "ratingCount": "25"
             },
             "award": "Michelin Guide Recognition"
           })}
