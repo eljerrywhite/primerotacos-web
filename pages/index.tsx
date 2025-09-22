@@ -258,7 +258,7 @@ const HomePage = () => {
       tacoEvents.badgeImpression(badgeCount);
     }
   }, [filteredTaquerias, loading]);
-  
+
   return (
     <div
       className="min-h-screen font-mono"
