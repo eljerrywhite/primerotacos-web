@@ -642,3 +642,50 @@ input::placeholder {
     color: var(--search-placeholder);
   }
 }
+
+/* ===== BADGE DE RESEÑA ===== */
+.review-badge {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: var(--badge-bg, #000000);
+  color: var(--badge-text, #ffffff);
+  border: 1px solid var(--badge-border, #000000);
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 2px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Animación sutil para llamar atención */
+@keyframes subtlePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+.review-badge {
+  animation: subtlePulse 3s ease-in-out infinite;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .review-badge {
+    --badge-bg: #ffffff;
+    --badge-text: #000000;
+    --badge-border: #ffffff;
+  }
+}
+
+/* Mobile: badge más pequeño */
+@media (max-width: 640px) {
+  .review-badge {
+    top: 8px;
+    right: 12px;
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+}

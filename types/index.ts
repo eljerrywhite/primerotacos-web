@@ -13,4 +13,6 @@ export interface Taqueria {
   colonia?: string;         
   alcaldia?: string;        
   fecha?: string | Date;
+  hasDetailPage?: boolean;
+  pageSlug?: string;         
 }
