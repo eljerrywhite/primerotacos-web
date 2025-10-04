@@ -49,6 +49,7 @@
 - **Contenido editorial:** Historias detalladas, especialidades y precios específicos
 - **Integración social:** Links a Instagram y Facebook de las taquerías
 - **CTA estratégicos:** Botones para mapa y calificación en cada página
+- **Breadcrumb optimizado:** Navegación mejorada con fondo adaptativo, texto truncado y padding consistente con hero-banner
 
 ## 🔄 En Desarrollo
 - Más páginas individuales de taquerías destacadas

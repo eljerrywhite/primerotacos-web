@@ -162,3 +162,9 @@
 - **CTAs estratégicos:** Botones mapa y calificación en cada página
 - **Footer consistente:** Mismo diseño que página principal
 - **Navegación fluida:** Links de regreso a página principal
+- **Breadcrumb navegacional:** Ubicado debajo del hero-video con:
+  - Padding consistente: 27px móvil, 48px desktop
+  - Fondo adaptativo según tema (card-bg)
+  - Texto truncado para resoluciones pequeñas (max-width: 200px)
+  - Iconos Home y ChevronRight responsive
+  - Enlace funcional a página principal

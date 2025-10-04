@@ -66,6 +66,7 @@
 - ✅ Efecto parallax en pattern (desktop)
 - ✅ Búsqueda en tiempo real
 - ✅ **Botón limpiar búsqueda**: Ícono X cuando hay texto
+- ✅ **Breadcrumb navegacional**: Componente adaptativo para páginas individuales
 - ✅ Ordenamiento (calificación/alfabético)
 - ✅ Filtros por alcaldía
 - ✅ Cards con taglines en cursiva
@@ -175,6 +176,7 @@
 ```
 primerotacos-web/
 ├── components/
+│   ├── Breadcrumb.tsx            # Componente de navegación breadcrumb
 │   ├── PrimeroTacosLogo.tsx      # Componente del logo
 │   └── RotatingTagline.tsx       # Componente de taglines rotatorios
 ├── lib/

@@ -39,6 +39,11 @@
 - **Variables CSS:** Reutilización del sistema de colores existente
 - **Responsive óptimo:** Mobile-first con breakpoints perfectos
 - **CTAs estratégicos:** Botones para mapa y calificación en cada página
+- **Breadcrumb mejorado:** Navegación posicionada debajo del hero-video
+  - Fondo adaptativo con variables CSS (card-bg)
+  - Padding consistente con hero-banner (27px móvil, 48px desktop)
+  - Texto truncado para pantallas pequeñas
+  - Iconos responsive y accesibles
 
 ---
 
