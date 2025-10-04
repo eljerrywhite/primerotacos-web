@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Head from "next/head";
 import { MapPin, Star, ChevronLeft, Instagram, DollarSign } from "lucide-react";
 import PrimeroTacosLogo from "../components/PrimeroTacosLogo";
+import Breadcrumb from "../components/Breadcrumb";
 
 const RicosTacosToluca = () => {
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
@@ -113,6 +114,9 @@ const RicosTacosToluca = () => {
         className="min-h-screen"
         style={{ backgroundColor: "var(--bg-primary)" }}
       >
+        {/* Breadcrumb */}
+        <Breadcrumb taqueriaNombre="Ricos Tacos Toluca" />
+        
         {/* Hero Section */}
         <section className="relative h-[60vh] md:h-[70vh] min-h-[400px] md:min-h-[500px] overflow-hidden flex items-center justify-start">
           {/* Background Video */}
