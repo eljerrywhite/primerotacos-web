@@ -644,48 +644,47 @@ input::placeholder {
 }
 
 /* ===== BADGE DE RESEÑA ===== */
-.review-badge {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  background: var(--badge-bg, #000000);
-  color: var(--badge-text, #ffffff);
-  border: 1px solid var(--badge-border, #000000);
-  padding: 4px 10px;
-  font-size: 11px;
+.badge-reseña {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-bottom: 12px;
   border-radius: 2px;
-  z-index: 10;
-  pointer-events: none;
+  line-height: 1;
+  background: #f3f3f3;
+  color: #000;
 }
 
-/* Animación sutil para llamar atención */
-@keyframes subtlePulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.85; }
+.badge-icon {
+  width: 12px;
+  height: 12px;
+  margin-top: -1px;
 }
 
-.review-badge {
-  animation: subtlePulse 3s ease-in-out infinite;
+.badge-reseña span {
+  transform: translateY(1px);
 }
 
-/* Dark mode */
 @media (prefers-color-scheme: dark) {
-  .review-badge {
-    --badge-bg: #ffffff;
-    --badge-text: #000000;
-    --badge-border: #ffffff;
+  .badge-reseña {
+    background: #2a2a2a;
+    color: #e8e8e8;
   }
 }
 
-/* Mobile: badge más pequeño */
 @media (max-width: 640px) {
-  .review-badge {
-    top: 8px;
-    right: 12px;
-    padding: 3px 8px;
-    font-size: 10px;
+  .badge-reseña {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+
+  .badge-icon {
+    width: 11px;
+    height: 11px;
   }
 }

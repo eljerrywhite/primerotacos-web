@@ -1,6 +1,5 @@
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import {
   MapPin,
   Search,
@@ -9,6 +8,7 @@ import {
   ChevronUp,
   X,
   Gem,
+  ArrowUpRight,
 } from "lucide-react";
 import PrimeroTacosLogo from "../components/PrimeroTacosLogo";
 import { Taqueria } from "../types";
@@ -250,14 +250,6 @@ const HomePage = () => {
       }
       return 0;
     });
-
-  // Trackear impresiones de badges
-  useEffect(() => {
-    const badgeCount = filteredTaquerias.filter(t => t.hasDetailPage).length;
-    if (badgeCount > 0 && !loading) {
-      tacoEvents.badgeImpression(badgeCount);
-    }
-  }, [filteredTaquerias, loading]);
 
   return (
     <div
@@ -722,141 +714,105 @@ const HomePage = () => {
           </div>
         ) : (
           // Lista normal de taquerías
-          <div className="max-w-4xl mx-auto space-y-4">
-            {filteredTaquerias.slice(0, displayLimit).map((taqueria) => {
-  // Si tiene página individual, envolvemos en Link
+            <div className="max-w-4xl mx-auto space-y-4">
+              {filteredTaquerias.slice(0, displayLimit).map((taqueria) => {
+              // Para debug: ver qué taquerías tienen hasDetailPage
+              console.log(taqueria.nombre, 'hasDetailPage:', taqueria.hasDetailPage);
+               return (
+              
+              <div
+                key={taqueria._id}
+                className="relative border-b-2 pb-5 px-4 sm:px-5 pt-5 transition-colors duration-200 cursor-pointer animate-fadeIn"
+                style={{
+                  backgroundColor: "var(--card-bg)",
+                  borderBottomColor: "var(--card-border)",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.backgroundColor = "var(--card-hover)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.backgroundColor = "var(--card-bg)")
+                }
+                onClick={() => {
+  // Si tiene página individual, navegar ahí
   if (taqueria.hasDetailPage && taqueria.pageSlug) {
-    return (
-      <Link
-        key={taqueria._id}
-        href={`/${taqueria.pageSlug}`}
-        onClick={() => {
-          // Trackear evento
-          tacoEvents.viewFeaturedTaqueria({
-            id: taqueria._id,
-            nombre: taqueria.nombre,
-            pageSlug: taqueria.pageSlug
-          });
-          tacoEvents.detailPageNavigation({
-            id: taqueria._id,
-            nombre: taqueria.nombre,
-            pageSlug: taqueria.pageSlug,
-            from: 'card'
-          });
-        }}
-      >
-        <div
-          className="relative border-b-2 pb-5 px-4 sm:px-5 pt-5 transition-colors duration-200 cursor-pointer animate-fadeIn"
-          style={{
-            backgroundColor: "var(--card-bg)",
-            borderBottomColor: "var(--card-border)",
-          }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor = "var(--card-hover)")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor = "var(--card-bg)")
-          }
-        >
-          {/* BADGE */}
-          <span className="review-badge">RESEÑA</span>
-          
-          {/* Resto del contenido de la card (igual que antes) */}
-          <h2 className="text-lg sm:text-xl font-bold uppercase mb-1">
-            {taqueria.nombre}
-          </h2>
-          {taqueria.alcaldia && (
-            <p className="text-xs sm:text-sm mb-3" style={{ color: "var(--text-muted)" }}>
-              {taqueria.alcaldia}
-            </p>
-          )}
-          {/* Tagline o especialidad */}
-          {taqueria.taglines && taqueria.taglines.length > 0 ? (
-            <p className="text-sm sm:text-base italic mb-4 leading-snug" style={{ color: "var(--text-secondary)" }}>
-              "{taqueria._id && randomIndexes[taqueria._id] !== undefined
-                ? taqueria.taglines[randomIndexes[taqueria._id]]
-                : taqueria.taglines[0]}"
-            </p>
-          ) : taqueria.especialidad ? (
-            <p className="text-sm sm:text-base italic mb-4 leading-snug" style={{ color: "var(--text-secondary)" }}>
-              "{taqueria.especialidad}"
-            </p>
-          ) : null}
-          <div className="flex items-center justify-between">
-            <span className="text-sm sm:text-base underline">VER RESEÑA COMPLETA</span>
-            <span className="px-3 py-1 text-base sm:text-lg font-bold" style={{
-              backgroundColor: "var(--header-bg)",
-              color: "var(--header-text)",
-            }}>
-              {taqueria.calificacionFinal.toFixed(1)}
-            </span>
-          </div>
-        </div>
-      </Link>
-    );
+    window.location.href = `/${taqueria.pageSlug}`;
   } else {
-    // Card normal sin página individual (comportamiento actual)
-    return (
-      <div
-        key={taqueria._id}
-        className="border-b-2 pb-5 px-4 sm:px-5 pt-5 transition-colors duration-200 cursor-pointer animate-fadeIn"
-        style={{
-          backgroundColor: "var(--card-bg)",
-          borderBottomColor: "var(--card-border)",
-        }}
-        onMouseEnter={(e) =>
-          (e.currentTarget.style.backgroundColor = "var(--card-hover)")
-        }
-        onMouseLeave={(e) =>
-          (e.currentTarget.style.backgroundColor = "var(--card-bg)")
-        }
-        onClick={() => {
-          setSelectedTaqueria(taqueria);
-          setModalOpen(true);
-          if (taqueria._id) {
-            tacoEvents.viewTaqueriaDetail({
-              id: taqueria._id,
-              nombre: taqueria.nombre,
-              calificacion: taqueria.calificacionFinal,
-              alcaldia: taqueria.alcaldia || "",
-            });
-          }
-        }}
-      >
-        {/* Contenido de la card (igual que antes, sin badge) */}
-        <h2 className="text-lg sm:text-xl font-bold uppercase mb-1">
-          {taqueria.nombre}
-        </h2>
-        {taqueria.alcaldia && (
-          <p className="text-xs sm:text-sm mb-3" style={{ color: "var(--text-muted)" }}>
-            {taqueria.alcaldia}
-          </p>
-        )}
-        {/* Tagline o especialidad */}
-        {taqueria.taglines && taqueria.taglines.length > 0 ? (
-          <p className="text-sm sm:text-base italic mb-4 leading-snug" style={{ color: "var(--text-secondary)" }}>
-            "{taqueria._id && randomIndexes[taqueria._id] !== undefined
-              ? taqueria.taglines[randomIndexes[taqueria._id]]
-              : taqueria.taglines[0]}"
-          </p>
-        ) : taqueria.especialidad ? (
-          <p className="text-sm sm:text-base italic mb-4 leading-snug" style={{ color: "var(--text-secondary)" }}>
-            "{taqueria.especialidad}"
-          </p>
-        ) : null}
-        <div className="flex items-center justify-between">
-          <span className="text-sm sm:text-base underline">VER DETALLES</span>
-          <span className="px-3 py-1 text-base sm:text-lg font-bold" style={{
-            backgroundColor: "var(--header-bg)",
-            color: "var(--header-text)",
-          }}>
-            {taqueria.calificacionFinal.toFixed(1)}
-          </span>
-        </div>
-      </div>
-    );
+    // Comportamiento normal: abrir modal
+    setSelectedTaqueria(taqueria);
+    setModalOpen(true);
+    if (taqueria._id) {
+      tacoEvents.viewTaqueriaDetail({
+        id: taqueria._id,
+        nombre: taqueria.nombre,
+        calificacion: taqueria.calificacionFinal,
+        alcaldia: taqueria.alcaldia || "",
+      });
+    }
   }
-})}
+}}
+              >
+                {/* Agregar badge si tiene página */}
+                {taqueria.hasDetailPage && (
+                 <div className="badge-reseña">
+                   <ArrowUpRight className="badge-icon" />
+                   <span>Reseña</span>
+                 </div>
+                )}
+                
+                <h2 className="text-lg sm:text-xl font-bold uppercase mb-1">
+                  {taqueria.nombre}
+                </h2>
+                {/* Alcaldía debajo del nombre */}
+                {taqueria.alcaldia && (
+                  <p
+                    className="text-xs sm:text-sm mb-3"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    {taqueria.alcaldia}
+                  </p>
+                )}
+                {/* Tagline random o especialidad */}
+                {taqueria.taglines && taqueria.taglines.length > 0 ? (
+                  <p
+                    className="text-sm sm:text-base italic mb-4 leading-snug"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    "
+                    {taqueria._id && randomIndexes[taqueria._id] !== undefined
+                      ? taqueria.taglines[randomIndexes[taqueria._id]]
+                      : taqueria.taglines[0]}
+                    "
+                  </p>
+                ) : taqueria.especialidad ? (
+                  <p
+                    className="text-sm sm:text-base italic mb-4 leading-snug"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
+                    "{taqueria.especialidad}"
+                  </p>
+                ) : null}
+
+                <div className="flex items-center justify-between">
+                  <span className="text-sm sm:text-base underline">
+                    VER DETALLES
+                  </span>
+                  <span
+                    className="px-3 py-1 text-base sm:text-lg font-bold"
+                    style={{
+                      backgroundColor: "var(--header-bg)",
+                      color: "var(--header-text)",
+                    }}
+                  >
+                    {taqueria.calificacionFinal.toFixed(1)}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+                                                            
+          </div>
+        )}
 
         {/* Botones de cargar más / volver arriba - SOLO SE MUESTRAN SI HAY RESULTADOS */}
         {!loading && !error && filteredTaquerias.length > 0 && (
