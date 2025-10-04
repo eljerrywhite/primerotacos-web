@@ -37,10 +37,10 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ taqueriaNombre }) => {
             Inicio
           </a>
         </li>
-        <li className="flex items-center gap-2">
-          <ChevronRight className="h-3.5 w-3.5" style={{ color: 'var(--text-primary)' }} />
+        <li className="flex items-center gap-2 min-w-0">
+          <ChevronRight className="h-3.5 w-3.5 flex-shrink-0" style={{ color: 'var(--text-primary)' }} />
           <span 
-            className="text-sm"
+            className="text-sm truncate"
             style={{ color: 'var(--text-primary)' }}
             aria-current="page"
           >
