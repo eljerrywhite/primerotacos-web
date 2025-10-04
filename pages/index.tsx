@@ -718,8 +718,7 @@ const HomePage = () => {
               {filteredTaquerias.slice(0, displayLimit).map((taqueria) => {
               // Para debug: ver qué taquerías tienen hasDetailPage
               console.log(taqueria.nombre, 'hasDetailPage:', taqueria.hasDetailPage);
-               return (
-              
+              return (
               <div
                 key={taqueria._id}
                 className="relative border-b-2 pb-5 px-4 sm:px-5 pt-5 transition-colors duration-200 cursor-pointer animate-fadeIn"
