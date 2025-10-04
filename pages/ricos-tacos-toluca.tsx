@@ -116,8 +116,7 @@ const RicosTacosToluca = () => {
       >
         {/* Hero Section */}
         <section className="relative h-[60vh] md:h-[70vh] min-h-[400px] md:min-h-[500px] overflow-hidden flex items-center justify-start">
-          {/* Breadcrumb */}
-          <Breadcrumb taqueriaNombre="Ricos Tacos Toluca" />
+          
           {/* Background Video */}
           {shouldLoadVideo ? (
             <video
@@ -191,6 +190,9 @@ const RicosTacosToluca = () => {
             </div>
           </div>
         </section>
+
+        {/* Breadcrumb */}
+        <Breadcrumb taqueriaNombre="Ricos Tacos Toluca" />
 
         {/* Main Content */}
         <main className="container mx-auto py-8 md:py-16 max-w-6xl px-6 md:px-10">

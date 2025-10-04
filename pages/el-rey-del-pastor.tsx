@@ -115,9 +115,6 @@ const ElReyDelPastor = () => {
       >
         {/* Hero Section */}
         <section className="relative h-[60vh] md:h-[70vh] min-h-[400px] md:min-h-[500px] overflow-hidden flex items-center justify-start">
-          {/* Breadcrumb */}
-          <Breadcrumb taqueriaNombre="El Rey del Pastor" />
-          {/* Background Video */}
           {/* Background Video */}
           {shouldLoadVideo ? (
             <video
@@ -191,246 +188,253 @@ const ElReyDelPastor = () => {
           </div>
         </section>
 
-        {/* Main Content */}
-        <main className="container mx-auto py-8 md:py-16 max-w-6xl px-6 md:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-            {/* Left Column - Editorial Content */}
-            <div className="space-y-8">
-              {/* Quote Section */}
-              <section>
-                <p
-                  className="text-xl md:text-2xl italic leading-relaxed mb-6"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  "{taqueriaData.descripcion.quote}"
-                </p>
-                <div
-                  className="text-center text-2xl tracking-widest"
-                  style={{ color: "var(--text-secondary)" }}
-                >
-                  🌮 🌮 🌮
-                </div>
-              </section>
+        {/* Breadcrumb */}
+        <Breadcrumb taqueriaNombre="El Rey del Pastor" />
 
-              {/* Description Section */}
-              <section className="space-y-4">
-                {taqueriaData.descripcion.paragraphs.map((paragraph, index) => (
+        {/* Información Principal */}
+        <section className="relative z-10 py-4 md:py-6"
+ style={{ backgroundColor: "var(--bg-primary)" }}
+        >
+          <div className="container mx-auto max-w-6xl px-6 md:px-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+              {/* Left Column - Editorial Content */}
+              <div className="space-y-8">
+                {/* Quote Section */}
+                <section>
                   <p
-                    key={index}
-                    className="text-base md:text-lg leading-relaxed"
+                    className="text-xl md:text-2xl italic leading-relaxed mb-6"
                     style={{ color: "var(--text-primary)" }}
                   >
-                    {index === 0 ? (
-                      <>
-                        Si andas por la Guerrero, justo saliendo del Metro o
-                        Metrobús, lánzate sin pensarla a{" "}
-                        <a
-                          href={taqueriaData.ubicacion}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="underline hover:opacity-70 transition-opacity"
-                          style={{ color: "var(--text-primary)" }}
-                        >
-                          El Rey del Pastor
-                        </a>{" "}
-                        —una taquería con más de medio siglo de historia, donde
-                        dos generaciones han perfeccionado el taco al punto de
-                        leyenda.
-                      </>
-                    ) : (
-                      paragraph
-                    )}
+                    "{taqueriaData.descripcion.quote}"
                   </p>
-                ))}
-              </section>
-            </div>
-
-            {/* Right Column - Details Card */}
-            <div className="lg:sticky lg:top-8">
-              <div
-                className="border-2 p-6 md:p-8"
-                style={{
-                  backgroundColor: "var(--card-bg)",
-                  borderColor: "var(--card-border)",
-                }}
-              >
-                {/* Main Rating */}
-                <div className="text-center mb-8">
                   <div
-                    className="text-5xl md:text-6xl font-bold"
-                    style={{ color: "var(--text-primary)" }}
-                  >
-                    {taqueriaData.calificacionFinal.toFixed(1)}
-                  </div>
-                  <p
-                    className="text-sm mt-2"
+                    className="text-center text-2xl tracking-widest"
                     style={{ color: "var(--text-secondary)" }}
                   >
-                    Promedio ponderado
-                  </p>
-                </div>
+                    🌮 🌮 🌮
+                  </div>
+                </section>
 
-                {/* Ratings Breakdown */}
+                {/* Description Section */}
+                <section className="space-y-4">
+                  {taqueriaData.descripcion.paragraphs.map((paragraph, index) => (
+                    <p
+                      key={index}
+                      className="text-base md:text-lg leading-relaxed"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      {index === 0 ? (
+                        <>
+                          Si andas por la Guerrero, justo saliendo del Metro o
+                          Metrobús, lánzate sin pensarla a{" "}
+                          <a
+                            href={taqueriaData.ubicacion}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline hover:opacity-70 transition-opacity"
+                            style={{ color: "var(--text-primary)" }}
+                          >
+                            El Rey del Pastor
+                          </a>{" "}
+                          —una taquería con más de medio siglo de historia, donde
+                          dos generaciones han perfeccionado el taco al punto de
+                          leyenda.
+                        </>
+                      ) : (
+                        paragraph
+                      )}
+                    </p>
+                  ))}
+                </section>
+              </div>
+
+              {/* Right Column - Details Card */}
+              <div className="lg:sticky lg:top-8">
                 <div
-                  className="grid grid-cols-3 gap-4 pb-6 mb-6 border-b"
-                  style={{ borderColor: "var(--card-border)" }}
+                  className="border-2 p-6 md:p-8"
+                  style={{
+                    backgroundColor: "var(--card-bg)",
+                    borderColor: "var(--card-border)",
+                  }}
                 >
-                  <div className="text-center">
+                  {/* Main Rating */}
+                  <div className="text-center mb-8">
                     <div
-                      className="text-2xl md:text-3xl font-bold"
+                      className="text-5xl md:text-6xl font-bold"
                       style={{ color: "var(--text-primary)" }}
                     >
-                      {taqueriaData.calidad.toFixed(1)}
+                      {taqueriaData.calificacionFinal.toFixed(1)}
                     </div>
-                    <div
-                      className="text-xs md:text-sm"
+                    <p
+                      className="text-sm mt-2"
                       style={{ color: "var(--text-secondary)" }}
                     >
-                      Calidad
-                    </div>
+                      Promedio ponderado
+                    </p>
                   </div>
-                  <div className="text-center">
-                    <div
-                      className="text-2xl md:text-3xl font-bold"
-                      style={{ color: "var(--text-primary)" }}
-                    >
-                      {taqueriaData.servicio.toFixed(1)}
-                    </div>
-                    <div
-                      className="text-xs md:text-sm"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      Servicio
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div
-                      className="text-2xl md:text-3xl font-bold"
-                      style={{ color: "var(--text-primary)" }}
-                    >
-                      {taqueriaData.lugar.toFixed(1)}
-                    </div>
-                    <div
-                      className="text-xs md:text-sm"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      Lugar
-                    </div>
-                  </div>
-                </div>
 
-                {/* Info Section */}
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-start gap-3">
-                    <MapPin
-                      className="h-5 w-5 mt-0.5 flex-shrink-0"
-                      style={{ color: "var(--text-secondary)" }}
-                    />
+                  {/* Ratings Breakdown */}
+                  <div
+                    className="grid grid-cols-3 gap-4 pb-6 mb-6 border-b"
+                    style={{ borderColor: "var(--card-border)" }}
+                  >
+                    <div className="text-center">
+                      <div
+                        className="text-2xl md:text-3xl font-bold"
+                        style={{ color: "var(--text-primary)" }}
+                      >
+                        {taqueriaData.calidad.toFixed(1)}
+                      </div>
+                      <div
+                        className="text-xs md:text-sm"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        Calidad
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <div
+                        className="text-2xl md:text-3xl font-bold"
+                        style={{ color: "var(--text-primary)" }}
+                      >
+                        {taqueriaData.servicio.toFixed(1)}
+                      </div>
+                      <div
+                        className="text-xs md:text-sm"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        Servicio
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <div
+                        className="text-2xl md:text-3xl font-bold"
+                        style={{ color: "var(--text-primary)" }}
+                      >
+                        {taqueriaData.lugar.toFixed(1)}
+                      </div>
+                      <div
+                        className="text-xs md:text-sm"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        Lugar
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Info Section */}
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-start gap-3">
+                      <MapPin
+                        className="h-5 w-5 mt-0.5 flex-shrink-0"
+                        style={{ color: "var(--text-secondary)" }}
+                      />
+                      <a
+                        href={taqueriaData.ubicacion}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm leading-relaxed underline hover:opacity-70 transition-opacity"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        {taqueriaData.direccion}
+                      </a>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <Globe
+                        className="h-5 w-5 mt-0.5 flex-shrink-0"
+                        style={{ color: "var(--text-secondary)" }}
+                      />
+                      <a
+                        href="https://www.facebook.com/people/El-Rey-del-Pastor/100062337296268/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm underline hover:opacity-70 transition-opacity"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        El Rey del Pastor en Facebook
+                      </a>
+                    </div>
+
+                    {/* Precios */}
+                    <div className="flex items-start gap-3">
+                      <DollarSign
+                        className="h-5 w-5 mt-0.5 flex-shrink-0"
+                        style={{ color: "var(--text-secondary)" }}
+                      />
+                      <span
+                        className="text-sm"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        Tacos: $11-12 | Lengua: $20
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Buttons */}
+                  <div className="flex gap-3">
                     <a
                       href={taqueriaData.ubicacion}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm leading-relaxed underline hover:opacity-70 transition-opacity"
-                      style={{ color: "var(--text-secondary)" }}
+                      className="flex-1 text-center py-3 text-sm md:text-base uppercase font-medium transition-all"
+                      style={{
+                        backgroundColor: "var(--header-bg)",
+                        color: "var(--header-text)",
+                        border: "2px solid var(--header-bg)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.opacity = "0.8";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.opacity = "1";
+                      }}
                     >
-                      {taqueriaData.direccion}
+                      Ver mapa
                     </a>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <Globe
-                      className="h-5 w-5 mt-0.5 flex-shrink-0"
-                      style={{ color: "var(--text-secondary)" }}
-                    />
                     <a
-                      href="https://www.facebook.com/people/El-Rey-del-Pastor/100062337296268/"
+                      href="https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm underline hover:opacity-70 transition-opacity"
-                      style={{ color: "var(--text-secondary)" }}
+                      className="flex-1 border-2 py-3 text-sm md:text-base text-center uppercase font-medium transition-all"
+                      style={{
+                        borderColor: "var(--btn-border)",
+                        backgroundColor: "var(--btn-bg)",
+                        color: "var(--btn-text)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor =
+                          "var(--btn-hover-bg)";
+                        e.currentTarget.style.color = "var(--btn-hover-text)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = "var(--btn-bg)";
+                        e.currentTarget.style.color = "var(--btn-text)";
+                      }}
                     >
-                      El Rey del Pastor en Facebook
+                      Calificar
                     </a>
                   </div>
+                </div>
 
-                  {/* Precios */}
-                  <div className="flex items-start gap-3">
-                    <DollarSign
-                      className="h-5 w-5 mt-0.5 flex-shrink-0"
-                      style={{ color: "var(--text-secondary)" }}
-                    />
-                    <span
-                      className="text-sm"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      Tacos: $11-12 | Lengua: $20
-                    </span>
+                {/* Tags Section - Outside card */}
+                <div className="mt-12">
+                  <div className="flex flex-wrap gap-3 justify-center">
+                    {taqueriaData.hashtags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="text-sm"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                </div>
-
-                {/* Buttons */}
-                <div className="flex gap-3">
-                  <a
-                    href={taqueriaData.ubicacion}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 text-center py-3 text-sm md:text-base uppercase font-medium transition-all"
-                    style={{
-                      backgroundColor: "var(--header-bg)",
-                      color: "var(--header-text)",
-                      border: "2px solid var(--header-bg)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.opacity = "0.8";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.opacity = "1";
-                    }}
-                  >
-                    Ver mapa
-                  </a>
-                  <a
-                    href="https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 border-2 py-3 text-sm md:text-base text-center uppercase font-medium transition-all"
-                    style={{
-                      borderColor: "var(--btn-border)",
-                      backgroundColor: "var(--btn-bg)",
-                      color: "var(--btn-text)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor =
-                        "var(--btn-hover-bg)";
-                      e.currentTarget.style.color = "var(--btn-hover-text)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "var(--btn-bg)";
-                      e.currentTarget.style.color = "var(--btn-text)";
-                    }}
-                  >
-                    Calificar
-                  </a>
-                </div>
-              </div>
-
-              {/* Tags Section - Outside card */}
-              <div className="mt-12">
-                <div className="flex flex-wrap gap-3 justify-center">
-                  {taqueriaData.hashtags.map((tag, index) => (
-                    <span
-                      key={index}
-                      className="text-sm"
-                      style={{ color: "var(--text-secondary)" }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
                 </div>
               </div>
             </div>
           </div>
-        </main>
+        </section>
 
         {/* Promotional Section */}
         <section className="py-12 text-center">
