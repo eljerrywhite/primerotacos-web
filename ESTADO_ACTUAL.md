@@ -1,5 +1,5 @@
 # ESTADO ACTUAL DEL PROYECTO
-*Actualizado: 12 de Septiembre 2025*
+*Actualizado: 21 de Enero 2025*
 
 ## 🚀 Sistema en Producción
 - **Frontend:** https://primerotacos.mx ✅
@@ -24,6 +24,7 @@
 - ✅ **SEO completo** con meta tags y sitemap
 - ✅ **Headers de seguridad** (calificación A)
 - ✅ **Páginas individuales de taquerías** - El Rey del Pastor y Ricos Tacos Toluca
+- ✅ **Sistema de enlaces a páginas individuales** - cards clickeables con detección automática
 - ✅ **Videos de fondo hero** en páginas individuales con lazy loading optimizado
 - ✅ **SEO Schema.org** completo para páginas de taquerías (Restaurant markup)
 - ✅ **Información detallada** - precios específicos, redes sociales, direcciones completas
@@ -40,7 +41,8 @@
 - Google Analytics warnings (cookies third-party) - No crítico
 - Funciona perfectamente en todos los browsers principales
 
-## 🆕 Últimas Actualizaciones (Sept 12, 2025)
+## 🆕 Últimas Actualizaciones (Enero 21, 2025)
+- **Sistema de enlaces:** Cards clickeables con detección automática de páginas individuales
 - **Páginas individuales:** El Rey del Pastor y Ricos Tacos Toluca completamente funcionales
 - **Video backgrounds:** Implementados con posters de respaldo y lazy loading
 - **SEO avanzado:** Schema.org Restaurant markup para mejor posicionamiento

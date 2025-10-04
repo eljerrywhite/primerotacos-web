@@ -78,6 +78,8 @@
 - ✅ **Sistema de variables CSS**: Temas centralizados y mantenibles
 - ✅ **Focus states accesibles**: Consistentes en todos los navegadores
 - ✅ **Páginas individuales**: El Rey del Pastor y Ricos Tacos Toluca con template completo
+- ✅ **Sistema de enlaces a páginas**: Cards clickeables con detección automática (hasDetailPage)
+- ✅ **Navegación intuitiva**: Click en toda la card lleva a página de detalle cuando existe
 - ✅ **Videos hero optimizados**: Lazy loading, posters de respaldo, autoplay responsivo
 - ✅ **Schema.org completo**: Restaurant markup para SEO avanzado
 - ✅ **Contenido editorial**: Historias auténticas, especialidades, precios detallados
@@ -489,4 +491,4 @@ npm start # localhost:3000
 
 *"Hecho con 🌮 en la CDMX"*
 
-*Última actualización: 12 de Septiembre 2025 - Páginas individuales con videos y SEO avanzado*
+*Última actualización: 21 de Enero 2025 - Sistema de enlaces a páginas individuales y SEO avanzado*

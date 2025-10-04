@@ -1,7 +1,7 @@
 # CHANGELOG
 *Historial cronológico de todas las actualizaciones*
 
-## [1.4.0] - 2025-09-12
+## [1.4.0] - 2025-01-21
 ### 🆕 PÁGINAS INDIVIDUALES DE TAQUERÍAS
 - **El Rey del Pastor**
   - Página completa con video hero background optimizado
@@ -14,6 +14,13 @@
   - Contenido editorial sobre familia viajando desde Toluca diariamente
   - Chorizo tamarindo y campechano como protagonistas
   - Integración completa con Instagram oficial
+
+### 🔗 FUNCIONALIDAD DE ENLACES A PÁGINAS INDIVIDUALES
+- **Cards clickeables:** Taquerías con páginas de detalle tienen cards completamente clickeables
+- **Detección automática:** Sistema que verifica si existe página individual (hasDetailPage)
+- **Hover effect mejorado:** Cursor pointer y feedback visual en cards con enlace
+- **Navegación fluida:** Click en cualquier parte de la card lleva a página de detalle
+- **Compatibilidad:** Taquerías sin página individual mantienen funcionalidad normal
 
 ### 🎥 OPTIMIZACIÓN DE VIDEOS
 - **Lazy loading:** Videos cargan después de 500ms para mejor performance

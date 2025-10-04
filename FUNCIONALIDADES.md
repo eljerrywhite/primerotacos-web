@@ -58,6 +58,14 @@
 - **EmptyState:** Estados vacíos con CTAs estratégicos
 - **PrimeroTacosLogo:** Componente adaptativo
 
+### **Sistema de Enlaces a Páginas Individuales**
+- **Detección automática:** Propiedad `hasDetailPage` en cada taquería
+- **Cards clickeables:** Toda la card es clickeable cuando existe página de detalle
+- **Navegación intuitiva:** Click en cualquier parte de la card (excepto botones específicos)
+- **Debug mode:** Console logs para verificar qué taquerías tienen páginas
+- **Cursor pointer:** Feedback visual inmediato en hover
+- **Compatibilidad:** Sistema retrocompatible con taquerías sin página individual
+
 ## 📱 Responsive y Mobile
 
 ### **Mobile-First**
