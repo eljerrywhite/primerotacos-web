@@ -114,11 +114,10 @@ const RicosTacosToluca = () => {
         className="min-h-screen"
         style={{ backgroundColor: "var(--bg-primary)" }}
       >
-        {/* Breadcrumb */}
-        <Breadcrumb taqueriaNombre="Ricos Tacos Toluca" />
-        
         {/* Hero Section */}
         <section className="relative h-[60vh] md:h-[70vh] min-h-[400px] md:min-h-[500px] overflow-hidden flex items-center justify-start">
+          {/* Breadcrumb */}
+          <Breadcrumb taqueriaNombre="Ricos Tacos Toluca" />
           {/* Background Video */}
           {shouldLoadVideo ? (
             <video

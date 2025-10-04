@@ -113,11 +113,10 @@ const ElReyDelPastor = () => {
         className="min-h-screen"
         style={{ backgroundColor: "var(--bg-primary)" }}
       >
-        {/* Breadcrumb */}
-        <Breadcrumb taqueriaNombre="El Rey del Pastor" />
-        
         {/* Hero Section */}
         <section className="relative h-[60vh] md:h-[70vh] min-h-[400px] md:min-h-[500px] overflow-hidden flex items-center justify-start">
+          {/* Breadcrumb */}
+          <Breadcrumb taqueriaNombre="El Rey del Pastor" />
           {/* Background Video */}
           {/* Background Video */}
           {shouldLoadVideo ? (
