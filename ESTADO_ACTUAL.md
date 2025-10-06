@@ -43,7 +43,7 @@
 
 ## 🆕 Últimas Actualizaciones (Enero 21, 2025)
 - **Sistema de enlaces:** Cards clickeables con detección automática de páginas individuales
-- **Páginas individuales:** El Rey del Pastor y Ricos Tacos Toluca completamente funcionales
+- **Páginas individuales:** El Rey del Pastor, Ricos Tacos Toluca y La Bonvi completamente funcionales
 - **Video backgrounds:** Implementados con posters de respaldo y lazy loading
 - **SEO avanzado:** Schema.org Restaurant markup para mejor posicionamiento
 - **Contenido editorial:** Historias detalladas, especialidades y precios específicos

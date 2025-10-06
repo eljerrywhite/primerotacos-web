@@ -8,12 +8,17 @@
   - Historia detallada desde 1974, especialidades únicas (pastor sin piña)
   - Información completa: precios específicos, ubicación, redes sociales
   - SEO Schema.org Restaurant markup para mejor posicionamiento
-  
+
 - **Ricos Tacos Toluca**
   - Página destacando distinción Michelin y especialidades únicas
   - Contenido editorial sobre familia viajando desde Toluca diariamente
   - Chorizo tamarindo y campechano como protagonistas
   - Integración completa con Instagram oficial
+
+- **La Bonvi**
+  - Página individual con video hero y contenido editorial
+  - Especialidades: New York, costilla, campechano
+  - Instagram integrado
 
 ### 🔗 FUNCIONALIDAD DE ENLACES A PÁGINAS INDIVIDUALES
 - **Cards clickeables:** Taquerías con páginas de detalle tienen cards completamente clickeables

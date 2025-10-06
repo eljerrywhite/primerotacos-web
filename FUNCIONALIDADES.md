@@ -153,6 +153,12 @@
 - **Instagram integrado:** Link directo a @ricostacostoluca_
 - **Video hero optimizado:** Lazy loading y poster de respaldo
 
+### **La Bonvi** (desde 2024)
+- Taquería fifí con especialidades únicas: New York, costilla, campechano
+- Video background con lazy loading y poster de respaldo
+- Precios específicos: Desde $89 a $145
+- Instagram: @labonvi.mx
+
 ### **Características Compartidas**
 - **Lazy loading videos:** Cargan después de 500ms para mejor performance
 - **SEO completo:** Meta tags, Open Graph, Twitter Cards individuales
