@@ -174,6 +174,36 @@ export const tacoEvents = {
   },
 };
 
+/**
+ * Función para registrar vistas de páginas individuales de taquerías
+ */
+export const trackPageView = (pageName: string, pageSlug: string) => {
+  trackEvent("page_view", {
+    page_name: pageName,
+    page_slug: pageSlug,
+    page_type: "taqueria_detail",
+  });
+};
+
+/**
+ * Función para registrar reproducción de videos
+ */
+export const trackVideoPlay = (taqueriaName: string) => {
+  trackEvent("video_play", {
+    taqueria_name: taqueriaName,
+  });
+};
+
+/**
+ * Función para registrar clics en CTAs
+ */
+export const trackCTAClick = (ctaText: string, taqueriaName: string) => {
+  trackEvent("cta_click", {
+    cta_text: ctaText,
+    taqueria_name: taqueriaName,
+  });
+};
+
 // Declaración de tipos para window.gtag
 declare global {
   interface Window {
