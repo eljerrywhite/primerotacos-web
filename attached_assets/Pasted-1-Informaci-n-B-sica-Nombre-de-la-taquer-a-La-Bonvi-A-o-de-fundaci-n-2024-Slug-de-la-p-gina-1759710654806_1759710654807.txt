@@ -1,0 +1,37 @@
+1. Información Básica
+* Nombre de la taquería: La Bonvi
+* Año de fundación: 2024
+* Slug de la página: la-bonvi
+2. Archivos Multimedia
+* Nombre del video: pr-bonvi.mp4
+* Nombre del poster/imagen: poster-bonvi.jpg
+3. Calificaciones
+* Calificación Final: (ejemplo: 4.6)
+* Calidad: 4
+* Servicio: 5
+* Lugar: 4
+4. Ubicación
+* Dirección completa:
+* URL de Google Maps:
+* Colonia/Alcaldía:
+5. Contenido Editorial
+Hero Section:
+* Tagline/pregunta provocadora: Tacos de primera, sin la experiencia callejera.
+Quote Principal:
+Sí, son tacos fifis, pero están muy chingones. Obligados: el de New York, Costilla y campechano.
+3 Párrafos de Historia/Descripción:
+* Párrafo 1: A las taquerías fifís uno entra con cierta desconfianza. Nunca es claro si hay más interés en el diseño de los platos y los asientos que en el sabor del taco, y eso genera duda. A pesar de eso, se decidió comer en La Bonvi (hipervinculo: https://maps.app.goo.gl/FLy4eRwVmWcaYw3C8) esperando una decepción y terminó callando bocas. La supuesta taquería más cara de la ciudad está muy pinche rica. 
+* Párrafo 2: Tiene gran servicio, pero mejores tacos. No se vayan sin pedir un campechano, una tostada de aguacate, otro de asada con tocino y una joyita: el de New York. Con todo y que está en el corazón fresa de la ciudad, hay buen ambiente, el lugar está lindo y, como toda taquería que se digne de serlo, el taco llega rápido. No se pierdan la experiencia.
+6. Detalles Adicionales
+* Instagram: @labonvi.mx (https://www.instagram.com/labonvi.mx/)
+* Rango de precios: Desde $89 a $145
+* Especialidades destacadas: campechano, tostada de aguacate, asada con tocino, New York
+7. Hashtags
+* #PrimeroTacos, #LaBonvi, #Tacofifí, #TacosGourmet, #FodieCDMX, #TacosEnLomas
+8. SEO Metadata
+* Meta Title: Tacos La Bonvi | Los tacos fifís que sí valen cada mordida
+* Meta Description: Tacos fifís con sabor real: prueba el de New York, costilla y campechano. Servicio top, lugar bonito y sabor que calla bocas.
+* OG Title: La Bonvi: los tacos fifís más ricos de la CDMX
+* OG Description: Sí, son tacos fifís, pero están muy chingones. Obligados: el de New York, costilla y campechano. Un lujo taquero que sorprende hasta al más escéptico.
+* OG Image Alt text: Plato de tacos de costilla y New York en La Bonvi, CDMX – tacos fifís con sabor real.
+* Snippet Discover / Card (2–3 líneas con punch): Tacos La Bonvi: los fifís que callan bocas. 🌮 Prueba el de New York, el campechano y el de costilla —sabores top, servicio de lujo y ambiente con flow.
