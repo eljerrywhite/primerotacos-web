@@ -443,7 +443,7 @@ export default function LaBonvi() {
                   <div className="font-semibold mb-1" style={{ color: "var(--text-primary)" }}>
                     Precios
                   </div>
-                  <div style={{ color: "var(--text-secondary)" }}>{taqueriaData.precios}</div>
+                  <div style={{ color: "var(--text-secondary)" }}>Taco: {taqueriaData.precios}</div>
                 </div>
               </div>
             </div>
