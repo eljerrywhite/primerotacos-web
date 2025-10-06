@@ -14,5 +14,6 @@ export interface Taqueria {
   alcaldia?: string;        
   fecha?: string | Date;
   hasDetailPage?: boolean;
-  pageSlug?: string;         
+  pageSlug?: string;
+  snippet?: string;
 }
