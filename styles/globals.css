@@ -656,7 +656,7 @@ input::placeholder {
   margin-bottom: 12px;
   border-radius: 2px;
   line-height: 1;
-  background: #f3f3f3;
+  background: #FEF3C7;
   color: #000;
 }
 
@@ -672,8 +672,8 @@ input::placeholder {
 
 @media (prefers-color-scheme: dark) {
   .badge-reseña {
-    background: #2a2a2a;
-    color: #e8e8e8;
+    background: #FDE68A;
+    color: #000;
   }
 }
 /* En pantallas muy pequeñas */
