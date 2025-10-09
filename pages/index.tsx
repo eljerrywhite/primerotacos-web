@@ -417,7 +417,7 @@ const HomePage = () => {
             </button>
 
             {/* Filtros desktop */}
-            <div className="hidden md:flex gap-4 mt-4">
+            <div className="hidden md:flex gap-4 mt-4 items-end">
               <div className="flex-1">
                 <label
                   htmlFor="sort-order-desktop"
@@ -529,28 +529,23 @@ const HomePage = () => {
                   />
                 </div>
               </div>
-              <div className="flex-1">
-                <label className="text-sm uppercase mb-1 block">
-                  &nbsp;
-                </label>
-                <div className="flex items-center gap-3 px-4 py-3">
-                  <button
-                    onClick={() => setShowOnlyResenas(!showOnlyResenas)}
-                    className="toggle-switch focus:outline-none"
+              <div className="flex items-center gap-3 px-4 py-3">
+                <button
+                  onClick={() => setShowOnlyResenas(!showOnlyResenas)}
+                  className="toggle-switch focus:outline-none"
+                  style={{
+                    backgroundColor: showOnlyResenas ? "#FDE68A" : "#ccc",
+                  }}
+                  aria-label="Toggle taquerías con reseña"
+                >
+                  <span
+                    className="toggle-slider"
                     style={{
-                      backgroundColor: showOnlyResenas ? "#FDE68A" : "#ccc",
+                      transform: showOnlyResenas ? "translateX(20px)" : "translateX(0)",
                     }}
-                    aria-label="Toggle taquerías con reseña"
-                  >
-                    <span
-                      className="toggle-slider"
-                      style={{
-                        transform: showOnlyResenas ? "translateX(20px)" : "translateX(0)",
-                      }}
-                    />
-                  </button>
-                  <span className="text-base">Reseña</span>
-                </div>
+                  />
+                </button>
+                <span className="text-base whitespace-nowrap">Reseña</span>
               </div>
             </div>
 
