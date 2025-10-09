@@ -177,18 +177,24 @@
 primerotacos-web/
 ├── components/
 │   ├── Breadcrumb.tsx            # Componente de navegación breadcrumb
+│   ├── EmptyState.tsx            # Componente para estados vacíos
 │   ├── PrimeroTacosLogo.tsx      # Componente del logo
-│   └── RotatingTagline.tsx       # Componente de taglines rotatorios
+│   ├── RotatingTagline.tsx       # Componente de taglines rotatorios
+│   └── TaqueriaSkeleton.tsx      # Skeleton loader con efecto shimmer
 ├── lib/
-│   └── analytics.ts              # Funciones de Google Analytics
+│   ├── analytics.ts              # Funciones de Google Analytics
+│   └── mongodb.ts                # Conexión a MongoDB
 ├── pages/
 │   ├── _app.tsx                  # App wrapper de Next.js
-│   ├── _document.tsx             # Documento HTML personalizado
+│   ├── _document.tsx             # Documento HTML personalizado con GA4
+│   ├── _error.tsx                # Página de error personalizada (404/500)
 │   ├── index.tsx                 # Página principal
 │   ├── el-rey-del-pastor.tsx     # Página individual - El Rey del Pastor
+│   ├── la-bonvi.tsx              # Página individual - La Bonvi
 │   ├── ricos-tacos-toluca.tsx    # Página individual - Ricos Tacos Toluca
 │   └── api/
-│       └── taquerias.js          # API route para datos
+│       ├── hello.ts              # API route de ejemplo
+│       └── taquerias.ts          # API route para datos de taquerías
 ├── public/                       # Assets estáticos (ver abajo)
 ├── styles/
 │   ├── globals.css               # Estilos globales y animaciones
@@ -196,27 +202,39 @@ primerotacos-web/
 ├── types/
 │   └── index.ts                  # TypeScript types (Taqueria, etc)
 ├── .env.local                    # Variables de entorno
-├── next.config.js                # Configuración de Next.js
+├── next.config.js                # Configuración de Next.js con headers de seguridad
 ├── package.json                  # Dependencias
-├── README.md                     # Documentación
+├── README.md                     # Documentación del proyecto
+├── PROYECTO_COMPLETO.md          # Documentación completa del proyecto
+├── FUNCIONALIDADES.md            # Catálogo de funcionalidades
+├── CHANGELOG.md                  # Historial de cambios
+├── ESTADO_ACTUAL.md              # Estado actual del proyecto
 └── tsconfig.json                 # Configuración TypeScript
 ```
 ### Archivos SEO y Assets en public/
 ```
 public/
+├── .well-known/
+│   └── security.txt             # Información de seguridad
+├── images/
+│   ├── poster-bonvi.jpg         # Poster para video La Bonvi
+│   ├── poster-rey.jpg           # Poster para video El Rey del Pastor
+│   └── poster-ricos.jpg         # Poster para video Ricos Tacos Toluca
+├── videos/
+│   ├── pr-bonvi.mp4             # Video hero La Bonvi
+│   ├── pr-rey_del_pastor-final.mp4  # Video hero El Rey del Pastor
+│   └── pr-ricos_tacos_toluca.mp4    # Video hero Ricos Tacos Toluca
 ├── android-chrome-192x192.png   # Favicon Android grande
 ├── android-chrome-512x512.png   # Favicon Android extra grande
 ├── apple-touch-icon.png         # Icono para dispositivos Apple
-├── bg-pattern.png              # Pattern de fondo
-├── favicon-16x16.png           # Favicon pequeño
-├── favicon-32x32.png           # Favicon estándar
-├── favicon.ico                 # Favicon principal
-├── og-image.png               # Imagen Open Graph
-├── site.webmanifest           # Manifest PWA
-├── sitemap.xml                # Mapa del sitio
-├── robots.txt                 # Directivas para bots
-└── .well-known/
-└── security.txt           # Información de seguridad
+├── bg-pattern.png               # Pattern de fondo
+├── favicon-16x16.png            # Favicon pequeño
+├── favicon-32x32.png            # Favicon estándar
+├── favicon.ico                  # Favicon principal
+├── og-image.png                 # Imagen Open Graph
+├── site.webmanifest             # Manifest PWA
+├── sitemap.xml                  # Mapa del sitio
+└── robots.txt                   # Directivas para bots
 ```
 ### Backend API (repositorio separado)
 ```
