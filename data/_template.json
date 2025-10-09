@@ -1,0 +1,57 @@
+{
+  "_id": "<slug>",
+  "slug": "<slug>",
+  "nombre": "<Nombre de la taquería>",
+  "desde": "YYYY",
+  "calidad": 0,
+  "servicio": 0,
+  "lugar": 0,
+  "calificacionFinal": null,
+  "direccion": "<Calle, número, colonia, alcaldía, CP, CDMX>",
+  "ubicacion": "https://maps.app.goo.gl/...",
+  "taglines": [
+    "<frase breve para el hero>"
+  ],
+  "descripcion": {
+    "quote": "<frase fuerte/quote>",
+    "paragraphs": [
+      "<párrafo 1>",
+      "<párrafo 2>"
+    ]
+  },
+  "instagram": "https://www.instagram.com/usuario_o_facebook/",
+  "priceText": "Tacos: $<min>–$<max>",
+  "especialidades": [
+    "<platillo 1>",
+    "<platillo 2>"
+  ],
+  "hashtags": [
+    "#PrimeroTacos",
+    "#<HashtagDeLaTaquería>"
+  ],
+  "openingHours": {
+    "opens": "12:00",
+    "closes": "23:30",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ]
+  },
+  "media": {
+    "video": "/videos/pr-<slug>.mp4",
+    "poster": "/images/poster-<slug>.jpg"
+  },
+  "seo": {
+    "title": "<Meta title para <slug>>",
+    "description": "<Meta description (155–170 chars) con gancho>",
+    "ogTitle": "<OG title para redes>",
+    "ogDescription": "<OG description (2–3 líneas con punch)>",
+    "ogImage": "https://primerotacos.mx/og-image.png",
+    "ogImageAlt": "<Texto alternativo descriptivo de la imagen OG>"
+  }
+}

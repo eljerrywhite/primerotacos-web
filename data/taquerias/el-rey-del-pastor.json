@@ -1,0 +1,37 @@
+{
+  "_id": "el-rey-del-pastor",
+  "slug": "el-rey-del-pastor",
+  "nombre": "El Rey del Pastor",
+  "desde": "1974",
+  "calidad": 5,
+  "servicio": 4,
+  "lugar": 3,
+  "calificacionFinal": 4.6,
+  "direccion": "06300, Eje 1 Nte. 184, Guerrero, Cuauhtémoc, Ciudad de México, CDMX. Afuera del Metro Guerrero",
+  "ubicacion": "https://maps.google.com/?q=El+Rey+del+Pastor+Guerrero+CDMX",
+  "taglines": ["50 años de tacos bien puestos en la Colonia Guerrero"],
+  "descripcion": {
+    "quote": "Pastor directo desde Jalisco: sin piña, sin cebolla, sin cilantro. Puro trompo con carne y cebolla caramelizada al fuego directo. Resultado: un sabor profundo, intenso y sin distracciones.",
+    "paragraphs": [
+      "Si andas por la Guerrero, justo saliendo del Metro o Metrobús, lánzate sin pensarla a El Rey del Pastor —una taquería con más de medio siglo de historia, donde dos generaciones han perfeccionado el taco al punto de leyenda.",
+      "La joya escondida son los tacos de cabeza. Lengua y surtida que se discuten. Te lo decimos sin rodeos: están pa' repetir. Y la salsa ya viene servida en los de pastor —es su sello. Esos tacos ya te los dan listos, bañaditos con una salsa casera estupenda que eleva todo el viaje y aún mejor si te lo bajas con el tepache de la casa.",
+      "Tacos normales a $11-12 pesos, el de lengua a $20 pesos. Comida de barrio, precio de barrio, sabor auténtico. Porque este lugar no es moda, es tradición taquera. Su pastor es distinto a todo lo que has probado."
+    ]
+  },
+  "instagram": "https://www.facebook.com/people/El-Rey-del-Pastor/100062337296268/",
+  "priceText": "Tacos: $11–12 | Lengua: $20",
+  "especialidades": ["pastor sin piña", "tacos de cabeza", "tepache de la casa"],
+  "hashtags": ["#PrimeroTacos", "#ElReyDelPastor", "#50AñosDeTradición", "#PastorSinPiña", "#ColoniaGuerrero", "#TacosDeCabeza"],
+  "media": {
+    "video": "/videos/pr-rey_del_pastor-final.mp4",
+    "poster": "/images/poster-rey.jpg"
+  },
+  "seo": {
+    "title": "El Rey del Pastor: Tacos legendarios en la Colonia Guerrero",
+    "description": "Más de 50 años sirviendo tacos al pastor y de cabeza únicos en CDMX. Sin piña, con sabor brutal. Frente al Metro Guerrero. ¡Pruébalos ya!",
+    "ogTitle": "El Rey del Pastor - 50 años de tradición | Primero Tacos",
+    "ogDescription": "Pastor directo desde Jalisco, sin piña. Tacos de cabeza legendarios. Frente al Metro Guerrero.",
+    "ogImage": "https://primerotacos.mx/og-image.png",
+    "ogImageAlt": "Trompo de pastor de El Rey del Pastor en la Colonia Guerrero."
+  }
+}
