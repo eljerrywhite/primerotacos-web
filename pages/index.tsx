@@ -671,9 +671,6 @@ const HomePage = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm uppercase mb-1 block">
-                    &nbsp;
-                  </label>
                   <div className="flex items-center gap-3 px-4 py-3">
                     <button
                       onClick={() => setShowOnlyResenas(!showOnlyResenas)}
