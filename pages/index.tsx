@@ -529,23 +529,30 @@ const HomePage = () => {
                   />
                 </div>
               </div>
-              <div className="flex items-center gap-3 px-4 py-3">
-                <button
-                  onClick={() => setShowOnlyResenas(!showOnlyResenas)}
-                  className="toggle-switch focus:outline-none"
-                  style={{
-                    backgroundColor: showOnlyResenas ? "#FDE68A" : "#ccc",
-                  }}
-                  aria-label="Toggle taquerías con reseña"
-                >
-                  <span
-                    className="toggle-slider"
+              <div className="flex-1">
+                <label className="text-sm uppercase mb-1 block">
+                  Taquerías con reseña:
+                </label>
+                <div className="flex items-center gap-3 px-4 py-3">
+                  <button
+                    onClick={() => setShowOnlyResenas(!showOnlyResenas)}
+                    className="toggle-switch focus:outline-none focus:ring-2 focus:ring-gray-400"
                     style={{
-                      transform: showOnlyResenas ? "translateX(20px)" : "translateX(0)",
+                      backgroundColor: showOnlyResenas ? "#FDE68A" : "#ccc",
                     }}
-                  />
-                </button>
-                <span className="text-base whitespace-nowrap">Reseña</span>
+                    aria-label="Toggle taquerías con reseña"
+                  >
+                    <span
+                      className="toggle-slider"
+                      style={{
+                        transform: showOnlyResenas ? "translateX(20px)" : "translateX(0)",
+                      }}
+                    />
+                  </button>
+                  <span className="text-base whitespace-nowrap">
+                    {showOnlyResenas ? "Sí" : "No"}
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -666,10 +673,13 @@ const HomePage = () => {
                   </div>
                 </div>
                 <div>
+                  <label className="text-sm uppercase mb-1 block">
+                    Taquerías con reseña:
+                  </label>
                   <div className="flex items-center gap-3 px-4 py-3">
                     <button
                       onClick={() => setShowOnlyResenas(!showOnlyResenas)}
-                      className="toggle-switch focus:outline-none"
+                      className="toggle-switch focus:outline-none focus:ring-2 focus:ring-gray-400"
                       style={{
                         backgroundColor: showOnlyResenas ? "#FDE68A" : "#ccc",
                       }}
@@ -682,7 +692,9 @@ const HomePage = () => {
                         }}
                       />
                     </button>
-                    <span className="text-base">Reseña</span>
+                    <span className="text-base">
+                      {showOnlyResenas ? "Sí" : "No"}
+                    </span>
                   </div>
                 </div>
               </div>

@@ -697,9 +697,14 @@ input::placeholder {
   min-height: 24px;
   max-height: 24px;
   border-radius: 12px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.2s ease;
   flex-shrink: 0;
   display: block;
+}
+
+.toggle-switch:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
 }
 
 .toggle-slider {
