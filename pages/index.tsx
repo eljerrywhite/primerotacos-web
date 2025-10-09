@@ -533,17 +533,24 @@ const HomePage = () => {
                 <label className="text-sm uppercase mb-1 block">
                   Filtrar:
                 </label>
-                <button
-                  onClick={() => setShowOnlyResenas(!showOnlyResenas)}
-                  className="w-full px-4 py-3 text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors text-left"
-                  style={{
-                    backgroundColor: showOnlyResenas ? "#F9D949" : "var(--btn-bg)",
-                    color: showOnlyResenas ? "#000000" : "var(--btn-text)",
-                    borderColor: showOnlyResenas ? "#F9D949" : "var(--btn-border)",
-                  }}
-                >
-                  Taquerías con reseña
-                </button>
+                <div className="flex items-center gap-3 px-4 py-3 border" style={{ borderColor: "var(--btn-border)" }}>
+                  <button
+                    onClick={() => setShowOnlyResenas(!showOnlyResenas)}
+                    className="toggle-switch focus:outline-none focus:ring-2 focus:ring-gray-400"
+                    style={{
+                      backgroundColor: showOnlyResenas ? "#F9D949" : "#ccc",
+                    }}
+                    aria-label="Toggle taquerías con reseña"
+                  >
+                    <span
+                      className="toggle-slider"
+                      style={{
+                        transform: showOnlyResenas ? "translateX(20px)" : "translateX(0)",
+                      }}
+                    />
+                  </button>
+                  <span className="text-base">Taquerías con reseña</span>
+                </div>
               </div>
             </div>
 
@@ -667,17 +674,24 @@ const HomePage = () => {
                   <label className="text-sm uppercase mb-1 block">
                     Filtrar:
                   </label>
-                  <button
-                    onClick={() => setShowOnlyResenas(!showOnlyResenas)}
-                    className="w-full px-4 py-3 text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors text-left"
-                    style={{
-                      backgroundColor: showOnlyResenas ? "#F9D949" : "var(--btn-bg)",
-                      color: showOnlyResenas ? "#000000" : "var(--btn-text)",
-                      borderColor: showOnlyResenas ? "#F9D949" : "var(--btn-border)",
-                    }}
-                  >
-                    Taquerías con reseña
-                  </button>
+                  <div className="flex items-center gap-3 px-4 py-3 border" style={{ borderColor: "var(--btn-border)" }}>
+                    <button
+                      onClick={() => setShowOnlyResenas(!showOnlyResenas)}
+                      className="toggle-switch focus:outline-none focus:ring-2 focus:ring-gray-400"
+                      style={{
+                        backgroundColor: showOnlyResenas ? "#F9D949" : "#ccc",
+                      }}
+                      aria-label="Toggle taquerías con reseña"
+                    >
+                      <span
+                        className="toggle-slider"
+                        style={{
+                          transform: showOnlyResenas ? "translateX(20px)" : "translateX(0)",
+                        }}
+                      />
+                    </button>
+                    <span className="text-base">Taquerías con reseña</span>
+                  </div>
                 </div>
               </div>
             )}

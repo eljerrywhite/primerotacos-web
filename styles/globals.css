@@ -17,7 +17,7 @@
       background-position: 1000px 0;
     }
   }
-  
+
   .skeleton-shimmer {
     background: linear-gradient(
       90deg,
@@ -368,7 +368,7 @@ html {
     color: black;
     border-color: #1a1a1a;
   }
-  
+
   .scroll-to-top:hover {
     background: black;
     color: white;
@@ -522,7 +522,7 @@ a {
 @keyframes modalSlideUp {
   from {
     opacity: 0;
-    transform: translateY(100px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -531,7 +531,7 @@ a {
 }
 
 .animate-modalSlideUp {
-  animation: modalSlideUp 0.3s ease-out;
+  animation: modalSlideUp 0.2s ease-out;
 }
 
 /* En móvil, el modal viene desde más abajo */
@@ -571,7 +571,7 @@ a {
   #search-input {
     font-size: 16px !important;
   }
-  
+
   #search-input::placeholder {
     font-size: 16px !important;
   }
@@ -583,7 +583,7 @@ a {
     padding-left: 2.5rem;
     font-size: 16px !important;
   }
-  
+
   #search-input::placeholder {
     font-size: 16px !important;
   }
@@ -637,7 +637,7 @@ input::placeholder {
   input {
     color: var(--search-text);
   }
-  
+
   input::placeholder {
     color: var(--search-placeholder);
   }
@@ -687,4 +687,25 @@ input::placeholder {
     width: 13px;
     height: 13px;
   }
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+  position: relative;
+  width: 48px;
+  height: 24px;
+  border-radius: 12px;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+  transition: transform 0.3s ease;
 }
