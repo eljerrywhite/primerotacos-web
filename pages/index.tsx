@@ -530,9 +530,7 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="flex-1">
-                <label className="text-sm uppercase mb-1 block">
-                  Taquerías con reseña:
-                </label>
+                <label className="text-sm uppercase mb-1 block">&nbsp;</label>
                 <div className="flex items-center gap-3 px-4 py-3">
                   <button
                     onClick={() => setShowOnlyResenas(!showOnlyResenas)}
@@ -550,7 +548,7 @@ const HomePage = () => {
                     />
                   </button>
                   <span className="text-base whitespace-nowrap">
-                    {showOnlyResenas ? "Sí" : "No"}
+                    Taquerías con reseña
                   </span>
                 </div>
               </div>
@@ -673,9 +671,6 @@ const HomePage = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm uppercase mb-1 block">
-                    Taquerías con reseña:
-                  </label>
                   <div className="flex items-center gap-3 px-4 py-3">
                     <button
                       onClick={() => setShowOnlyResenas(!showOnlyResenas)}
@@ -693,7 +688,7 @@ const HomePage = () => {
                       />
                     </button>
                     <span className="text-base">
-                      {showOnlyResenas ? "Sí" : "No"}
+                      Taquerías con reseña
                     </span>
                   </div>
                 </div>
