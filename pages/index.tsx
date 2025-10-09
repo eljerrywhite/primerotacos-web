@@ -549,7 +549,7 @@ const HomePage = () => {
                       }}
                     />
                   </button>
-                  <span className="text-base">Taquerías con reseña</span>
+                  <span className="text-base">Reseña</span>
                 </div>
               </div>
             </div>
@@ -687,7 +687,7 @@ const HomePage = () => {
                         }}
                       />
                     </button>
-                    <span className="text-base">Taquerías con reseña</span>
+                    <span className="text-base">Reseña</span>
                   </div>
                 </div>
               </div>
@@ -804,7 +804,7 @@ const HomePage = () => {
                    <span>Reseña</span>
                  </div>
                 )}
-                
+
                 <h2 className="text-lg sm:text-xl font-bold uppercase mb-1">
                   {taqueria.nombre}
                 </h2>
@@ -855,7 +855,7 @@ const HomePage = () => {
               </div>
             );
           })}
-                                                            
+
           </div>
         )}
 
