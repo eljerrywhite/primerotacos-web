@@ -693,13 +693,14 @@ input::placeholder {
 .toggle-switch {
   position: relative;
   width: 48px;
-  height: 24px;
-  min-height: 24px;
-  max-height: 24px;
+  height: 24px !important;
+  min-height: 24px !important;
+  max-height: 24px !important;
   border-radius: 12px;
   transition: background-color 0.3s ease, box-shadow 0.2s ease;
   flex-shrink: 0;
   display: block;
+  box-sizing: border-box;
 }
 
 .toggle-switch:focus-visible {
