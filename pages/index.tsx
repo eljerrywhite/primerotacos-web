@@ -538,7 +538,7 @@ const HomePage = () => {
                     onClick={() => setShowOnlyResenas(!showOnlyResenas)}
                     className="toggle-switch focus:outline-none"
                     style={{
-                      backgroundColor: showOnlyResenas ? "#FEF3C7" : "#ccc",
+                      backgroundColor: showOnlyResenas ? "#FDE68A" : "#ccc",
                     }}
                     aria-label="Toggle taquerías con reseña"
                   >
@@ -676,7 +676,7 @@ const HomePage = () => {
                       onClick={() => setShowOnlyResenas(!showOnlyResenas)}
                       className="toggle-switch focus:outline-none"
                       style={{
-                        backgroundColor: showOnlyResenas ? "#FEF3C7" : "#ccc",
+                        backgroundColor: showOnlyResenas ? "#FDE68A" : "#ccc",
                       }}
                       aria-label="Toggle taquerías con reseña"
                     >
