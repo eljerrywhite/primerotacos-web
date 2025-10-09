@@ -530,12 +530,15 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="flex-1">
+                <label className="text-sm uppercase mb-1 block">
+                  &nbsp;
+                </label>
                 <div className="flex items-center gap-3 px-4 py-3">
                   <button
                     onClick={() => setShowOnlyResenas(!showOnlyResenas)}
                     className="toggle-switch focus:outline-none"
                     style={{
-                      backgroundColor: showOnlyResenas ? "#F9D949" : "#ccc",
+                      backgroundColor: showOnlyResenas ? "#FEF3C7" : "#ccc",
                     }}
                     aria-label="Toggle taquerías con reseña"
                   >
@@ -668,12 +671,15 @@ const HomePage = () => {
                   </div>
                 </div>
                 <div>
+                  <label className="text-sm uppercase mb-1 block">
+                    &nbsp;
+                  </label>
                   <div className="flex items-center gap-3 px-4 py-3">
                     <button
                       onClick={() => setShowOnlyResenas(!showOnlyResenas)}
                       className="toggle-switch focus:outline-none"
                       style={{
-                        backgroundColor: showOnlyResenas ? "#F9D949" : "#ccc",
+                        backgroundColor: showOnlyResenas ? "#FEF3C7" : "#ccc",
                       }}
                       aria-label="Toggle taquerías con reseña"
                     >
