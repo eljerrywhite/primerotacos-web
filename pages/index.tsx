@@ -530,13 +530,10 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="flex-1">
-                <label className="text-sm uppercase mb-1 block">
-                  Filtrar:
-                </label>
-                <div className="flex items-center gap-3 px-4 py-3 border" style={{ borderColor: "var(--btn-border)" }}>
+                <div className="flex items-center gap-3 px-4 py-3">
                   <button
                     onClick={() => setShowOnlyResenas(!showOnlyResenas)}
-                    className="toggle-switch focus:outline-none focus:ring-2 focus:ring-gray-400"
+                    className="toggle-switch focus:outline-none"
                     style={{
                       backgroundColor: showOnlyResenas ? "#F9D949" : "#ccc",
                     }}
@@ -671,13 +668,10 @@ const HomePage = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm uppercase mb-1 block">
-                    Filtrar:
-                  </label>
-                  <div className="flex items-center gap-3 px-4 py-3 border" style={{ borderColor: "var(--btn-border)" }}>
+                  <div className="flex items-center gap-3 px-4 py-3">
                     <button
                       onClick={() => setShowOnlyResenas(!showOnlyResenas)}
-                      className="toggle-switch focus:outline-none focus:ring-2 focus:ring-gray-400"
+                      className="toggle-switch focus:outline-none"
                       style={{
                         backgroundColor: showOnlyResenas ? "#F9D949" : "#ccc",
                       }}
