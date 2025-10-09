@@ -26,6 +26,7 @@ const HomePage = () => {
   const [error, setError] = useState(false);
   const [sortOrder, setSortOrder] = useState("calificacion");
   const [selectedAlcaldia, setSelectedAlcaldia] = useState("todas");
+  const [showOnlyResenas, setShowOnlyResenas] = useState(false);
   const [selectedTaqueria, setSelectedTaqueria] = useState<Taqueria | null>(
     null,
   );
@@ -235,7 +236,9 @@ const HomePage = () => {
         selectedAlcaldia === "todas" ||
         taqueria.alcaldia?.toLowerCase() === selectedAlcaldia.toLowerCase();
 
-      return matchesSearch && matchesAlcaldia;
+      const matchesResena = !showOnlyResenas || taqueria.hasDetailPage;
+
+      return matchesSearch && matchesAlcaldia && matchesResena;
     })
     .sort((a, b) => {
       if (sortOrder === "calificacion") {
@@ -526,6 +529,22 @@ const HomePage = () => {
                   />
                 </div>
               </div>
+              <div className="flex-1">
+                <label className="text-sm uppercase mb-1 block">
+                  Filtrar:
+                </label>
+                <button
+                  onClick={() => setShowOnlyResenas(!showOnlyResenas)}
+                  className="w-full px-4 py-3 text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors text-left"
+                  style={{
+                    backgroundColor: showOnlyResenas ? "#F9D949" : "var(--btn-bg)",
+                    color: showOnlyResenas ? "#000000" : "var(--btn-text)",
+                    borderColor: showOnlyResenas ? "#F9D949" : "var(--btn-border)",
+                  }}
+                >
+                  Taquerías con reseña
+                </button>
+              </div>
             </div>
 
             {/* Filtros móvil expandible */}
@@ -643,6 +662,22 @@ const HomePage = () => {
                       style={{ color: "var(--text-secondary)" }}
                     />
                   </div>
+                </div>
+                <div>
+                  <label className="text-sm uppercase mb-1 block">
+                    Filtrar:
+                  </label>
+                  <button
+                    onClick={() => setShowOnlyResenas(!showOnlyResenas)}
+                    className="w-full px-4 py-3 text-base border focus:outline-none focus:ring-2 focus:ring-gray-400 transition-colors text-left"
+                    style={{
+                      backgroundColor: showOnlyResenas ? "#F9D949" : "var(--btn-bg)",
+                      color: showOnlyResenas ? "#000000" : "var(--btn-text)",
+                      borderColor: showOnlyResenas ? "#F9D949" : "var(--btn-border)",
+                    }}
+                  >
+                    Taquerías con reseña
+                  </button>
                 </div>
               </div>
             )}
