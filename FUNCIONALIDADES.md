@@ -34,6 +34,7 @@
 ### **Filtros Avanzados**
 - **Por alcaldía:** Contador inteligente solo muestra números cuando hay contenido
 - **Ordenamiento:** Calificación, alfabético, fecha
+- **Toggle "Taquerías con reseña":** Filtra solo las taquerías con página individual completa
 - **Responsive:** Desktop y móvil
 - **UX estratégica:** Guía hacia empty states con CTA
 
@@ -57,6 +58,7 @@
 - **TaqueriaSkeleton:** Loading states elegantes
 - **EmptyState:** Estados vacíos con CTAs estratégicos
 - **PrimeroTacosLogo:** Componente adaptativo
+- **Página de Error:** Manejo profesional de errores 404 y 500 con diseño consistente
 
 ### **Sistema de Enlaces a Páginas Individuales**
 - **Detección automática:** Propiedad `hasDetailPage` en cada taquería

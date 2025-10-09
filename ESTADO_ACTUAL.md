@@ -18,17 +18,19 @@
 ## 🔧 Funcionalidades Activas
 - ✅ **Búsqueda inteligente** con 14 sinónimos implementados
 - ✅ **Filtros por alcaldía** con contador inteligente
+- ✅ **Toggle "Taquerías con reseña"** - filtra solo taquerías con página individual completa
 - ✅ **Taglines rotativos** únicos en la industria
 - ✅ **Skeleton loaders** para mejor UX
 - ✅ **Modal informativo** sobre los Knijos
 - ✅ **SEO completo** con meta tags y sitemap
 - ✅ **Headers de seguridad** (calificación A)
-- ✅ **Páginas individuales de taquerías** - El Rey del Pastor y Ricos Tacos Toluca
+- ✅ **Páginas individuales de taquerías** - El Rey del Pastor, Ricos Tacos Toluca y La Bonvi
 - ✅ **Sistema de enlaces a páginas individuales** - cards clickeables con detección automática
 - ✅ **Videos de fondo hero** en páginas individuales con lazy loading optimizado
 - ✅ **SEO Schema.org** completo para páginas de taquerías (Restaurant markup)
 - ✅ **Información detallada** - precios específicos, redes sociales, direcciones completas
 - ✅ **Design system consistente** - integración perfecta con el tema principal
+- ✅ **Página de error personalizada** - manejo profesional de errores 404/500
 
 ## 🎯 Performance y Seguridad
 - **SSL:** Certificados válidos ✅

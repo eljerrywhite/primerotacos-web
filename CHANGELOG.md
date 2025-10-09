@@ -20,6 +20,10 @@
   - Especialidades: New York, costilla, campechano
   - Instagram integrado
 
+### 🔧 NUEVAS FUNCIONALIDADES UI
+- **Toggle "Taquerías con reseña"**: Filtro especial para mostrar solo taquerías con página individual completa (badge amarillo)
+- **Página de error personalizada**: Manejo profesional de errores 404/500 con diseño consistente y botón para volver al inicio
+
 ### 🔗 FUNCIONALIDAD DE ENLACES A PÁGINAS INDIVIDUALES
 - **Cards clickeables:** Taquerías con páginas de detalle tienen cards completamente clickeables
 - **Detección automática:** Sistema que verifica si existe página individual (hasDetailPage)
