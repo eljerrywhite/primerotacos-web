@@ -11,7 +11,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import PrimeroTacosLogo from "../components/PrimeroTacosLogo";
-import { Taqueria } from "../types";
+import type { TaqueriaBase as Taqueria } from "../types";
 import RotatingTagline from "../components/RotatingTagline";
 import { tacoEvents } from "../lib/analytics";
 import TaqueriaSkeleton from "../components/TaqueriaSkeleton";
