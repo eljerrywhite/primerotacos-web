@@ -137,6 +137,76 @@
 - **Calificar con GPT:** Principal conversion
 - **Ver mapa:** Secondary action
 
+## 🆕 Sistema de Alta de Taquerías
+
+### **Proceso de 4 Pasos**
+
+#### 1. Medios
+- **Poster**: Colocar en `/public/images/poster-<slug>.jpg`
+- **Video** (opcional): Colocar en `/public/videos/pr-<slug>.mp4`
+
+#### 2. Crear JSON
+- **Ubicación**: `data/taquerias/<slug>.json`
+- **Template**: Usar `data/_template.json` como base
+- **Campos requeridos**: `_id`, `slug`, `nombre`, `calidad`, `servicio`, `lugar`, `direccion`, `ubicacion`, `taglines`, `descripcion`, `media`, `seo`
+
+#### 3. Verificación Local
+- **API**: Abrir `/api/taquerias` → verificar `"hasDetailPage": true` para el slug
+- **Página**: Abrir `/<slug>` → verificar render correcto (hero, rating, card lateral, redes)
+- **Badge**: Verificar que aparezca badge "Reseña" en la card del home
+
+#### 4. Actualizar Sitemap
+- **Archivo**: `public/sitemap.xml`
+- **Agregar**: Entry con `<url>`, `<loc>` e `<image:image>` para el poster
+
+### **Detección Automática de Páginas**
+- **Manifest de archivos**: Sistema lee automáticamente JSONs en `/data/taquerias/`
+- **Propiedad `hasDetailPage`**: Calculada dinámicamente por `/api/taquerias`
+- **Cards clickeables**: Si existe JSON, toda la card es clickeable
+- **Sistema retrocompatible**: Taquerías sin JSON mantienen funcionalidad normal
+
+### **Template JSON Estandarizado**
+```json
+{
+  "_id": "<slug>",
+  "slug": "<slug>",
+  "nombre": "Nombre de la taquería",
+  "desde": "YYYY",
+  "calidad": 4,
+  "servicio": 4,
+  "lugar": 4,
+  "calificacionFinal": null,
+  "direccion": "Calle, Colonia, Alcaldía, CP Ciudad, CDMX",
+  "ubicacion": "https://maps.app.goo.gl/...",
+  "taglines": ["Frase corta para el hero"],
+  "descripcion": {
+    "quote": "Quote fuerte.",
+    "paragraphs": ["Párrafo 1", "Párrafo 2"]
+  },
+  "website": "https://...",
+  "instagram": "@usuario",
+  "priceText": "Tacos: $xx–$yy",
+  "hashtags": ["#PrimeroTacos"],
+  "openingHours": {
+    "opens": "12:00",
+    "closes": "23:30",
+    "days": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+  },
+  "media": {
+    "video": "/videos/pr-<slug>.mp4",
+    "poster": "/images/poster-<slug>.jpg"
+  },
+  "seo": {
+    "title": "Meta title…",
+    "description": "Meta description…",
+    "ogTitle": "OG title…",
+    "ogDescription": "OG description…",
+    "ogImage": "https://primerotacos.mx/og-image.png",
+    "ogImageAlt": "Descripción accesible de la imagen"
+  }
+}
+```
+
 ## 📄 Páginas Individuales de Taquerías
 
 ### **El Rey del Pastor** (desde 1974)

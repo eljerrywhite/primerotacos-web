@@ -175,6 +175,12 @@
 ### Estructura General del Proyecto
 ```
 primerotacos-web/
+├── data/
+│   ├── taquerias/                # JSONs de taquerías individuales
+│   │   ├── el-rey-del-pastor.json
+│   │   ├── la-bonvi.json
+│   │   └── ricos-tacos-toluca.json
+│   └── _template.json            # Template para nuevas taquerías
 ├── components/
 │   ├── Breadcrumb.tsx            # Componente de navegación breadcrumb
 │   ├── EmptyState.tsx            # Componente para estados vacíos
@@ -411,6 +417,7 @@ npm start # localhost:3000
 
 ## 🔄 FLUJO DE DATOS
 
+### **Sistema de Calificación (GPT → MongoDB)**
 1. **Usuario → GPT**: "Calificar nuevos tacos"
 2. **GPT → Usuario**: Solicita datos y URL Maps
 3. **GPT**: Extrae info de la URL
@@ -418,6 +425,14 @@ npm start # localhost:3000
 5. **API → MongoDB**: Guarda o actualiza (promedio)
 6. **Frontend → API**: GET taquerías
 7. **Frontend**: Muestra con filtros y búsqueda
+
+### **Alta de Página Individual (Manual)**
+1. **Crear medios**: Poster y video (opcional) en `/public/`
+2. **Crear JSON**: Archivo en `data/taquerias/<slug>.json` con template
+3. **Verificación**: API detecta automáticamente el JSON (manifest)
+4. **Propiedad `hasDetailPage`**: Se activa automáticamente en `/api/taquerias`
+5. **Navegación**: Card se vuelve clickeable, lleva a `/<slug>`
+6. **Sitemap**: Actualización manual en `public/sitemap.xml`
 
 ## 🔄 TAGLINES ROTATIVOS - FEATURE ÚNICA
 

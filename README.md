@@ -104,6 +104,16 @@ El GPT especializado:
 
 [Usar el GPT](https://chatgpt.com/g/g-C1HIeGZpN-primero-tacos)
 
+## 📝 Agregar Nueva Taquería con Página Individual
+
+### Proceso rápido:
+1. **Medios**: Colocar poster en `/public/images/poster-<slug>.jpg` y video (opcional) en `/public/videos/pr-<slug>.mp4`
+2. **JSON**: Crear `data/taquerias/<slug>.json` usando el template en `data/_template.json`
+3. **Verificar**: Abrir `/api/taquerias` para confirmar `hasDetailPage: true` y luego `/<slug>` para ver la página
+4. **Sitemap**: Agregar entrada en `public/sitemap.xml` con la URL y poster
+
+Ver [FUNCIONALIDADES.md](FUNCIONALIDADES.md#-sistema-de-alta-de-taquerías) para detalles completos.
+
 ## 🚀 Deployment
 
 El proyecto se despliega automáticamente en Render cuando se hace push a la rama `main`.
