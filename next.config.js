@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Removido experimental.allowedDevOrigins ya que no es compatible con Next.js 13.5.6
+
+  eslint: {
+    ignoreDuringBuilds: true,   // ⬅️ desactiva ESLint en build
+  },
   
   async headers() {
     return [

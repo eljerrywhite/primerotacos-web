@@ -6,7 +6,7 @@ export interface TaqueriaBase {
   calidad: number;
   servicio: number;
   lugar: number;
-  ccalificacionFinal: number | null;
+  calificacionFinal: number | null;
   ubicacion?: string;
   especialidad?: string;
   taglines?: string[];
