@@ -1,0 +1,58 @@
+{
+  "_id": "ricos-tacos-toluca",
+  "slug": "ricos-tacos-toluca",
+  "nombre": "Ricos Tacos Toluca",
+  "desde": "2003",
+  "calidad": 5.0,
+  "servicio": 4.0,
+  "lugar": 3.0,
+  "calificacionFinal": 4.6,
+  "direccion": "C. López 103, Colonia Centro, Centro, Cuauhtémoc, 06000 Ciudad de México, CDMX",
+  "ubicacion": "https://maps.app.goo.gl/7HKPK5ZnghGQkynU9",
+  "taglines": [
+    "¿De verdad valen la distinción Michelin estos tacos de chorizo?"
+  ],
+  "descripcion": {
+    "quote": "Campechano de chorizo con cecina o el taco de chorizo tamarindo… aquí los sabores no se parecen a nada que hayas probado antes.",
+    "paragraphs": [
+      "En la Calle de López, frente al Mercado de Arcos de Belén, se arma la fila para probar los Ricos Tacos Toluca. Desde 2003, la familia viaja diario desde Toluca pa' servir su especialidad: chorizos rojo, verde, habanero y tamarindo, además de cecina, arrachera, obispo (embutido) y queso de puerco.",
+      "El campechano con chorizo y cecina es la joya de la casa, pero el taco de tamarindo es la sorpresa dulce-picosita que te volará la cabeza. Todos los tacos vienen bien armados con papitas, cebollita y salsas caseras únicas, difíciles de dejar de probar. El truco está en mezclarlas y, como decía mi abuelo —pónle color al taco.",
+      "Tip de la casa: antes de morder el taco, prueba cada chorizo solito. Así descubres la magia del sazón toluqueño, preparado con almendra, cacahuate y pasas."
+    ]
+  },
+  "instagram": "https://instagram.com/ricostacostoluca_",
+  "priceText": "Taco: $30 | Campechano: $35 | Con queso: +$10",
+  "especialidades": [
+    "chorizo verde",
+    "chorizo rojo",
+    "chorizo habanero",
+    "chorizo tamarindo",
+    "campechano con cecina"
+  ],
+  "hashtags": [
+    "#PrimeroTacos",
+    "#RicosTacosToluca",
+    "#TacosDeChorizo",
+    "#CentroHistórico",
+    "#TacosDeCecina",
+    "#TacosObispo",
+    "#DistinciónMichelin"
+  ],
+  "openingHours": {
+    "opens": "12:00",
+    "closes": "23:30",
+    "days": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+  },
+  "media": {
+    "video": "/videos/pr-ricos_tacos_toluca.mp4",
+    "poster": "/images/poster-ricos.jpg"
+  },
+  "seo": {
+    "title": "Ricos Tacos Toluca | Chorizo Michelin en CDMX",
+    "description": "Tacos de chorizo verde, rojo, habanero y tamarindo en el Centro Histórico. Campechano estrella y distinción Michelin. ¡Prúebalos ya!",
+    "ogTitle": "Ricos Tacos Toluca - Distinción Michelin | Primero Tacos",
+    "ogDescription": "Chorizo rojo, verde, habanero y tamarindo. El campechano con cecina que cambió el juego en CDMX.",
+    "ogImage": "https://primerotacos.mx/og-image.png",
+    "ogImageAlt": "Plato de tacos de chorizo y campechano de Ricos Tacos Toluca en CDMX."
+  }
+}
