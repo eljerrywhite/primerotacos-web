@@ -31,7 +31,7 @@
     "description": "Más de 50 años sirviendo tacos al pastor y de cabeza únicos en CDMX. Sin piña, con sabor brutal. Frente al Metro Guerrero. ¡Pruébalos ya!",
     "ogTitle": "El Rey del Pastor - 50 años de tradición | Primero Tacos",
     "ogDescription": "Pastor directo desde Jalisco, sin piña. Tacos de cabeza legendarios. Frente al Metro Guerrero.",
-    "ogImage": "https://primerotacos.mx/og-image.png",
+    "ogImage": "/images/poster-rey.jpg",
     "ogImageAlt": "Trompo de pastor de El Rey del Pastor en la Colonia Guerrero."
   }
 }

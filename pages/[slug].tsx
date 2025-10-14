@@ -80,8 +80,12 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
       : `Tacos en CDMX: ${taqueria.nombre}`);
   const ogTitle = taqueria.seo?.ogTitle || title;
   const ogDescription = taqueria.seo?.ogDescription || metaDesc;
-  const ogImage = taqueria.seo?.ogImage || "https://primerotacos.mx/og-image.png";
-  const ogImageAlt = taqueria.seo?.ogImageAlt || taqueria.nombre;
+  const posterPath = taqueria.media?.poster || "/images/poster-default.jpg";
+  const ogImage = posterPath.startsWith("http")
+    ? posterPath
+    : `https://primerotacos.mx${posterPath}`;
+
+  const ogImageAlt = taqueria.seo?.ogImageAlt || `${taqueria.nombre} - poster`;
 
   return (
     <>
@@ -91,6 +95,14 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
         <meta property="og:title" content={ogTitle} />
         <meta property="og:description" content={ogDescription} />
         <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content={ogImageAlt} />
+        <meta property="og:site_name" content="Primero Tacos" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={ogImage} />
+
         <meta property="og:type" content="restaurant" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={ogTitle} />
@@ -208,16 +220,7 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
                     <p key={index} className="text-base md:text-lg leading-relaxed" style={{ color: "var(--text-primary)" }}>
                       {index === 0 && taqueria.ubicacion ? (
                         <>
-                          <a
-                            href={taqueria.ubicacion}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="underline hover:opacity-70 transition-opacity"
-                            style={{ color: "var(--text-primary)" }}
-                          >
-                            {taqueria.nombre}
-                          </a>
-                          {" — "}
+                        
                           {paragraph}
                         </>
                       ) : (

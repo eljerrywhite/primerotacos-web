@@ -1,0 +1,65 @@
+{
+  "_id": "tizne-tacomotora",
+  "slug": "tizne-tacomotora",
+  "nombre": "Tizne Tacomotora",
+  "desde": "2015",
+  "calidad": 3,
+  "servicio": 3,
+  "lugar": 4,
+  "calificacionFinal": null,
+  "direccion": "Guanajuato 27-B, Roma Nte., Cuauhtémoc, 06700 Ciudad de México, CDMX",
+  "ubicacion": "https://maps.app.goo.gl/vpo4fG1L2DKpUCg88",
+  "taglines": [
+    "Del humo al taco: fusión callejera y gourmet."
+  ],
+  "descripcion": {
+    "quote": "Tacos ahumados únicos que mezclan técnica mexicana, sabores asiáticos y BBQ gringa",
+    "paragraphs": [
+      "El concepto de Tizne Tacomotora nació en festivales y eventos, y culminó en un restaurante en la Roma sin perder el alma callejera. Aquí los tacos no solo se comen, se saborean como si fueran una declaración de principios: ahumados, atrevidos y con técnica quirúrgica.",
+      "Nosotros recomendamos el taco kalbi de brisket, marinado en miso y jengibre, que rinde homenaje a la carne asada coreana pero con toda la textura y corazón de la CDMX. También hay short rib en tortilla de harina hecha a mano, y unas costillitas glaseadas con una salsita tipo jalea que recuerda al BBQ tradicional. Detalles como el cilantro criollo, el jengibre encurtido y el rub de ceniza de tortilla hacen que aquí no se hable de antojo, sino de experiencia (incluídas las vegetarianas).",
+      "Ahora operan desde un local más cómodo donde puedes disfrutar el modo restaurante con otro menú el cual pinta muy bien. La experiencia en modo 'Express' puede volverse incómoda, ya que al no poder abrir cuenta, tienes que levantarte cada vez que quieres pedir otro taco. Tizne Tacomotora es para quien busca tacos con técnica, historia y mucho carácter."
+    ]
+  },
+  "instagram": "https://www.instagram.com/tiznetacomotora/",
+  "priceText": "Tacos: $50 | Grill Quesadilla: $105 | Gringa: $85  ",
+  "especialidades": [
+    "Brisket",
+    "Pork belly",
+    "Costillita",
+    "Kalbi",
+    "Pulled Porke al pastor",
+    "Barbacoa de short rib"
+  ],
+  "hashtags": [
+    "#PrimeroTacos",
+    "#Tacomotora",
+    "#TacosAhumados",
+    "#TacosGourmet",
+    "#TacosEnLaRoma",
+    "#TacosCDMX"
+  ],
+  "openingHours": {
+    "opens": "18:00",
+    "closes": "23:30",
+    "days": [
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ]
+  },
+  "media": {
+    "video": "/videos/PT-tizne_tacomotora.mp4",
+    "poster": "/images/poster-tizne.jpg"
+  },
+  "seo": {
+    "title": "Tizne Tacomotora | Tacos ahumados en la Roma con sazón callejero y cocina fusión.",
+    "description": "Tizne Tacomotora en la Roma ofrece tacos ahumados únicos que mezclan técnica mexicana, sabores asiáticos y BBQ. Brisket, short rib, pastor, suadero y tortillas hechas a mano.",
+    "ogTitle": "Tacos ahumados que nacieron en la calle y se lucen en la Roma",
+    "ogDescription": "Brisket, short rib, costillitas glaseadas y hasta veggie: Tizne Tacomotora mezcla humo, técnica y puro sabor chilango.",
+    "ogImage": "/images/poster-tizne.jpg",
+    "ogImageAlt": "Taco de brisket ahumado sobre tortilla en Tizne Tacomotora, colonia Roma"
+  }
+}
