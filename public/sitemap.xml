@@ -43,4 +43,15 @@
     </image:image>
   </url>
 
+  <url>
+    <loc>https://primerotacos.mx/tizne-tacomotora</loc>
+    <lastmod>2025-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://primerotacos.mx/images/poster-tizne.jpg</image:loc>
+      <image:caption>Plato de tacos de Tizne Tacomotora, CDMX.</image:caption>
+    </image:image>
+  </url>
+
 </urlset>
