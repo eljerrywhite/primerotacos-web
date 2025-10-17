@@ -46,7 +46,7 @@ const HomePage = () => {
     "Azcapotzalco",
     "Benito Juárez",
     "Coyoacán",
-    "Cuajimalpa",
+    "Cuajimalpa de Morelos",
     "Cuauhtémoc",
     "Gustavo A. Madero",
     "Iztacalco",
@@ -263,7 +263,30 @@ const HomePage = () => {
     >
       <Head>
         <title>Top Tacos y Taquerias CDMX por PrimeroTacos.mx</title>
+        <meta name="description" content="Encuentra las mejores taquerías de CDMX: reseñas, mapas y videos. 🌮" />
+
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Primero Tacos" />
+        <meta property="og:title" content="Primero Tacos — Directorio de taquerías en CDMX" />
+        <meta property="og:description" content="Encuentra las mejores taquerías de CDMX: reseñas, mapas y videos. 🌮" />
+        <meta property="og:url" content="https://primerotacos.mx/" />
+        <meta property="og:image" content="https://primerotacos.mx/og-image.jpg?v=2" />
+        <meta property="og:image:secure_url" content="https://primerotacos.mx/og-image.jpg?v=2" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Primero Tacos — portada" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Primero Tacos — Directorio de taquerías en CDMX" />
+        <meta name="twitter:description" content="Encuentra las mejores taquerías de CDMX: reseñas, mapas y videos. 🌮" />
+        <meta name="twitter:image" content="https://primerotacos.mx/og-image.jpg?v=2" />
+
+        {/* Canonical */}
+        <link rel="canonical" href="https://primerotacos.mx/" />
       </Head>
 
       {/* Skip to main content link for accessibility */}

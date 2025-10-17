@@ -21,13 +21,13 @@ export default function Document() {
         <meta property="og:description" content="Encuentra las mejores taquerías en CDMX, calificadas por expertos taqueros según calidad, servicio y ubicación." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://primerotacos.mx" />
-        <meta property="og:image" content="https://primerotacos.mx/og-image.png" />
+        <meta property="og:image" content="https://primerotacos.mx/og-image.png?v=2" />
         
         {/* Etiquetas para Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Primero Tacos - Base de datos comunitaria de taquerías en CDMX" />
         <meta name="twitter:description" content="Encuentra las mejores taquerías en CDMX, calificadas por expertos taqueros según calidad, servicio y ubicación." />
-        <meta name="twitter:image" content="https://primerotacos.mx/og-image.png" />
+        <meta name="twitter:image" content="https://primerotacos.mx/og-image.png?v=2" />
         
         {/* Favicon y otros iconos - Actualizado para incluir todos los tamaños */}
         <link rel="icon" href="/favicon.ico" />
