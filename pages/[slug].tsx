@@ -623,24 +623,24 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       mangle: false,
       headerIds: false,
     }) as string;
-    
+
     console.log('MD input:', md);
     console.log('HTML output:', html);
-    
+
     // Sanitizar permitiendo todos los atributos necesarios
     const clean = DOMPurify.sanitize(html, {
       ALLOWED_TAGS: ["b", "strong", "i", "em", "a", "p", "br", "ul", "ol", "li"],
       ALLOWED_ATTR: ["href", "target", "rel"],
     });
-    
+
     console.log('Sanitized:', clean);
-    
+
     // Asegurar que todos los enlaces tengan target y rel
     const final = clean.replace(
       /<a href="([^"]+)">/gi,
       '<a href="$1" target="_blank" rel="noopener noreferrer">'
     );
-    
+
     console.log('Final:', final);
     return final;
   };
