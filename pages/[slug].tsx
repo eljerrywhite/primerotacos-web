@@ -616,13 +616,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const DOMPurify = (await import("isomorphic-dompurify")).default;
 
   const mdToHtml = (md: string) => {
-    // Parsear markdown con opciones básicas
-    const html = marked(md, { 
+    // Configurar marked con opciones correctas
+    marked.setOptions({
       breaks: true,
       gfm: true,
       mangle: false,
-      headerIds: false
-    }) as string;
+      headerIds: false,
+    });
+    
+    // Parsear markdown
+    const html = marked.parse(md) as string;
     
     // Sanitizar permitiendo enlaces con href
     const clean = DOMPurify.sanitize(html, {
