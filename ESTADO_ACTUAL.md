@@ -1,5 +1,5 @@
 # ESTADO ACTUAL DEL PROYECTO
-*Actualizado: 21 de Enero 2025*
+*Actualizado: 22 de Enero 2025*
 
 ## 🚀 Sistema en Producción
 - **Frontend:** https://primerotacos.mx ✅
@@ -43,15 +43,17 @@
 - Google Analytics warnings (cookies third-party) - No crítico
 - Funciona perfectamente en todos los browsers principales
 
-## 🆕 Últimas Actualizaciones (Enero 21, 2025)
+## 🆕 Últimas Actualizaciones (Enero 22, 2025)
+- **Nueva página:** Tacos Hola El Güero - primera taquería veggie con página completa
+- **Markdown en párrafos:** Enlaces funcionales en contenido editorial usando sintaxis markdown
+- **Parser mejorado:** Integración de `marked` + `DOMPurify` para contenido seguro y rico
+
+### Actualizaciones Previas (Enero 21, 2025)
 - **Sistema de enlaces:** Cards clickeables con detección automática de páginas individuales
 - **Páginas individuales:** El Rey del Pastor, Ricos Tacos Toluca y La Bonvi completamente funcionales
 - **Video backgrounds:** Implementados con posters de respaldo y lazy loading
 - **SEO avanzado:** Schema.org Restaurant markup para mejor posicionamiento
-- **Contenido editorial:** Historias detalladas, especialidades y precios específicos
-- **Integración social:** Links a Instagram y Facebook de las taquerías
-- **CTA estratégicos:** Botones para mapa y calificación en cada página
-- **Breadcrumb optimizado:** Navegación mejorada con fondo adaptativo, texto truncado y padding consistente con hero-banner
+- **Breadcrumb optimizado:** Navegación mejorada con fondo adaptativo
 
 ## 🔄 En Desarrollo
 - Más páginas individuales de taquerías destacadas

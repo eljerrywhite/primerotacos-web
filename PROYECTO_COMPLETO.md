@@ -1,5 +1,5 @@
 # PROYECTO PRIMERO TACOS - DOCUMENTACIÓN COMPLETA
-*Última actualización: 12 de Septiembre de 2025*
+*Última actualización: 22 de Enero de 2025*
 
 ## 🎯 RESUMEN EJECUTIVO
 
@@ -14,6 +14,7 @@
 
 ### Frontend (primerotacos-web)
 - **Stack**: Next.js 13.5.6, TypeScript, Tailwind CSS
+- **Markdown**: marked + isomorphic-dompurify
 - **Host**: Render (Web Service)
 - **Repo**: https://github.com/eljerrywhite/primerotacos-web
 

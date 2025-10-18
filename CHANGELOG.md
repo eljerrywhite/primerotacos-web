@@ -1,6 +1,22 @@
 # CHANGELOG
 *Historial cronológico de todas las actualizaciones*
 
+## [1.4.1] - 2025-01-22
+### 🆕 NUEVA PÁGINA INDIVIDUAL
+- **Tacos Hola El Güero** (desde 1968)
+  - Primera taquería de guisados y vegetarianos con página completa
+  - Reconocida por la guía Michelin
+  - Contenido con enlaces markdown funcionales en los párrafos
+  - Especialidades veggie: acelgas, coliflor, chile relleno, calabacitas
+
+### 🔧 MEJORAS TÉCNICAS
+- **Markdown en párrafos:** Sistema de parsing markdown con `marked` y `DOMPurify`
+  - Soporte para enlaces `[texto](url)` en contenido editorial
+  - Sanitización segura manteniendo funcionalidad de links
+  - Atributos `target="_blank"` y `rel="noopener"` en enlaces externos
+
+---
+
 ## [1.4.0] - 2025-01-21
 ### 🆕 PÁGINAS INDIVIDUALES DE TAQUERÍAS
 - **El Rey del Pastor**

@@ -165,6 +165,12 @@
 - **Cards clickeables**: Si existe JSON, toda la card es clickeable
 - **Sistema retrocompatible**: Taquerías sin JSON mantienen funcionalidad normal
 
+### **Soporte de Markdown en Párrafos**
+- **Sintaxis markdown:** Los párrafos soportan `**negrita**`, `*cursiva*` y `[enlaces](url)`
+- **Parser seguro:** Usa `marked` para convertir markdown a HTML
+- **Sanitización:** `DOMPurify` previene XSS manteniendo funcionalidad
+- **Links externos:** Automáticamente agrega `target="_blank"` y `rel="noopener"`
+
 ### **Template JSON Estandarizado**
 ```json
 {
