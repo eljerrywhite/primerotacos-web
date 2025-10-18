@@ -616,14 +616,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const DOMPurify = (await import("isomorphic-dompurify")).default;
 
   const mdToHtml = (md: string) => {
-    const html = marked.parse(md, { mangle: false, headerIds: false }) as string;
+    const html = marked.parse(md, { 
+      mangle: false, 
+      headerIds: false,
+      breaks: true,
+      gfm: true 
+    }) as string;
     const clean = DOMPurify.sanitize(html, {
       ALLOWED_TAGS: ["b", "strong", "i", "em", "a", "p", "br", "ul", "ol", "li"],
       ALLOWED_ATTR: { a: ["href", "target", "rel"] },
     });
-    return clean.replaceAll(
-      /<a\s/gi,
-      '<a target="_blank" rel="noopener noreferrer" '
+    // Asegurar que todos los enlaces tengan los atributos correctos
+    return clean.replace(
+      /<a\s+href="([^"]+)"([^>]*)>/gi,
+      '<a href="$1" target="_blank" rel="noopener noreferrer"$2>'
     );
   };
 
