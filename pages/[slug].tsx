@@ -615,20 +615,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { marked } = await import("marked");
   const DOMPurify = (await import("isomorphic-dompurify")).default;
 
-  // Configurar marked para que use el renderer correcto
-  marked.use({
-    mangle: false,
-    headerIds: false,
-    breaks: true,
-    gfm: true,
-  });
-
   const mdToHtml = (md: string) => {
-    const html = marked.parse(md) as string;
+    // Parsear markdown con opciones básicas
+    const html = marked(md, { 
+      breaks: true,
+      gfm: true,
+      mangle: false,
+      headerIds: false
+    }) as string;
+    
+    // Sanitizar permitiendo enlaces con href
     const clean = DOMPurify.sanitize(html, {
       ALLOWED_TAGS: ["b", "strong", "i", "em", "a", "p", "br", "ul", "ol", "li"],
       ALLOWED_ATTR: { a: ["href", "target", "rel"] },
     });
+    
     // Agregar target y rel a todos los enlaces
     return clean.replace(
       /<a\s+href="([^"]+)"([^>]*)>/gi,
