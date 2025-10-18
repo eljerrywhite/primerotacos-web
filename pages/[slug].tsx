@@ -262,15 +262,14 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
                 )}
 
                 {/* Descripción (HTML ya generado en servidor) */}
-                <section className="space-y-4" suppressHydrationWarning>
+                <section className="space-y-4">
                   {paragraphsHtml.map((html, idx) => (
-                    <p
+                    <div
                       key={idx}
                       className="text-base md:text-lg leading-relaxed"
                       style={{ color: "var(--text-primary)" }}
-                    >
-                      <span dangerouslySetInnerHTML={{ __html: html }} />
-                    </p>
+                      dangerouslySetInnerHTML={{ __html: html }}
+                    />
                   ))}
                 </section>
               </div>
