@@ -725,3 +725,24 @@ input::placeholder {
 
 /* slug hyperlink*/
 .prose a { text-decoration: underline; }
+
+/* Estilos para los enlaces en los párrafos de descripción */
+div[dangerouslySetInnerHTML] a,
+.text-base a,
+.text-lg a {
+  color: var(--text-primary) !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+  transition: opacity 0.2s ease;
+}
+
+div[dangerouslySetInnerHTML] a:hover,
+.text-base a:hover,
+.text-lg a:hover {
+  opacity: 0.7;
+}
+
+/* Asegurar que los enlaces funcionen correctamente */
+div[dangerouslySetInnerHTML] p a {
+  pointer-events: auto !important;
+}
