@@ -61,3 +61,4 @@ export interface TaqueriaDetail extends TaqueriaBase {
   media: TaqueriaMedia;
   seo?: TaqueriaSEO;
 }
+

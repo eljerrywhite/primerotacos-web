@@ -1,0 +1,72 @@
+{
+  "_id": "tacos-hola-el-güero",
+  "slug": "tacos-hola-el-guero",
+  "nombre": "Tacos Hola El Güero",
+  "desde": "1968",
+  "calidad": 4,
+  "servicio": 4,
+  "lugar": 3,
+  "calificacionFinal": 3.9,
+  "direccion": "Ámsterdam 135, Hipódromo, Cuauhtémoc, 06100 Ciudad de México, CDMX",
+  "ubicacion": "https://maps.app.goo.gl/FTL8iiP6zAhrgTySA",
+  "taglines": [
+    "¿Tacos de guisado tan buenos que ya tienen distinción Michelin?"
+  ],
+  "descripcion": {
+    "quote": "Los mejores tacos de guisado en la Condesa, buenos toppings y opciones veggie.",
+    "paragraphs": [
+      "Una de las mejores opciones para echar tacos de guisado y verdaderos tacos vegetarianos —o *veggies* pa’ los cool son los [Tacos Hola El Güero](https://maps.app.goo.gl/FTL8iiP6zAhrgTySA). Recientemente fueron reconocidos por la guía Michelin, aunque ya eran todo un clásico de la colonia Condesa desde 1968. Aquí la experiencia es directa, práctica y bien chilanga: para comer en la banqueta y seguir tu camino con el corazón lleno (y la panza también).",
+      "Lo que de verdad se aplaude —y por lo que te la recomendamos sin dudar— es por su variedad de guisos caseros clásicos, de esos que ya nomás encuentras en casa de la abuela o algún tío nostálgico: **acelgas, torta de coliflor, chile relleno, calabacitas, rajas y hasta ensalada de nopales**. Con estos tacos no vas a extrañar la carne ni tantito, y puedes rematarlos con guacamole, queso fresco y frijoles negros de la olla que estan deliciosos.",
+      "Esta propuesta taquera es un ejemplo chingón de comida rica, saludable y sin necesidad de usar sustitutos raros para imitar carne. Aquí lo que hay es sazón, tradición y puro amor por el taco bien hecho."
+    ]
+  },
+  "instagram": "https://www.instagram.com/tacosholaelguero/",
+  "priceText": "Tacos: $32",
+  "especialidades": [
+    "Acelga",
+    "Torta de coliflor",
+    "Chile relleno",
+    "Calabacitas",
+    "Rajas",
+    "Nopales",
+    "Chicharron",
+    "Chorizo",
+    "Bisteck en pasilla",
+    "Picadillo"
+    
+  ],
+  "hashtags": [
+    "#PrimeroTacos",
+    "#TacosHolaElGüero",
+    "#TacosDeGuisado",
+    "#TacosVeggie",
+    "#TacosVegetarianos",
+    "#DistinciónMichelin",
+    "#TacosCDMX"
+  ],
+  "openingHours": {
+    "opens": "09:00",
+    "closes": "21:30 (Sat 19hr & Sun 15hr)",
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ]
+  },
+  "media": {
+    "video": "/videos/PT-hola-el-guero.mp4",
+    "poster": "/images/poster-hola.jpg"
+  },
+  "seo": {
+    "title": "Tacos Hola El Güero | Tacos de guisado y vegetarianos en la Condesa desde 1968",
+    "description": "Clásico de la Condesa desde 1968: tacos vegetarianos de guisado con sazón casero. Acelgas, coliflor, chile relleno y más, directo a la banqueta.",
+    "ogTitle": "Tacos de guisado —incluyendo vegetarianos— en la Condesa desde 1968",
+    "ogDescription": "Desde acelgas hasta chile relleno, estos tacos de guisado con sabor de casa son un clásico chilango que no necesita carne para rifar.",
+    "ogImage": "https://primerotacos.mx/poster-hola.jpg",
+    "ogImageAlt": "<Texto alternativo descriptivo de la imagen OG>"
+  }
+}

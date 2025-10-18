@@ -3,23 +3,25 @@ import fs from "fs";
 import path from "path";
 import Head from "next/head";
 import type { GetStaticPaths, GetStaticProps } from "next";
-import type { TaqueriaDetail } from "../types"; 
-import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import React from "react";
+import type { TaqueriaDetail } from "../types";
 import { MapPin, Star, Globe, DollarSign, Instagram } from "lucide-react";
 import PrimeroTacosLogo from "../components/PrimeroTacosLogo";
 import Breadcrumb from "../components/Breadcrumb";
 
-
 /** ---------- Utils ---------- */
-function computeFinal(calidad: number, servicio: number, lugar: number, given?: number | null) {
+function computeFinal(
+  calidad: number,
+  servicio: number,
+  lugar: number,
+  given?: number | null
+) {
   if (typeof given === "number") return given;
-  // 70% calidad, 20% servicio, 10% lugar
-  const n = (calidad * 0.7 + servicio * 0.2 + lugar * 0.1);
-  // redondeo a 1 decimal
+  const n = calidad * 0.7 + servicio * 0.2 + lugar * 0.1;
   return Math.round(n * 10) / 10;
 }
 
-// Helpers sociales
 function instagramLabel(value?: string) {
   if (!value) return "";
   const v = value.trim();
@@ -34,19 +36,17 @@ function instagramLabel(value?: string) {
   }
   return `@${v.replace(/^@+/, "")}`;
 }
-
 function instagramHref(value?: string) {
   if (!value) return "";
   const v = value.trim();
   if (v.startsWith("http")) return v;
   return `https://instagram.com/${v.replace(/^@+/, "")}`;
 }
-
 function prettyDomain(url?: string) {
   if (!url) return "";
   try {
     const u = new URL(url);
-    return u.host; // ej: www.sitio.com
+    return u.host;
   } catch {
     try {
       const u2 = new URL(`https://${url}`);
@@ -57,20 +57,47 @@ function prettyDomain(url?: string) {
   }
 }
 
-/** ---------- Página ---------- */
+/** ---------- Tipos de props ---------- */
 interface PageProps {
-  taqueria: TaqueriaDetail;
+  taqueria: TaqueriaDetail & { paragraphsHtml?: string[] };
 }
 
+/** ---------- Componente de video (solo cliente) ---------- */
+// Definimos el JSX real del video
+function ClientVideo({ poster, video }: { poster?: string; video?: string }) {
+  if (!video) return null;
+  return (
+    <video
+      className="absolute inset-0 w-full h-full object-cover"
+      autoPlay
+      muted
+      loop
+      playsInline
+      poster={poster || "/images/poster-default.jpg"}
+      style={{ filter: "var(--video-filter, none)" }}
+    >
+      <source src={video} type="video/mp4" />
+    </video>
+  );
+}
+// y lo convertimos a componente client-only
+const HeroVideo = dynamic(
+  async () => ({
+    default: (props: { poster?: string; video?: string }) => (
+      <ClientVideo {...props} />
+    ),
+  }),
+  { ssr: false }
+);
+
+/** ---------- Página ---------- */
 export default function TaqueriaPage({ taqueria }: PageProps) {
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setShouldLoadVideo(true), 500);
-    return () => clearTimeout(t);
-  }, []);
-
-  const finalScore = computeFinal(taqueria.calidad, taqueria.servicio, taqueria.lugar, taqueria.calificacionFinal);
+  const finalScore = computeFinal(
+    taqueria.calidad,
+    taqueria.servicio,
+    taqueria.lugar,
+    taqueria.calificacionFinal
+  );
 
   const title = taqueria.seo?.title || `${taqueria.nombre} | Primero Tacos`;
   const metaDesc =
@@ -78,40 +105,45 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
     (taqueria.descripcion?.quote
       ? taqueria.descripcion.quote.slice(0, 160)
       : `Tacos en CDMX: ${taqueria.nombre}`);
+
   const ogTitle = taqueria.seo?.ogTitle || title;
   const ogDescription = taqueria.seo?.ogDescription || metaDesc;
+
   const posterPath = taqueria.media?.poster || "/images/poster-default.jpg";
   const ogImage = posterPath.startsWith("http")
     ? posterPath
     : `https://primerotacos.mx${posterPath}`;
-
   const ogImageAlt = taqueria.seo?.ogImageAlt || `${taqueria.nombre} - poster`;
+
+  const paragraphsHtml = taqueria.paragraphsHtml ?? [];
 
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={metaDesc} />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="restaurant" />
+        <meta property="og:site_name" content="Primero Tacos" />
         <meta property="og:title" content={ogTitle} />
         <meta property="og:description" content={ogDescription} />
         <meta property="og:image" content={ogImage} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content={ogImageAlt} />
-        <meta property="og:site_name" content="Primero Tacos" />
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content={ogImage} />
-
-        <meta property="og:type" content="restaurant" />
+        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={ogTitle} />
         <meta name="twitter:description" content={ogDescription} />
+        <meta name="twitter:image" content={ogImage} />
+
         <link rel="canonical" href={`https://primerotacos.mx/${taqueria.slug}`} />
-        {/* Schema.org minimal */}
+
+        {/* Schema.org */}
         <script
           type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -124,70 +156,76 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
                     "@type": "PostalAddress",
                     streetAddress: taqueria.direccion,
                     addressLocality: "Ciudad de México",
-                    addressRegion: "CDMX"
+                    addressRegion: "CDMX",
                   }
                 : undefined,
               aggregateRating: {
                 "@type": "AggregateRating",
                 ratingValue: String(finalScore),
                 bestRating: "5",
-                worstRating: "1"
+                worstRating: "1",
               },
-              foundingDate: taqueria.desde || undefined
-            })
+              foundingDate: taqueria.desde || undefined,
+            }),
           }}
         />
       </Head>
 
-      <div className="min-h-screen" style={{ backgroundColor: "var(--bg-primary)" }}>
+      <div
+        className="min-h-screen"
+        style={{ backgroundColor: "var(--bg-primary)" }}
+        suppressHydrationWarning
+      >
         {/* Hero */}
         <section className="relative h-[60vh] md:h-[70vh] min-h-[400px] md:min-h-[500px] overflow-hidden flex items-center justify-start">
-          {shouldLoadVideo ? (
-            <video
-              className="absolute inset-0 w-full h-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-              poster={taqueria.media?.poster || "/images/poster-default.jpg"}
-              style={{ filter: "var(--video-filter, none)" }}
-            >
-              {taqueria.media?.video && <source src={taqueria.media.video} type="video/mp4" />}
-            </video>
-          ) : (
-            <img
-              src={taqueria.media?.poster || "/images/poster-default.jpg"}
-              className="absolute inset-0 w-full h-full object-cover"
-              alt={taqueria.nombre}
-            />
-          )}
+          {/* SSR siempre con IMG */}
+          <img
+            src={posterPath}
+            className="absolute inset-0 w-full h-full object-cover"
+            alt={taqueria.nombre}
+          />
+          {/* En cliente, se monta el video (no afecta hidratación) */}
+          <HeroVideo poster={posterPath} video={taqueria.media?.video} />
 
           <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-black/50 to-black/40" />
-
           <div className="relative z-20 text-left py-8 md:py-10 max-w-2xl mx-4 animate-fadeInUp hero-content-box px-2 md:px-8">
             <div className="mb-6">
-              <a href="/" className="inline-block hover:opacity-80 transition-opacity">
+              <a
+                href="/"
+                className="inline-block hover:opacity-80 transition-opacity"
+              >
                 <PrimeroTacosLogo className="h-12 md:h-16" variant="negative" />
               </a>
             </div>
 
             <div>
-              <h1 className="text-5xl md:text-6xl font-bold uppercase mb-6 tracking-tight" style={{ color: "white" }}>
+              <h1
+                className="text-5xl md:text-6xl font-bold uppercase mb-6 tracking-tight"
+                style={{ color: "white" }}
+              >
                 {taqueria.nombre}
               </h1>
 
               {taqueria.taglines?.[0] && (
                 <div className="mb-6">
-                  <p className="text-lg md:text-xl leading-relaxed" style={{ color: "white" }}>
+                  <p
+                    className="text-lg md:text-xl leading-relaxed"
+                    style={{ color: "white" }}
+                  >
                     {taqueria.taglines[0]}
                   </p>
                 </div>
               )}
 
-              <div className="text-3xl md:text-4xl font-bold flex items-center gap-2" style={{ color: "white" }}>
+              <div
+                className="text-3xl md:text-4xl font-bold flex items-center gap-2"
+                style={{ color: "white" }}
+              >
                 <Star className="w-6 h-6 md:w-7 md:h-7 fill-current" />
                 {finalScore.toFixed(1)}
-                <span className="text-sm md:text-base font-normal ml-2">Calificación Knija</span>
+                <span className="text-sm md:text-base font-normal ml-2">
+                  Calificación Knija
+                </span>
               </div>
             </div>
           </div>
@@ -197,7 +235,10 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
         <Breadcrumb taqueriaNombre={taqueria.nombre} />
 
         {/* Contenido principal */}
-        <section className="relative z-10 py-4 md:py-6" style={{ backgroundColor: "var(--bg-primary)" }}>
+        <section
+          className="relative z-10 py-4 md:py-6"
+          style={{ backgroundColor: "var(--bg-primary)" }}
+        >
           <div className="container mx-auto max-w-6xl px-6 md:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
               {/* Izquierda */}
@@ -205,27 +246,30 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
                 {/* Quote */}
                 {!!taqueria.descripcion?.quote && (
                   <section>
-                    <p className="text-xl md:text-2xl italic leading-relaxed mb-6" style={{ color: "var(--text-primary)" }}>
+                    <p
+                      className="text-xl md:text-2xl italic leading-relaxed mb-6"
+                      style={{ color: "var(--text-primary)" }}
+                    >
                       "{taqueria.descripcion.quote}"
                     </p>
-                    <div className="text-center text-2xl tracking-widest" style={{ color: "var(--text-secondary)" }}>
+                    <div
+                      className="text-center text-2xl tracking-widest"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
                       🌮 🌮 🌮
                     </div>
                   </section>
                 )}
 
-                {/* Descripción */}
-                <section className="space-y-4">
-                  {(taqueria.descripcion?.paragraphs || []).map((paragraph, index) => (
-                    <p key={index} className="text-base md:text-lg leading-relaxed" style={{ color: "var(--text-primary)" }}>
-                      {index === 0 && taqueria.ubicacion ? (
-                        <>
-                        
-                          {paragraph}
-                        </>
-                      ) : (
-                        paragraph
-                      )}
+                {/* Descripción (HTML ya generado en servidor) */}
+                <section className="space-y-4" suppressHydrationWarning>
+                  {paragraphsHtml.map((html, idx) => (
+                    <p
+                      key={idx}
+                      className="text-base md:text-lg leading-relaxed"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      <span dangerouslySetInnerHTML={{ __html: html }} />
                     </p>
                   ))}
                 </section>
@@ -233,40 +277,73 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
 
               {/* Derecha: Card lateral */}
               <div className="lg:sticky lg:top-8">
-                <div className="border-2 p-6 md:p-8" style={{ backgroundColor: "var(--card-bg)", borderColor: "var(--card-border)" }}>
+                <div
+                  className="border-2 p-6 md:p-8"
+                  style={{
+                    backgroundColor: "var(--card-bg)",
+                    borderColor: "var(--card-border)",
+                  }}
+                >
                   {/* Score */}
                   <div className="text-center mb-8">
-                    <div className="text-5xl md:text-6xl font-bold" style={{ color: "var(--text-primary)" }}>
+                    <div
+                      className="text-5xl md:text-6xl font-bold"
+                      style={{ color: "var(--text-primary)" }}
+                    >
                       {finalScore.toFixed(1)}
                     </div>
-                    <p className="text-sm mt-2" style={{ color: "var(--text-secondary)" }}>
+                    <p
+                      className="text-sm mt-2"
+                      style={{ color: "var(--text-secondary)" }}
+                    >
                       Promedio ponderado
                     </p>
                   </div>
 
                   {/* Breakdown */}
-                  <div className="grid grid-cols-3 gap-4 pb-6 mb-6 border-b" style={{ borderColor: "var(--card-border)" }}>
+                  <div
+                    className="grid grid-cols-3 gap-4 pb-6 mb-6 border-b"
+                    style={{ borderColor: "var(--card-border)" }}
+                  >
                     <div className="text-center">
-                      <div className="text-2xl md:text-3xl font-bold" style={{ color: "var(--text-primary)" }}>
+                      <div
+                        className="text-2xl md:text-3xl font-bold"
+                        style={{ color: "var(--text-primary)" }}
+                      >
                         {taqueria.calidad.toFixed(1)}
                       </div>
-                      <div className="text-xs md:text-sm" style={{ color: "var(--text-secondary)" }}>
+                      <div
+                        className="text-xs md:text-sm"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
                         Calidad
                       </div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl md:text-3xl font-bold" style={{ color: "var(--text-primary)" }}>
+                      <div
+                        className="text-2xl md:text-3xl font-bold"
+                        style={{ color: "var(--text-primary)" }}
+                      >
                         {taqueria.servicio.toFixed(1)}
                       </div>
-                      <div className="text-xs md:text-sm" style={{ color: "var(--text-secondary)" }}>
+                      <div
+                        className="text-xs md:text-sm"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
                         Servicio
                       </div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl md:text-3xl font-bold" style={{ color: "var(--text-primary)" }}>
+                      <div
+                        className="text-2xl md:text-3xl font-bold"
+                        style={{ color: "var(--text-primary)" }}
+                      >
                         {taqueria.lugar.toFixed(1)}
                       </div>
-                      <div className="text-xs md:text-sm" style={{ color: "var(--text-secondary)" }}>
+                      <div
+                        className="text-xs md:text-sm"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
                         Lugar
                       </div>
                     </div>
@@ -274,10 +351,12 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
 
                   {/* Info */}
                   <div className="space-y-4 mb-8">
-                    {/* Dirección */}
                     {taqueria.direccion && taqueria.ubicacion && (
                       <div className="flex items-start gap-3">
-                        <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: "var(--text-secondary)" }} />
+                        <MapPin
+                          className="h-5 w-5 mt-0.5 flex-shrink-0"
+                          style={{ color: "var(--text-secondary)" }}
+                        />
                         <a
                           href={taqueria.ubicacion}
                           target="_blank"
@@ -290,12 +369,18 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
                       </div>
                     )}
 
-                    {/* Sitio web (Globe + dominio) */}
                     {taqueria.website && (
                       <div className="flex items-start gap-3">
-                        <Globe className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: "var(--text-secondary)" }} />
+                        <Globe
+                          className="h-5 w-5 mt-0.5 flex-shrink-0"
+                          style={{ color: "var(--text-secondary)" }}
+                        />
                         <a
-                          href={taqueria.website.startsWith("http") ? taqueria.website : `https://${taqueria.website}`}
+                          href={
+                            taqueria.website.startsWith("http")
+                              ? taqueria.website
+                              : `https://${taqueria.website}`
+                          }
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-sm underline hover:opacity-70 transition-opacity"
@@ -306,10 +391,12 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
                       </div>
                     )}
 
-                    {/* Instagram (icono + @usuario) */}
                     {taqueria.instagram && (
                       <div className="flex items-start gap-3">
-                        <Instagram className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: "var(--text-secondary)" }} />
+                        <Instagram
+                          className="h-5 w-5 mt-0.5 flex-shrink-0"
+                          style={{ color: "var(--text-secondary)" }}
+                        />
                         <a
                           href={instagramHref(taqueria.instagram)}
                           target="_blank"
@@ -322,10 +409,12 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
                       </div>
                     )}
 
-                    {/* Facebook (Globe + label fijo) */}
                     {taqueria.facebook && (
                       <div className="flex items-start gap-3">
-                        <Globe className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: "var(--text-secondary)" }} />
+                        <Globe
+                          className="h-5 w-5 mt-0.5 flex-shrink-0"
+                          style={{ color: "var(--text-secondary)" }}
+                        />
                         <a
                           href={taqueria.facebook}
                           target="_blank"
@@ -338,11 +427,16 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
                       </div>
                     )}
 
-                    {/* Precios */}
                     {taqueria.priceText && (
                       <div className="flex items-start gap-3">
-                        <DollarSign className="h-5 w-5 mt-0.5 flex-shrink-0" style={{ color: "var(--text-secondary)" }} />
-                        <span className="text-sm" style={{ color: "var(--text-secondary)" }}>
+                        <DollarSign
+                          className="h-5 w-5 mt-0.5 flex-shrink-0"
+                          style={{ color: "var(--text-secondary)" }}
+                        />
+                        <span
+                          className="text-sm"
+                          style={{ color: "var(--text-secondary)" }}
+                        >
                           {taqueria.priceText}
                         </span>
                       </div>
@@ -360,10 +454,14 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
                         style={{
                           backgroundColor: "var(--header-bg)",
                           color: "var(--header-text)",
-                          border: "2px solid var(--header-bg)"
+                          border: "2px solid var(--header-bg)",
                         }}
-                        onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.8")}
-                        onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.opacity = "0.8")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.opacity = "1")
+                        }
                       >
                         Ver mapa
                       </a>
@@ -376,15 +474,16 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
                       style={{
                         borderColor: "var(--btn-border)",
                         backgroundColor: "var(--btn-bg)",
-                        color: "var(--btn-text)"
+                        color: "var(--btn-text)",
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--btn-hover-bg)";
-                        e.currentTarget.style.color = "var(--btn-hover-text)";
+                        (e.currentTarget.style.backgroundColor =
+                          "var(--btn-hover-bg)"),
+                          (e.currentTarget.style.color = "var(--btn-hover-text)");
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--btn-bg)";
-                        e.currentTarget.style.color = "var(--btn-text)";
+                        (e.currentTarget.style.backgroundColor = "var(--btn-bg)"),
+                          (e.currentTarget.style.color = "var(--btn-text)");
                       }}
                     >
                       Calificar
@@ -393,31 +492,46 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
                 </div>
 
                 {/* Hashtags */}
-                {Array.isArray(taqueria.hashtags) && taqueria.hashtags.length > 0 && (
-                  <div className="mt-12">
-                    <div className="flex flex-wrap gap-3 justify-center">
-                      {taqueria.hashtags.map((tag, idx) => (
-                        <span key={idx} className="text-sm" style={{ color: "var(--text-secondary)" }}>
-                          {tag}
-                        </span>
-                      ))}
+                {Array.isArray(taqueria.hashtags) &&
+                  taqueria.hashtags.length > 0 && (
+                    <div className="mt-12">
+                      <div className="flex flex-wrap gap-3 justify-center">
+                        {taqueria.hashtags.map((tag, idx) => (
+                          <span
+                            key={idx}
+                            className="text-sm"
+                            style={{ color: "var(--text-secondary)" }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
               </div>
             </div>
           </div>
         </section>
 
         {/* Promo */}
-        <section className="py-12 text-center">
+        <section className="py-12 text-center" suppressHydrationWarning>
           <div className="container mx-auto px-6">
-            <p className="text-lg md:text-xl mb-2" style={{ color: "var(--text-primary)" }}>
+            <p
+              className="text-lg md:text-xl mb-2"
+              style={{ color: "var(--text-primary)" }}
+            >
               ¿Listo pa' la ruta taquera?
             </p>
-            <p className="text-base md:text-lg" style={{ color: "var(--text-secondary)" }}>
+            <p
+              className="text-base md:text-lg"
+              style={{ color: "var(--text-secondary)" }}
+            >
               Encuentra más joyas como esta en{" "}
-              <a href="/" className="underline hover:opacity-70 transition-opacity font-medium" style={{ color: "var(--text-primary)" }}>
+              <a
+                href="/"
+                className="underline hover:opacity-70 transition-opacity font-medium"
+                style={{ color: "var(--text-primary)" }}
+              >
                 primerotacos.mx
               </a>
             </p>
@@ -425,14 +539,24 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
         </section>
 
         {/* Footer */}
-        <footer className="pattern-background py-8" style={{ backgroundColor: "var(--bg-secondary)" }}>
+        <footer
+          className="pattern-background py-8"
+          style={{ backgroundColor: "var(--bg-secondary)" }}
+          suppressHydrationWarning
+        >
           <div className="container mx-auto px-4">
             <div className="flex justify-center mb-4">
               <div className="h-12 md:h-16">
-                <PrimeroTacosLogo className="h-full w-auto max-w-[180px] md:max-w-[240px] dark-mode-invert" variant="positive" />
+                <PrimeroTacosLogo
+                  className="h-full w-auto max-w-[180px] md:max-w-[240px] dark-mode-invert"
+                  variant="positive"
+                />
               </div>
             </div>
-            <div className="text-center text-sm sm:text-base" style={{ color: "var(--text-secondary)" }}>
+            <div
+              className="text-center text-sm sm:text-base"
+              style={{ color: "var(--text-secondary)" }}
+            >
               <p>© 2025 PRIMERO TACOS × LOS KNIJOS</p>
               <p className="mt-1">Hecho con 🌮, barrio y amor por la CDMX.</p>
             </div>
@@ -475,7 +599,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     .map((f) => f.replace(".json", ""));
   return {
     paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: false
+    fallback: false,
   };
 };
 
@@ -485,12 +609,31 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const raw = fs.readFileSync(file, "utf-8");
   const data = JSON.parse(raw);
 
-  // compatibilidad: algunos JSON antiguos usan "precio" en vez de "priceText"
+  // compat: "precio" -> "priceText"
   if (!data.priceText && data.precio) data.priceText = data.precio;
+
+  // 👉 Markdown → HTML solo en servidor
+  const { marked } = await import("marked");
+  const DOMPurify = (await import("isomorphic-dompurify")).default;
+
+  const mdToHtml = (md: string) => {
+    const html = marked.parse(md, { mangle: false, headerIds: false }) as string;
+    const clean = DOMPurify.sanitize(html, {
+      ALLOWED_TAGS: ["b", "strong", "i", "em", "a", "p", "br", "ul", "ol", "li"],
+      ALLOWED_ATTR: { a: ["href", "target", "rel"] },
+    });
+    return clean.replaceAll(
+      /<a\s/gi,
+      '<a target="_blank" rel="noopener noreferrer" '
+    );
+  };
+
+  const paragraphs: string[] = data?.descripcion?.paragraphs || [];
+  const paragraphsHtml = paragraphs.map(mdToHtml);
 
   return {
     props: {
-      taqueria: { ...data, slug }
-    }
+      taqueria: { ...data, slug, paragraphsHtml },
+    },
   };
 };
