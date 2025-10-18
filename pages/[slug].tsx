@@ -616,34 +616,33 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const DOMPurify = (await import("isomorphic-dompurify")).default;
 
   const mdToHtml = (md: string) => {
-    // Configurar marked con opciones correctas
-    marked.setOptions({
+    // Parsear markdown con configuración inline
+    const html = marked.parse(md, {
       breaks: true,
       gfm: true,
       mangle: false,
       headerIds: false,
-    });
+    }) as string;
     
-    // Parsear markdown
-    const html = marked.parse(md) as string;
+    console.log('MD input:', md);
+    console.log('HTML output:', html);
     
-    // Sanitizar con configuración más permisiva para enlaces
+    // Sanitizar permitiendo todos los atributos necesarios
     const clean = DOMPurify.sanitize(html, {
       ALLOWED_TAGS: ["b", "strong", "i", "em", "a", "p", "br", "ul", "ol", "li"],
-      ALLOWED_ATTR: { 
-        "a": ["href", "target", "rel"],
-        "*": ["class"] 
-      },
-      KEEP_CONTENT: true,
-      RETURN_DOM: false,
-      RETURN_DOM_FRAGMENT: false,
+      ALLOWED_ATTR: ["href", "target", "rel"],
     });
     
-    // Agregar target y rel a todos los enlaces que tengan href
-    return clean.replace(
+    console.log('Sanitized:', clean);
+    
+    // Asegurar que todos los enlaces tengan target y rel
+    const final = clean.replace(
       /<a href="([^"]+)">/gi,
       '<a href="$1" target="_blank" rel="noopener noreferrer">'
     );
+    
+    console.log('Final:', final);
+    return final;
   };
 
   const paragraphs: string[] = data?.descripcion?.paragraphs || [];
