@@ -627,15 +627,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     // Parsear markdown
     const html = marked.parse(md) as string;
     
-    // Sanitizar permitiendo enlaces con href
+    // Sanitizar con configuración más permisiva para enlaces
     const clean = DOMPurify.sanitize(html, {
       ALLOWED_TAGS: ["b", "strong", "i", "em", "a", "p", "br", "ul", "ol", "li"],
-      ALLOWED_ATTR: { a: ["href", "target", "rel"] },
+      ALLOWED_ATTR: { 
+        "a": ["href", "target", "rel"],
+        "*": ["class"] 
+      },
+      KEEP_CONTENT: true,
+      RETURN_DOM: false,
+      RETURN_DOM_FRAGMENT: false,
     });
     
-    // Agregar target y rel a todos los enlaces
+    // Agregar target y rel a todos los enlaces que tengan href
     return clean.replace(
-      /<a\s+href="([^"]+)"([^>]*)>/gi,
+      /<a href="([^"]+)">/gi,
       '<a href="$1" target="_blank" rel="noopener noreferrer">'
     );
   };
