@@ -620,7 +620,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const html = marked.parse(md, {
       breaks: true,
       gfm: true,
-      headerIds: false,
     }) as string;
 
     console.log('MD input:', md);
