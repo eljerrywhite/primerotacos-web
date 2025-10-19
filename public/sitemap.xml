@@ -54,4 +54,15 @@
     </image:image>
   </url>
 
+  <url>
+    <loc>https://primerotacos.mx/tacos-hola-el-guero</loc>
+    <lastmod>2025-10-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://primerotacos.mx/images/poster-hola.jpg</image:loc>
+      <image:caption>Taquería Hola El Güero, CDMX.</image:caption>
+    </image:image>
+  </url>
+
 </urlset>
