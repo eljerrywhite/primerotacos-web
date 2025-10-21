@@ -177,7 +177,7 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
         suppressHydrationWarning
       >
         {/* Hero */}
-        <section className="relative h-[60vh] md:h-[70vh] min-h-[400px] md:min-h-[500px] overflow-hidden flex items-center justify-start">
+        <section className="relative min-h-[500px] md:h-[70vh] md:min-h-[500px] overflow-hidden flex items-center justify-start">
           {/* SSR siempre con IMG */}
           <img
             src={posterPath}
@@ -188,7 +188,7 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
           <HeroVideo poster={posterPath} video={taqueria.media?.video} />
 
           <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-black/50 to-black/40" />
-          <div className="relative z-20 text-left py-8 md:py-10 max-w-2xl mx-4 animate-fadeInUp hero-content-box px-2 md:px-8">
+          <div className="relative z-20 text-left py-12 md:py-10 max-w-2xl mx-4 md:mx-6 animate-fadeInUp hero-content-box px-4 md:px-8">
             <div className="mb-6">
               <a
                 href="/"
