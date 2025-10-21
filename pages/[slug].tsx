@@ -188,7 +188,7 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
           <HeroVideo poster={posterPath} video={taqueria.media?.video} />
 
           <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/40 via-black/50 to-black/40" />
-          <div className="relative z-20 text-left py-12 md:py-10 max-w-2xl mx-4 md:mx-6 animate-fadeInUp hero-content-box px-4 md:px-8">
+          <div className="relative z-20 text-left py-12 md:py-10 max-w-2xl animate-fadeInUp hero-content-box px-6 md:px-10">
             <div className="mb-6">
               <a
                 href="/"
