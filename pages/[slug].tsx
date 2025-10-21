@@ -236,7 +236,7 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
 
         {/* Contenido principal */}
         <section
-          className="relative z-10 py-4 md:py-6"
+          className="relative z-10 py-8 md:py-10"
           style={{ backgroundColor: "var(--bg-primary)" }}
         >
           <div className="container mx-auto max-w-6xl px-6 md:px-10">
