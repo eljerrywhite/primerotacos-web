@@ -558,7 +558,18 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
             >
               <p>© 2025 PRIMERO TACOS × LOS KNIJOS</p>
               <p className="mt-1">Hecho con 🌮, barrio y amor por la CDMX.</p>
-            
+              <p className="mt-2">
+                <a
+                  href="https://instagram.com/primerotacos"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 underline hover:opacity-70 transition-opacity"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  <Instagram className="h-4 w-4" />
+                  @primerotacos
+                </a>
+              </p>
             </div>
           </div>
         </footer>
