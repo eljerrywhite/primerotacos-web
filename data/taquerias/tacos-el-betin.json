@@ -9,9 +9,7 @@
   "calificacionFinal": 4.3,
   "direccion": "C. Guillermo Prieto 36, San Rafael, Cuauhtémoc, 06470 Ciudad de México, CDMX",
   "ubicacion": "https://maps.app.goo.gl/nf5ryZFiNMk95RQLA",
-  "taglines": [
-    "Tacos de lengua y pastor que se distinguen en la San Rafael."
-  ],
+  "taglines": ["Tacos de lengua y pastor que se distinguen en la San Rafael."],
   "descripcion": {
     "quote": "En colonia San Rafael, los teatros cuentan historias... y los tacos también.",
     "paragraphs": [
@@ -19,14 +17,14 @@
       "Acá somos fans declarados de los **tacos de lengua**, que sin exagerar, le compiten al nivel de los tapatíos —y eso ya es decir mucho. La salsa verde es la estrella del show, pero hay para todos los gustos, incluyendo cebollitas hechas en la chorizera que amarran sabroso. ¿Te late más lo bravo? Entonces aviéntate las cebollitas crudas con habanero y limón. Aunque esta vez no probamos el pastor, es bien sabido que en El Betín también se rifa. **Suadero, tripa y longaniza** completan el repertorio con muy buena ejecución."
     ]
   },
-  "instagram": "https://www.instagram.com/usuario_o_facebook/",
+  "instagram": "Sin usuario",
   "priceText": "Tacos: $20–$30 | Gringa $75",
   "especialidades": [
     "Pastor",
     "Lengua",
-    "Suadero",  
+    "Suadero",
     "Tripa",
-    "Longaniza",  
+    "Longaniza",
     "Campechanos",
     "Cabeza"
   ],
@@ -42,14 +40,7 @@
   "openingHours": {
     "opens": "11:00",
     "closes": "01:00",
-    "days": [
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ]
+    "days": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
   },
   "media": {
     "video": "/videos/PT-el_betin.mp4",
