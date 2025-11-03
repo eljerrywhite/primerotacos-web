@@ -558,6 +558,7 @@ export default function TaqueriaPage({ taqueria }: PageProps) {
             >
               <p>© 2025 PRIMERO TACOS × LOS KNIJOS</p>
               <p className="mt-1">Hecho con 🌮, barrio y amor por la CDMX.</p>
+            
             </div>
           </div>
         </footer>

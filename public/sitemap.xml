@@ -65,4 +65,15 @@
     </image:image>
   </url>
 
+  <url>
+    <loc>https://primerotacos.mx/tacos-el-betin</loc>
+    <lastmod>2025-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://primerotacos.mx/images/poster-betin.jpg</image:loc>
+      <image:caption>Tacos El Betín, CDMX.</image:caption>
+    </image:image>
+  </url>
+
 </urlset>
