@@ -26,24 +26,20 @@ function cleanSlug(s = '') {
 async function tryFetchArray(url: string): Promise<any[] | null> {
   try {
     const resp = await fetch(url);
-    if (!resp.ok) return null;
-    // intentamos JSON directo
-    try {
+    if (resp.ok) {
       const data = await resp.json();
-      return Array.isArray(data) ? data : null;
-    } catch {
-      // si la API devuelve texto, intentamos parsear manual
-      const txt = await (await fetch(url)).text();
-      try {
-        const parsed = JSON.parse(txt);
-        return Array.isArray(parsed) ? parsed : null;
-      } catch {
-        return null;
+
+      // Manejar ambos formatos
+      if (data && data.taquerias) {
+        return data.taquerias;  // Nuevo formato
+      } else if (Array.isArray(data)) {
+        return data;  // Formato antiguo
       }
     }
-  } catch {
-    return null;
+  } catch (error) {
+    console.error(`Error fetching from ${url}:`, error);
   }
+  return null;
 }
 
 /** Resuelve la fuente de datos:
@@ -54,7 +50,9 @@ async function fetchTaqueriasBase(): Promise<any[]> {
   const fromEnv = process.env.RENDER_API_URL;
   if (fromEnv) {
     const data = await tryFetchArray(fromEnv);
-    if (data) return data;
+    if (data) {
+      return data;
+    }
   }
 
   const possibleRoutes = [
@@ -66,8 +64,11 @@ async function fetchTaqueriasBase(): Promise<any[]> {
 
   for (const route of possibleRoutes) {
     const data = await tryFetchArray(route);
-    if (data) return data;
+    if (data) {
+      return data;
+    }
   }
+
   return []; // último recurso
 }
 
