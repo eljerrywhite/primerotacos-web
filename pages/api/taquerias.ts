@@ -47,19 +47,28 @@ async function tryFetchArray(url: string): Promise<any[] | null> {
  * 2) Si no, prueba múltiples rutas (tu lógica actual).
  */
 async function fetchTaqueriasBase(): Promise<any[]> {
-  const fromEnv = process.env.RENDER_API_URL;
-  if (fromEnv) {
-    const data = await tryFetchArray(fromEnv);
-    if (data) {
-      return data;
+  // Primero intentar el endpoint completo con API key
+  try {
+    const response = await fetch('https://primerotacos.onrender.com/taquerias/full', {
+      headers: {
+        'x-api-key': 'PT-2025-secreto-knij@s' // PON TU CLAVE REAL AQUÍ
+      }
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (Array.isArray(data)) {
+        return data;
+      }
     }
+  } catch (error) {
+    console.error('Error fetching full data:', error);
   }
 
+  // Si falla, intentar las rutas anteriores
   const possibleRoutes = [
-    "https://primerotacos.onrender.com/api/taquerias",
     "https://primerotacos.onrender.com/taquerias",
     "https://primerotacos.onrender.com/api/taqueria",
-    "https://primerotacos.onrender.com/"
   ];
 
   for (const route of possibleRoutes) {
